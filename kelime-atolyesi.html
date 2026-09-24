@@ -1,0 +1,556 @@
+<title>C1 Kelime Atölyesi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+  :root {
+    --zemin: #edf0f5;
+    --yuzey: #ffffff;
+    --yuzey2: #f5f7fb;
+    --murekkep: #1a2030;
+    --soluk: #5b6479;
+    --cizgi: #d7dce6;
+    --vurgu: #2945c4;
+    --vurgu-yazi: #ffffff;
+    --vurgu-acik: #e4e9fb;
+    --dogru: #1c7f52;
+    --dogru-acik: #dff3e8;
+    --yanlis: #b83a33;
+    --yanlis-acik: #f8e1df;
+    --golge: 0 1px 2px rgba(26, 32, 48, .06), 0 8px 24px rgba(26, 32, 48, .06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --zemin: #10131b;
+      --yuzey: #181c27;
+      --yuzey2: #1e2330;
+      --murekkep: #e7eaf2;
+      --soluk: #9aa2b8;
+      --cizgi: #2c3242;
+      --vurgu: #8ea2ff;
+      --vurgu-yazi: #0e1330;
+      --vurgu-acik: #242c4d;
+      --dogru: #5fd39a;
+      --dogru-acik: #173427;
+      --yanlis: #ff8a80;
+      --yanlis-acik: #3a1d1d;
+      --golge: 0 1px 2px rgba(0, 0, 0, .3);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --zemin: #10131b;
+    --yuzey: #181c27;
+    --yuzey2: #1e2330;
+    --murekkep: #e7eaf2;
+    --soluk: #9aa2b8;
+    --cizgi: #2c3242;
+    --vurgu: #8ea2ff;
+    --vurgu-yazi: #0e1330;
+    --vurgu-acik: #242c4d;
+    --dogru: #5fd39a;
+    --dogru-acik: #173427;
+    --yanlis: #ff8a80;
+    --yanlis-acik: #3a1d1d;
+    --golge: 0 1px 2px rgba(0, 0, 0, .3);
+  }
+
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    margin: 0;
+    background: var(--zemin);
+    color: var(--murekkep);
+    font-family: "Manrope", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    padding-inline: 16px;
+    padding-block: 24px 48px;
+  }
+  .kap { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+
+  header { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
+  header h1 {
+    margin: 0;
+    font-family: "Newsreader", Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(26px, 5vw, 34px);
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  header p { margin: 4px 0 0; color: var(--soluk); font-size: 14px; }
+  .ilerleme { text-align: right; font-size: 13px; color: var(--soluk); font-variant-numeric: tabular-nums; }
+  .ilerleme strong { display: block; font-size: 22px; color: var(--murekkep); font-weight: 700; }
+
+  .araclar { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .sekmeler, .seviyeler { display: flex; gap: 4px; padding: 4px; background: var(--yuzey); border: 1px solid var(--cizgi); border-radius: 10px; }
+  .sekmeler button, .seviyeler button {
+    border: 0; background: transparent; color: var(--soluk);
+    font: inherit; font-weight: 600; font-size: 14px;
+    padding: 7px 14px; border-radius: 7px; cursor: pointer;
+  }
+  .sekmeler button[aria-selected="true"], .seviyeler button[aria-pressed="true"] { background: var(--vurgu); color: var(--vurgu-yazi); }
+  button:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 2px; }
+
+  .kart {
+    background: var(--yuzey);
+    border: 1px solid var(--cizgi);
+    border-radius: 14px;
+    box-shadow: var(--golge);
+    padding: 28px;
+  }
+  @media (max-width: 480px) { .kart { padding: 20px; } }
+
+  .etiket {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--soluk);
+  }
+  .madde-bas { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .kelime {
+    font-family: "Newsreader", Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(38px, 9vw, 56px);
+    line-height: 1;
+    letter-spacing: -.01em;
+    overflow-wrap: anywhere;
+  }
+  .rozet {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px; font-weight: 500;
+    padding: 3px 8px; border-radius: 99px;
+    background: var(--vurgu-acik); color: var(--vurgu);
+  }
+  .seslendir {
+    margin-left: auto;
+    border: 1px solid var(--cizgi); background: var(--yuzey2); color: var(--murekkep);
+    border-radius: 99px; width: 38px; height: 38px; cursor: pointer; font-size: 16px;
+  }
+  .anlam { margin-top: 20px; display: grid; gap: 16px; }
+  .anlam .tanim { font-family: "Newsreader", Georgia, serif; font-size: 20px; line-height: 1.4; margin: 4px 0 0; }
+  .anlam .tr { font-size: 17px; font-weight: 600; margin: 4px 0 0; }
+  .ornek { margin: 4px 0 0; font-family: "Newsreader", Georgia, serif; font-style: italic; font-size: 18px; border-left: 3px solid var(--cizgi); padding-left: 12px; }
+  .ornek b { font-style: normal; color: var(--vurgu); }
+  .es { margin: 4px 0 0; color: var(--soluk); }
+  .gizli-anlam { filter: blur(7px); user-select: none; transition: filter .25s; }
+
+  .dugmeler { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
+  .btn {
+    font: inherit; font-weight: 600; font-size: 14px;
+    border-radius: 9px; padding: 10px 16px; cursor: pointer;
+    border: 1px solid var(--cizgi); background: var(--yuzey); color: var(--murekkep);
+  }
+  .btn.ana { background: var(--vurgu); color: var(--vurgu-yazi); border-color: var(--vurgu); }
+  .btn:disabled { opacity: .5; cursor: default; }
+  .sayac { margin-left: auto; align-self: center; color: var(--soluk); font-size: 13px; font-variant-numeric: tabular-nums; }
+
+  .uret { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding: 16px 20px; background: var(--yuzey2); border: 1px dashed var(--cizgi); border-radius: 12px; }
+  .uret p { margin: 0; flex: 1; min-width: 220px; font-size: 14px; color: var(--soluk); }
+  .uret p strong { color: var(--murekkep); }
+
+  /* Test */
+  .soru-ust { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+  .cubuk { height: 4px; background: var(--yuzey2); border-radius: 4px; overflow: hidden; margin-top: 10px; }
+  .cubuk span { display: block; height: 100%; background: var(--vurgu); transition: width .3s; }
+  .soru { font-family: "Newsreader", Georgia, serif; font-size: 22px; line-height: 1.4; margin: 20px 0; }
+  .soru .bosluk { display: inline-block; min-width: 90px; border-bottom: 2px solid var(--vurgu); }
+  .secenekler { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 520px) { .secenekler { grid-template-columns: 1fr; } }
+  .secenek {
+    text-align: left; font: inherit; font-size: 15px; font-weight: 500;
+    padding: 14px 16px; border-radius: 10px; cursor: pointer;
+    border: 1px solid var(--cizgi); background: var(--yuzey2); color: var(--murekkep);
+  }
+  .secenek:hover:not(:disabled) { border-color: var(--vurgu); }
+  .secenek.dogru { background: var(--dogru-acik); border-color: var(--dogru); color: var(--dogru); }
+  .secenek.yanlis { background: var(--yanlis-acik); border-color: var(--yanlis); color: var(--yanlis); }
+  .secenek:disabled { cursor: default; }
+  .geri-bildirim { margin-top: 16px; min-height: 24px; font-size: 14px; }
+
+  .sonuc-skor { font-family: "Newsreader", Georgia, serif; font-size: 64px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+  .liste { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 1px; background: var(--cizgi); border-radius: 10px; overflow: hidden; }
+  .liste li { background: var(--yuzey); padding: 12px 16px; display: flex; gap: 12px; justify-content: space-between; flex-wrap: wrap; }
+  .liste li b { font-family: "Newsreader", Georgia, serif; font-size: 18px; }
+  .liste li span { color: var(--soluk); }
+  .durum { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 99px; align-self: center; }
+  .durum.ok { background: var(--dogru-acik); color: var(--dogru); }
+  .durum.yeni { background: var(--yuzey2); color: var(--soluk); }
+  .not { font-size: 12px; color: var(--soluk); text-align: center; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="kap">
+  <header>
+    <div>
+      <h1>C1 Kelime Atölyesi</h1>
+      <p>İleri düzey İngilizce kelimeleri öğren, sonra kendini sına.</p>
+    </div>
+    <div class="ilerleme"><strong id="ogrenilen">0 / 0</strong>kelime öğrenildi</div>
+  </header>
+
+  <div class="araclar">
+    <div class="sekmeler" role="tablist">
+      <button role="tab" aria-selected="true" data-sekme="ogren">Öğren</button>
+      <button role="tab" aria-selected="false" data-sekme="test">Test</button>
+      <button role="tab" aria-selected="false" data-sekme="liste">Kelimelerim</button>
+    </div>
+    <div class="seviyeler" aria-label="Seviye">
+      <button aria-pressed="false" data-seviye="C1">C1</button>
+      <button aria-pressed="false" data-seviye="C2">C2</button>
+      <button aria-pressed="true" data-seviye="hepsi">Hepsi</button>
+    </div>
+  </div>
+
+  <main id="alan"></main>
+
+  <div class="uret" id="uretKutu" hidden>
+    <p><strong>Yeni kelime üret.</strong> Claude, listende olmayan 8 yeni C1–C2 kelimeyi anlamı ve örnek cümlesiyle hazırlar.</p>
+    <button class="btn ana" id="uretBtn" type="button">Yeni kelimeler üret</button>
+  </div>
+
+  <p class="not">Seviye etiketleri yaklaşıktır; CEFR kaynakları arasında küçük farklar olabilir.</p>
+</div>
+
+<script>
+// Hazır kelime havuzu. Örnek cümlede hedef kelime [köşeli parantez] içindedir.
+const HAVUZ = [
+  { w: "ambiguous", pos: "adj", lv: "C1", def: "having more than one possible meaning", tr: "belirsiz, iki anlamlı", ex: "The wording of the contract is [ambiguous], so both sides read it differently.", syn: "unclear, equivocal" },
+  { w: "undermine", pos: "verb", lv: "C1", def: "to gradually make something weaker or less effective", tr: "baltalamak, zayıflatmak", ex: "Constant criticism can [undermine] a child's confidence.", syn: "weaken, erode" },
+  { w: "scrutiny", pos: "noun", lv: "C1", def: "careful and detailed examination", tr: "titiz inceleme", ex: "The minister's expenses came under close [scrutiny].", syn: "examination, inspection" },
+  { w: "plausible", pos: "adj", lv: "C1", def: "seeming likely to be true or reasonable", tr: "akla yatkın, makul", ex: "She gave a [plausible] explanation for her absence.", syn: "credible, believable" },
+  { w: "reluctant", pos: "adj", lv: "C1", def: "unwilling and therefore slow to do something", tr: "isteksiz, gönülsüz", ex: "He was [reluctant] to admit that he had made a mistake.", syn: "unwilling, hesitant" },
+  { w: "feasible", pos: "adj", lv: "C1", def: "possible to do or achieve in practice", tr: "uygulanabilir, yapılabilir", ex: "The engineers doubt that the plan is financially [feasible].", syn: "viable, practicable" },
+  { w: "mitigate", pos: "verb", lv: "C1", def: "to make something bad less severe or harmful", tr: "hafifletmek, azaltmak", ex: "Planting trees can help [mitigate] the effects of urban heat.", syn: "alleviate, reduce" },
+  { w: "profound", pos: "adj", lv: "C1", def: "very great or intense; showing deep understanding", tr: "derin, köklü", ex: "The war had a [profound] effect on the whole generation.", syn: "deep, far-reaching" },
+  { w: "deteriorate", pos: "verb", lv: "C1", def: "to become gradually worse", tr: "kötüleşmek, bozulmak", ex: "His health began to [deteriorate] rapidly after the operation.", syn: "worsen, decline" },
+  { w: "discrepancy", pos: "noun", lv: "C1", def: "a difference between things that should be the same", tr: "tutarsızlık, uyuşmazlık", ex: "Auditors found a [discrepancy] between the two sets of figures.", syn: "inconsistency, mismatch" },
+  { w: "inherent", pos: "adj", lv: "C1", def: "existing as a natural, permanent part of something", tr: "doğasında olan, içkin", ex: "Every investment carries [inherent] risks.", syn: "intrinsic, built-in" },
+  { w: "prevalent", pos: "adj", lv: "C1", def: "common or widespread at a particular time or place", tr: "yaygın", ex: "The disease is more [prevalent] in rural areas.", syn: "widespread, common" },
+  { w: "coherent", pos: "adj", lv: "C1", def: "logical and consistent; clearly connected", tr: "tutarlı, bağlantılı", ex: "The report fails to present a [coherent] argument.", syn: "logical, consistent" },
+  { w: "hinder", pos: "verb", lv: "C1", def: "to make it difficult for something to happen or progress", tr: "engel olmak, sekteye uğratmak", ex: "Heavy snow [hindered] the rescue efforts.", syn: "hamper, obstruct" },
+  { w: "alleviate", pos: "verb", lv: "C1", def: "to make pain or a problem less severe", tr: "hafifletmek, dindirmek", ex: "The drug is used to [alleviate] chronic pain.", syn: "ease, relieve" },
+  { w: "compelling", pos: "adj", lv: "C1", def: "very convincing or interesting, demanding attention", tr: "ikna edici, sürükleyici", ex: "The prosecution presented [compelling] evidence.", syn: "convincing, persuasive" },
+  { w: "notion", pos: "noun", lv: "C1", def: "a belief or idea about something", tr: "kavram, fikir", ex: "She rejected the [notion] that success depends only on luck.", syn: "idea, concept" },
+  { w: "substantial", pos: "adj", lv: "C1", def: "large in amount, size or importance", tr: "önemli ölçüde, kayda değer", ex: "The company made a [substantial] profit last year.", syn: "considerable, significant" },
+  { w: "constrain", pos: "verb", lv: "C1", def: "to limit or restrict what someone or something can do", tr: "kısıtlamak, sınırlamak", ex: "Our research was [constrained] by a lack of funding.", syn: "restrict, limit" },
+  { w: "controversial", pos: "adj", lv: "C1", def: "causing a lot of public disagreement", tr: "tartışmalı", ex: "The new law remains highly [controversial].", syn: "disputed, contentious" },
+  { w: "advocate", pos: "verb", lv: "C1", def: "to publicly support a particular policy or way of doing things", tr: "savunmak, desteklemek", ex: "Many doctors [advocate] a diet rich in vegetables.", syn: "support, champion" },
+  { w: "inevitable", pos: "adj", lv: "C1", def: "certain to happen and impossible to avoid", tr: "kaçınılmaz", ex: "Some job losses seem [inevitable] after the merger.", syn: "unavoidable, certain" },
+
+  { w: "ubiquitous", pos: "adj", lv: "C2", def: "seeming to be everywhere at the same time", tr: "her yerde bulunan", ex: "Smartphones have become [ubiquitous] in modern life.", syn: "omnipresent, pervasive" },
+  { w: "ephemeral", pos: "adj", lv: "C2", def: "lasting for only a very short time", tr: "geçici, kısa ömürlü", ex: "Fame on social media is often [ephemeral].", syn: "fleeting, transient" },
+  { w: "pragmatic", pos: "adj", lv: "C2", def: "dealing with problems in a practical, realistic way", tr: "pragmatik, gerçekçi", ex: "We need a [pragmatic] approach rather than an ideal one.", syn: "practical, realistic" },
+  { w: "exacerbate", pos: "verb", lv: "C2", def: "to make a problem or bad situation worse", tr: "kötüleştirmek, şiddetlendirmek", ex: "Cutting staff would only [exacerbate] the delays.", syn: "aggravate, worsen" },
+  { w: "conundrum", pos: "noun", lv: "C2", def: "a confusing and difficult problem", tr: "içinden çıkılmaz sorun, bilmece", ex: "How to fund the project remains a [conundrum].", syn: "puzzle, dilemma" },
+  { w: "juxtapose", pos: "verb", lv: "C2", def: "to place things side by side to show a contrast", tr: "yan yana koymak (karşılaştırmak için)", ex: "The exhibition [juxtaposes] ancient and modern art.", syn: "contrast, set side by side" },
+  { w: "candid", pos: "adj", lv: "C2", def: "honest and direct, even when the truth is uncomfortable", tr: "açık sözlü, samimi", ex: "She gave a [candid] account of her struggles.", syn: "frank, forthright" },
+  { w: "tenacious", pos: "adj", lv: "C2", def: "holding firmly to something; very determined", tr: "azimli, inatçı", ex: "The [tenacious] journalist refused to drop the story.", syn: "persistent, determined" },
+  { w: "succinct", pos: "adj", lv: "C2", def: "expressed clearly in a few words", tr: "özlü, kısa ve net", ex: "Please keep your summary [succinct].", syn: "concise, brief" },
+  { w: "dichotomy", pos: "noun", lv: "C2", def: "a division or contrast between two opposite things", tr: "ikilik, karşıtlık", ex: "The film explores the [dichotomy] between duty and desire.", syn: "division, split" },
+  { w: "idiosyncratic", pos: "adj", lv: "C2", def: "peculiar to one person; unusual or individual", tr: "kendine özgü, alışılmadık", ex: "His [idiosyncratic] style of teaching amused the students.", syn: "eccentric, distinctive" },
+  { w: "precarious", pos: "adj", lv: "C2", def: "not safe or secure; likely to fall or fail", tr: "tehlikeli, güvencesiz", ex: "Many freelancers live in a [precarious] financial situation.", syn: "unstable, insecure" },
+  { w: "ostensibly", pos: "adv", lv: "C2", def: "apparently or seemingly, but perhaps not actually", tr: "görünüşte, sözde", ex: "He left, [ostensibly] to visit his mother.", syn: "seemingly, supposedly" },
+  { w: "cogent", pos: "adj", lv: "C2", def: "clear, logical and convincing", tr: "sağlam, ikna edici (gerekçe)", ex: "She made a [cogent] case for reform.", syn: "convincing, compelling" },
+  { w: "reticent", pos: "adj", lv: "C2", def: "unwilling to share thoughts or feelings", tr: "suskun, ağzı sıkı", ex: "He is [reticent] about his private life.", syn: "reserved, taciturn" },
+  { w: "galvanize", pos: "verb", lv: "C2", def: "to shock or excite someone into taking action", tr: "harekete geçirmek, canlandırmak", ex: "The disaster [galvanized] the community into action.", syn: "spur, energize" },
+  { w: "scrupulous", pos: "adj", lv: "C2", def: "very careful to be honest and do things correctly", tr: "titiz, vicdanlı", ex: "She was [scrupulous] in keeping accurate records.", syn: "meticulous, conscientious" },
+  { w: "enigmatic", pos: "adj", lv: "C2", def: "mysterious and difficult to understand", tr: "gizemli, esrarengiz", ex: "The Mona Lisa is famous for her [enigmatic] smile.", syn: "mysterious, puzzling" },
+  { w: "obsolete", pos: "adj", lv: "C2", def: "no longer used because something newer exists", tr: "modası geçmiş, kullanılmayan", ex: "Fax machines are now largely [obsolete].", syn: "outdated, outmoded" },
+  { w: "benevolent", pos: "adj", lv: "C2", def: "kind and wishing to help others", tr: "iyiliksever, hayırsever", ex: "A [benevolent] donor paid for the new library.", syn: "kind, charitable" },
+  { w: "mundane", pos: "adj", lv: "C2", def: "ordinary and not interesting or exciting", tr: "sıradan, tekdüze", ex: "Most of the job involves [mundane] paperwork.", syn: "dull, routine" },
+  { w: "eloquent", pos: "adj", lv: "C2", def: "able to express ideas clearly and persuasively", tr: "belagatli, etkili konuşan", ex: "She gave an [eloquent] speech at the ceremony.", syn: "articulate, expressive" }
+];
+
+const POS_TR = { adj: "sıfat", verb: "fiil", noun: "isim", adv: "zarf" };
+const DEPO = "c1-kelime-atolyesi-v1";
+
+// Kişisel ilerleme yalnızca bu tarayıcıda tutulur
+let durum = { bilinen: {}, uretilen: [], seviye: "hepsi" };
+try { Object.assign(durum, JSON.parse(localStorage.getItem(DEPO)) || {}); } catch (e) {}
+function kaydet() { try { localStorage.setItem(DEPO, JSON.stringify(durum)); } catch (e) {} }
+
+const alan = document.getElementById("alan");
+let sekme = "ogren";
+let ogrenSira = [], ogrenIndex = 0, anlamAcik = false;
+let test = null;
+
+function tumKelimeler() { return HAVUZ.concat(durum.uretilen); }
+function secili() {
+  const t = tumKelimeler();
+  return durum.seviye === "hepsi" ? t : t.filter(k => k.lv === durum.seviye);
+}
+function karistir(a) {
+  a = a.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+function kacis(s) { return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+function ornekHtml(ex) { return kacis(ex).replace(/\[(.+?)\]/g, "<b>$1</b>"); }
+
+function ilerlemeGuncelle() {
+  const t = tumKelimeler();
+  const n = t.filter(k => durum.bilinen[k.w]).length;
+  document.getElementById("ogrenilen").textContent = n + " / " + t.length;
+}
+
+// Seslendirme (tarayıcı destekliyorsa)
+const sesVar = "speechSynthesis" in window;
+function seslendir(metin) {
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(metin);
+    u.lang = "en-GB"; u.rate = 0.9;
+    speechSynthesis.speak(u);
+  } catch (e) {}
+}
+
+/* ---------- ÖĞREN ---------- */
+function ogrenHazirla() {
+  const s = secili();
+  const yeni = karistir(s.filter(k => !durum.bilinen[k.w]));
+  const eski = karistir(s.filter(k => durum.bilinen[k.w]));
+  ogrenSira = yeni.concat(eski);
+  ogrenIndex = 0;
+  anlamAcik = false;
+}
+
+function ogrenCiz() {
+  if (!ogrenSira.length) { alan.innerHTML = `<div class="kart">Bu seviyede kelime yok.</div>`; return; }
+  const k = ogrenSira[ogrenIndex % ogrenSira.length];
+  const bilindi = !!durum.bilinen[k.w];
+  alan.innerHTML = `
+    <article class="kart">
+      <div class="madde-bas">
+        <span class="kelime">${kacis(k.w)}</span>
+        <span class="etiket">${POS_TR[k.pos] || kacis(k.pos)}</span>
+        <span class="rozet">${kacis(k.lv)}</span>
+        ${bilindi ? '<span class="durum ok">öğrenildi</span>' : ""}
+        ${sesVar ? '<button class="seslendir" id="sesBtn" type="button" aria-label="Telaffuzu dinle">🔊</button>' : ""}
+      </div>
+      <div class="anlam ${anlamAcik ? "" : "gizli-anlam"}" id="anlam">
+        <div><div class="etiket">Tanım</div><p class="tanim">${kacis(k.def)}</p></div>
+        <div><div class="etiket">Türkçe</div><p class="tr">${kacis(k.tr)}</p></div>
+        <div><div class="etiket">Örnek</div><p class="ornek">${ornekHtml(k.ex)}</p></div>
+        ${k.syn ? `<div><div class="etiket">Eş anlamlılar</div><p class="es">${kacis(k.syn)}</p></div>` : ""}
+      </div>
+      <div class="dugmeler">
+        ${anlamAcik
+          ? `<button class="btn ana" id="bildim" type="button">Öğrendim</button>
+             <button class="btn" id="tekrar" type="button">Tekrar göster</button>`
+          : `<button class="btn ana" id="goster" type="button">Anlamını göster</button>`}
+        <span class="sayac">${(ogrenIndex % ogrenSira.length) + 1} / ${ogrenSira.length}</span>
+      </div>
+    </article>`;
+  if (sesVar) document.getElementById("sesBtn").onclick = () => seslendir(k.w + ". " + k.ex.replace(/[\[\]]/g, ""));
+  if (!anlamAcik) {
+    document.getElementById("goster").onclick = () => { anlamAcik = true; ogrenCiz(); };
+    document.getElementById("anlam").onclick = () => { anlamAcik = true; ogrenCiz(); };
+  } else {
+    document.getElementById("bildim").onclick = () => {
+      durum.bilinen[k.w] = true; kaydet(); ilerlemeGuncelle(); sonraki();
+    };
+    document.getElementById("tekrar").onclick = () => {
+      // Kelimeyi birkaç kart sonra yeniden göster
+      ogrenSira.splice(Math.min(ogrenIndex + 4, ogrenSira.length), 0, k);
+      sonraki();
+    };
+  }
+}
+function sonraki() { ogrenIndex = (ogrenIndex + 1) % ogrenSira.length; anlamAcik = false; ogrenCiz(); }
+
+/* ---------- TEST ---------- */
+const SORU_SAYISI = 10;
+
+function celdiriciler(k, havuz, alanAdi) {
+  const ayni = havuz.filter(x => x.w !== k.w && x.pos === k.pos);
+  const diger = havuz.filter(x => x.w !== k.w && x.pos !== k.pos);
+  const secim = karistir(ayni).concat(karistir(diger));
+  const cikti = [];
+  for (const x of secim) {
+    if (cikti.length === 3) break;
+    if (!cikti.includes(x[alanAdi]) && x[alanAdi] !== k[alanAdi]) cikti.push(x[alanAdi]);
+  }
+  return cikti;
+}
+
+function testHazirla() {
+  const s = secili();
+  const havuz = tumKelimeler();
+  const hedef = karistir(s).slice(0, Math.min(SORU_SAYISI, s.length));
+  const sorular = hedef.map((k, i) => {
+    const tur = i % 3;
+    if (tur === 0) {
+      return { k, tip: "Türkçe anlamı hangisi?", soru: `<span class="kelime" style="font-size:40px">${kacis(k.w)}</span>`, dogru: k.tr, secenekler: karistir([k.tr, ...celdiriciler(k, havuz, "tr")]) };
+    }
+    if (tur === 1) {
+      return { k, tip: "Bu tanıma uyan kelime hangisi?", soru: `“${kacis(k.def)}”`, dogru: k.w, secenekler: karistir([k.w, ...celdiriciler(k, havuz, "w")]) };
+    }
+    const bicim = (k.ex.match(/\[(.+?)\]/) || [, k.w])[1];
+    const cumle = kacis(k.ex).replace(/\[(.+?)\]/, '<span class="bosluk">&nbsp;</span>');
+    // Seçenekleri hedefin kullanılan biçimiyle değil, sözlük biçimiyle göster
+    return { k, tip: "Boşluğa hangi kelime gelir?", soru: cumle, dogru: k.w, ipucu: bicim, secenekler: karistir([k.w, ...celdiriciler(k, havuz, "w")]) };
+  });
+  test = { sorular, i: 0, dogru: 0, yanlislar: [], cevaplandi: false };
+}
+
+function testCiz() {
+  if (!test || !test.sorular.length) { alan.innerHTML = `<div class="kart">Test için yeterli kelime yok.</div>`; return; }
+  if (test.i >= test.sorular.length) return sonucCiz();
+  const q = test.sorular[test.i];
+  alan.innerHTML = `
+    <section class="kart">
+      <div class="soru-ust">
+        <span class="etiket">Soru ${test.i + 1} / ${test.sorular.length} · ${q.tip}</span>
+        <span class="etiket">Doğru: ${test.dogru}</span>
+      </div>
+      <div class="cubuk"><span style="width:${(test.i / test.sorular.length) * 100}%"></span></div>
+      <p class="soru">${q.soru}</p>
+      <div class="secenekler">
+        ${q.secenekler.map((s, j) => `<button class="secenek" type="button" data-j="${j}">${kacis(s)}</button>`).join("")}
+      </div>
+      <div class="geri-bildirim" id="gb"></div>
+    </section>`;
+  alan.querySelectorAll(".secenek").forEach(b => b.onclick = () => cevapla(b, q));
+}
+
+function cevapla(btn, q) {
+  if (test.cevaplandi) return;
+  test.cevaplandi = true;
+  const secilen = q.secenekler[+btn.dataset.j];
+  const dogruMu = secilen === q.dogru;
+  alan.querySelectorAll(".secenek").forEach(b => {
+    b.disabled = true;
+    if (q.secenekler[+b.dataset.j] === q.dogru) b.classList.add("dogru");
+  });
+  if (dogruMu) {
+    test.dogru++;
+    durum.bilinen[q.k.w] = true; kaydet(); ilerlemeGuncelle();
+  } else {
+    btn.classList.add("yanlis");
+    test.yanlislar.push(q.k);
+    delete durum.bilinen[q.k.w]; kaydet(); ilerlemeGuncelle();
+  }
+  const gb = document.getElementById("gb");
+  gb.innerHTML = `${dogruMu ? "✓ Doğru." : "✗ Yanlış."} <b>${kacis(q.k.w)}</b>: ${kacis(q.k.tr)} — <span style="color:var(--soluk)">${ornekHtml(q.k.ex)}</span>
+    <div class="dugmeler" style="margin-top:12px"><button class="btn ana" id="devam" type="button">${test.i + 1 < test.sorular.length ? "Sonraki soru" : "Sonucu gör"}</button></div>`;
+  document.getElementById("devam").onclick = () => { test.i++; test.cevaplandi = false; testCiz(); };
+  document.getElementById("devam").focus();
+}
+
+function sonucCiz() {
+  const oran = Math.round((test.dogru / test.sorular.length) * 100);
+  const yorum = oran >= 90 ? "Çok iyi. Bu kelimeler artık senin." : oran >= 60 ? "İyi gidiyorsun. Yanlışları bir kez daha çalış." : "Önce Öğren sekmesinde kartlara bir göz at, sonra tekrar dene.";
+  alan.innerHTML = `
+    <section class="kart">
+      <div class="etiket">Sonuç</div>
+      <div class="sonuc-skor">${test.dogru}<span style="font-size:28px;color:var(--soluk)"> / ${test.sorular.length}</span></div>
+      <p>${yorum}</p>
+      ${test.yanlislar.length ? `<div class="etiket" style="margin-top:20px">Tekrar çalışılacaklar</div>
+        <ul class="liste">${test.yanlislar.map(k => `<li><b>${kacis(k.w)}</b><span>${kacis(k.tr)}</span></li>`).join("")}</ul>` : ""}
+      <div class="dugmeler">
+        <button class="btn ana" id="yeniTest" type="button">Yeni test</button>
+        ${test.yanlislar.length ? '<button class="btn" id="yanlisCalis" type="button">Yanlışları çalış</button>' : ""}
+      </div>
+    </section>`;
+  document.getElementById("yeniTest").onclick = () => { testHazirla(); testCiz(); };
+  const yc = document.getElementById("yanlisCalis");
+  if (yc) yc.onclick = () => {
+    ogrenSira = test.yanlislar.slice(); ogrenIndex = 0; anlamAcik = false;
+    sekmeSec("ogren", true);
+  };
+}
+
+/* ---------- LİSTE ---------- */
+function listeCiz() {
+  const s = secili().slice().sort((a, b) => a.w.localeCompare(b.w));
+  alan.innerHTML = `
+    <section class="kart">
+      <div class="etiket">${s.length} kelime · ${durum.seviye === "hepsi" ? "tüm seviyeler" : durum.seviye}</div>
+      <ul class="liste">
+        ${s.map(k => `<li><div><b>${kacis(k.w)}</b> <span class="etiket">${POS_TR[k.pos] || kacis(k.pos)} · ${kacis(k.lv)}</span><br><span>${kacis(k.tr)}</span></div>
+          <span class="durum ${durum.bilinen[k.w] ? "ok" : "yeni"}">${durum.bilinen[k.w] ? "öğrenildi" : "yeni"}</span></li>`).join("")}
+      </ul>
+      <div class="dugmeler"><button class="btn" id="sifirla" type="button">İlerlemeyi sıfırla</button></div>
+    </section>`;
+  const sb = document.getElementById("sifirla");
+  sb.onclick = () => {
+    if (sb.dataset.onay) { durum.bilinen = {}; kaydet(); ilerlemeGuncelle(); listeCiz(); }
+    else { sb.dataset.onay = "1"; sb.textContent = "Emin misin? Tekrar tıkla"; }
+  };
+}
+
+/* ---------- Gezinme ---------- */
+function sekmeSec(ad, siraKoru) {
+  sekme = ad;
+  document.querySelectorAll("[data-sekme]").forEach(b => b.setAttribute("aria-selected", b.dataset.sekme === ad));
+  if (ad === "ogren") { if (!siraKoru) ogrenHazirla(); ogrenCiz(); }
+  if (ad === "test") { testHazirla(); testCiz(); }
+  if (ad === "liste") listeCiz();
+}
+document.querySelectorAll("[data-sekme]").forEach(b => b.onclick = () => sekmeSec(b.dataset.sekme));
+function seviyeIsaretle() {
+  document.querySelectorAll("[data-seviye]").forEach(b => b.setAttribute("aria-pressed", b.dataset.seviye === durum.seviye));
+}
+document.querySelectorAll("[data-seviye]").forEach(b => b.onclick = () => {
+  durum.seviye = b.dataset.seviye; kaydet(); seviyeIsaretle(); sekmeSec(sekme);
+});
+
+/* ---------- Claude ile yeni kelime üret ---------- */
+(async () => {
+  const sample = window.claude ? await window.claude.use("sample") : null;
+  if (!sample) return;
+  const kutu = document.getElementById("uretKutu");
+  const btn = document.getElementById("uretBtn");
+  const aciklama = kutu.querySelector("p");
+  const ilkAciklama = aciklama.innerHTML;
+  kutu.hidden = false;
+
+  btn.onclick = async () => {
+    btn.disabled = true;
+    btn.textContent = "Hazırlanıyor…";
+    aciklama.innerHTML = "Claude yeni kelimeleri seçiyor. Bu 10–40 saniye sürebilir.";
+    const mevcut = tumKelimeler().map(k => k.w).join(", ");
+    const seviye = durum.seviye === "hepsi" ? "a mix of C1 and C2" : durum.seviye;
+    const istem =
+`You are an expert EFL lexicographer. Choose 8 English words at CEFR level ${seviye} that are useful for advanced learners (academic and educated general English). Only use words whose CEFR level you are confident about.
+Do NOT include any of these words: ${mevcut}.
+For each word give an accurate learner-dictionary definition, a natural Turkish translation (1-3 short equivalents), one natural example sentence in which the target word (in the form used) is wrapped in square brackets exactly once, and 2 synonyms.
+Reply with only a JSON array like:
+[{"w":"meticulous","pos":"adj","lv":"C1","def":"showing great attention to detail","tr":"titiz, özenli","ex":"She kept [meticulous] records of every experiment.","syn":"thorough, painstaking"}]
+"pos" must be one of adj, verb, noun, adv. "lv" must be C1 or C2.`;
+    try {
+      const veri = await sample.json(istem, { cache: false });
+      const var_olan = new Set(tumKelimeler().map(k => k.w.toLowerCase()));
+      const temiz = (Array.isArray(veri) ? veri : []).filter(k =>
+        k && typeof k.w === "string" && k.w.trim() && typeof k.def === "string" && typeof k.tr === "string" &&
+        typeof k.ex === "string" && /\[.+?\]/.test(k.ex) && ["adj", "verb", "noun", "adv"].includes(k.pos) &&
+        ["C1", "C2"].includes(k.lv) && !var_olan.has(k.w.toLowerCase())
+      ).map(k => ({ w: k.w.trim(), pos: k.pos, lv: k.lv, def: k.def, tr: k.tr, ex: k.ex, syn: typeof k.syn === "string" ? k.syn : "", yeni: true }));
+      if (!temiz.length) throw { code: "invalid_json" };
+      durum.uretilen = durum.uretilen.concat(temiz);
+      kaydet(); ilerlemeGuncelle();
+      aciklama.innerHTML = `<strong>${temiz.length} yeni kelime eklendi:</strong> ${temiz.map(k => kacis(k.w)).join(", ")}. Öğren sekmesinde seni bekliyorlar.`;
+      ogrenSira = temiz.filter(k => durum.seviye === "hepsi" || k.lv === durum.seviye).concat(ogrenSira);
+      ogrenIndex = 0; anlamAcik = false;
+      sekmeSec("ogren", true);
+    } catch (e) {
+      const kod = e && e.code;
+      if (["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed"].includes(kod)) {
+        kutu.hidden = true; return;
+      }
+      aciklama.innerHTML = kod === "rate_limited"
+        ? "Çok sık istek gönderildi. Biraz bekleyip yeniden dene."
+        : kod === "cancelled" ? ilkAciklama
+        : "Kelimeler bu sefer hazırlanamadı. Yeniden dene.";
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Yeni kelimeler üret";
+    }
+  };
+})();
+
+seviyeIsaretle();
+ilerlemeGuncelle();
+sekmeSec("ogren");
+</script>
