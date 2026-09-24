@@ -294,10 +294,12 @@ function ilerlemeGuncelle() {
   document.getElementById("ogrenilen").textContent = n + " / " + t.length;
 }
 
-// Seslendirme (tarayıcı destekliyorsa)
-const sesVar = "speechSynthesis" in window;
+// Seslendirme: Android uygulamasında yerel TTS köprüsü, tarayıcıda Web Speech
+const androidSes = window.AndroidTTS;
+const sesVar = !!androidSes || "speechSynthesis" in window;
 function seslendir(metin) {
   try {
+    if (androidSes) { androidSes.speak(metin); return; }
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(metin);
     u.lang = "en-GB"; u.rate = 0.9;
