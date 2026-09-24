@@ -1,0 +1,308 @@
+<title>Yıldız Yazısı</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+  :root {
+    color-scheme: dark;
+    --gece: #070914;
+    --yuzey: rgba(20, 24, 48, 0.72);
+    --cizgi: rgba(160, 175, 255, 0.18);
+    --metin: #e9ecff;
+    --soluk: #8e95c2;
+    --altin: #ffcf6b;
+    --camgobegi: #7fe7ff;
+    --gul: #ff7aa8;
+  }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--gece);
+    color: var(--metin);
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    overflow: hidden;
+    touch-action: none;
+  }
+  canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+
+  .baslik {
+    position: fixed;
+    top: calc(env(safe-area-inset-top, 0px) + 20px);
+    left: 16px; right: 16px;
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 12px; flex-wrap: wrap;
+    pointer-events: none;
+  }
+  .baslik h1 {
+    margin: 0;
+    font-family: "Syne", "IBM Plex Sans", sans-serif;
+    font-weight: 800;
+    font-size: clamp(18px, 3vw, 24px);
+    letter-spacing: 0.02em;
+  }
+  .baslik h1 span { color: var(--altin); }
+  .baslik p {
+    margin: 0; font-size: 13px; color: var(--soluk);
+  }
+
+  .panel {
+    position: fixed;
+    left: 50%; transform: translateX(-50%);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
+    width: min(560px, calc(100% - 32px));
+    box-sizing: border-box;
+    display: flex; flex-direction: column; gap: 10px;
+    padding: 12px;
+    background: var(--yuzey);
+    border: 1px solid var(--cizgi);
+    border-radius: 14px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  form { display: flex; gap: 8px; }
+  input {
+    flex: 1; min-width: 0;
+    font: inherit; font-size: 16px;
+    color: var(--metin);
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--cizgi);
+    border-radius: 9px;
+    padding: 10px 12px;
+  }
+  input::placeholder { color: var(--soluk); }
+  button {
+    font: inherit; font-weight: 500; font-size: 14px;
+    cursor: pointer;
+    border-radius: 9px;
+    padding: 10px 14px;
+    border: 1px solid var(--cizgi);
+    background: transparent;
+    color: var(--metin);
+  }
+  button.ana { background: var(--altin); color: #1a1300; border-color: var(--altin); }
+  button:hover { border-color: var(--camgobegi); }
+  button:focus-visible, input:focus-visible { outline: 2px solid var(--camgobegi); outline-offset: 2px; }
+  .cipler { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .cipler button { padding: 6px 11px; font-size: 13px; border-radius: 99px; }
+  .cipler small { color: var(--soluk); font-size: 12px; margin-left: auto; }
+</style>
+
+<canvas id="gok"></canvas>
+
+<header class="baslik">
+  <h1>Yıldız <span>Yazısı</span></h1>
+  <p>Fareyle yıldızları it · Tıkla, patlasın · Bir şey yaz, gökyüzü yazsın</p>
+</header>
+
+<div class="panel">
+  <form id="form">
+    <input id="yazi" maxlength="14" placeholder="Adını yaz…" autocomplete="off" aria-label="Yıldızlarla yazılacak metin">
+    <button class="ana" type="submit">Yaz</button>
+  </form>
+  <div class="cipler">
+    <button type="button" data-kelime="Merhaba">Merhaba</button>
+    <button type="button" data-kelime="Miho">Miho</button>
+    <button type="button" data-kelime="♥">♥</button>
+    <button type="button" data-kelime="2026">2026</button>
+    <button type="button" id="dagit">Dağıt</button>
+    <small id="sayac"></small>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById("gok");
+const ctx = canvas.getContext("2d");
+const sayac = document.getElementById("sayac");
+const azHareket = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const RENKLER = ["#ffcf6b", "#7fe7ff", "#ff7aa8", "#ffffff"];
+let W, H, dpr;
+let parcaciklar = [];
+let dagitik = false;
+let aktifKelime = "Merhaba";
+const imlec = { x: -9999, y: -9999, aktif: false };
+
+function boyutla() {
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  W = window.innerWidth;
+  H = window.innerHeight;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+// Metni gizli bir tuvale çizip piksellerinden hedef noktalar çıkar
+function hedefNoktalar(metin) {
+  const off = document.createElement("canvas");
+  off.width = W; off.height = H;
+  const o = off.getContext("2d");
+  const aile = '800 200px "Syne", sans-serif';
+  o.font = aile;
+  const genislik = o.measureText(metin).width || 1;
+  const boy = Math.min(200 * (W * 0.86) / genislik, H * 0.38);
+  o.font = `800 ${boy}px "Syne", sans-serif`;
+  o.textAlign = "center";
+  o.textBaseline = "middle";
+  o.fillStyle = "#fff";
+  o.fillText(metin, W / 2, H * 0.46);
+
+  const veri = o.getImageData(0, 0, W, H).data;
+  let adim = Math.max(3, Math.round(Math.sqrt((W * H) / 60000)));
+  let noktalar;
+  do {
+    noktalar = [];
+    for (let y = 0; y < H; y += adim) {
+      for (let x = 0; x < W; x += adim) {
+        if (veri[(y * W + x) * 4 + 3] > 128) noktalar.push({ x, y });
+      }
+    }
+    adim++;
+  } while (noktalar.length > 3200);
+  // Karıştır ki parçacıklar harflere rastgele dağılsın
+  for (let i = noktalar.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [noktalar[i], noktalar[j]] = [noktalar[j], noktalar[i]];
+  }
+  return noktalar;
+}
+
+function yeniParcacik() {
+  return {
+    x: Math.random() * W, y: Math.random() * H,
+    vx: 0, vy: 0,
+    hx: null, hy: null,
+    r: 0.6 + Math.random() * 1.4,
+    renk: RENKLER[Math.floor(Math.random() * RENKLER.length)],
+    faz: Math.random() * Math.PI * 2
+  };
+}
+
+function kelimeYaz(metin) {
+  metin = (metin || "").trim();
+  if (!metin) return;
+  aktifKelime = metin;
+  dagitik = false;
+  const noktalar = hedefNoktalar(metin);
+  const serbestSayi = Math.round((W * H) / 5000);
+  const toplam = noktalar.length + serbestSayi;
+  while (parcaciklar.length < toplam) parcaciklar.push(yeniParcacik());
+  parcaciklar.length = toplam;
+  parcaciklar.forEach((p, i) => {
+    if (i < noktalar.length) { p.hx = noktalar[i].x; p.hy = noktalar[i].y; }
+    else { p.hx = null; p.hy = null; }
+  });
+  sayac.textContent = noktalar.length.toLocaleString("tr-TR") + " yıldız";
+}
+
+function patlat(x, y, guc) {
+  for (const p of parcaciklar) {
+    const dx = p.x - x, dy = p.y - y;
+    const d = Math.hypot(dx, dy) + 1;
+    const etki = guc * Math.exp(-d / 220);
+    p.vx += (dx / d) * etki;
+    p.vy += (dy / d) * etki;
+  }
+}
+
+function dagit() {
+  dagitik = !dagitik;
+  document.getElementById("dagit").textContent = dagitik ? "Topla" : "Dağıt";
+  if (dagitik) {
+    for (const p of parcaciklar) {
+      const a = Math.random() * Math.PI * 2;
+      const h = 4 + Math.random() * 10;
+      p.vx += Math.cos(a) * h;
+      p.vy += Math.sin(a) * h;
+    }
+  }
+}
+
+let zaman = 0;
+function kare() {
+  zaman += 0.016;
+  // Hafif iz bırakan arka plan
+  ctx.globalCompositeOperation = "source-over";
+  ctx.fillStyle = azHareket ? "#070914" : "rgba(7, 9, 20, 0.28)";
+  ctx.fillRect(0, 0, W, H);
+  ctx.globalCompositeOperation = "lighter";
+
+  const yay = azHareket ? 0.12 : 0.045;
+  const surtunme = azHareket ? 0.7 : 0.86;
+
+  for (const p of parcaciklar) {
+    if (p.hx !== null && !dagitik) {
+      p.vx += (p.hx - p.x) * yay;
+      p.vy += (p.hy - p.y) * yay;
+    } else {
+      // Serbest yıldızlar yavaşça süzülür
+      p.vx += Math.cos(p.faz + zaman * 0.6) * 0.02;
+      p.vy += Math.sin(p.faz + zaman * 0.5) * 0.02;
+    }
+
+    if (imlec.aktif) {
+      const dx = p.x - imlec.x, dy = p.y - imlec.y;
+      const d2 = dx * dx + dy * dy;
+      if (d2 < 110 * 110) {
+        const d = Math.sqrt(d2) + 0.1;
+        const itme = (110 - d) / 110 * 3.2;
+        p.vx += (dx / d) * itme;
+        p.vy += (dy / d) * itme;
+      }
+    }
+
+    p.vx *= surtunme; p.vy *= surtunme;
+    p.x += p.vx; p.y += p.vy;
+
+    if (p.hx === null || dagitik) {
+      if (p.x < 0) p.x += W; if (p.x > W) p.x -= W;
+      if (p.y < 0) p.y += H; if (p.y > H) p.y -= H;
+    }
+
+    const hiz = Math.min(Math.hypot(p.vx, p.vy), 12);
+    const parilti = 0.55 + 0.45 * Math.sin(zaman * 3 + p.faz);
+    ctx.globalAlpha = Math.min(1, 0.35 + parilti * 0.5 + hiz * 0.05);
+    ctx.fillStyle = p.renk;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r + hiz * 0.12, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(kare);
+}
+
+// Olaylar
+canvas.addEventListener("pointermove", e => { imlec.x = e.clientX; imlec.y = e.clientY; imlec.aktif = true; });
+canvas.addEventListener("pointerleave", () => { imlec.aktif = false; });
+canvas.addEventListener("pointerup", e => { if (e.pointerType === "touch") imlec.aktif = false; });
+canvas.addEventListener("pointerdown", e => {
+  imlec.x = e.clientX; imlec.y = e.clientY; imlec.aktif = true;
+  patlat(e.clientX, e.clientY, 38);
+});
+
+document.getElementById("form").addEventListener("submit", e => {
+  e.preventDefault();
+  const girdi = document.getElementById("yazi");
+  kelimeYaz(girdi.value);
+  girdi.blur();
+});
+document.querySelectorAll("[data-kelime]").forEach(b =>
+  b.addEventListener("click", () => kelimeYaz(b.dataset.kelime))
+);
+document.getElementById("dagit").addEventListener("click", dagit);
+
+let boyutZamanlayici;
+window.addEventListener("resize", () => {
+  clearTimeout(boyutZamanlayici);
+  boyutZamanlayici = setTimeout(() => { boyutla(); kelimeYaz(aktifKelime); }, 150);
+});
+
+// Başlat: yazı tipi yüklenince harfler doğru biçimde oluşsun
+boyutla();
+ctx.fillStyle = "#070914";
+ctx.fillRect(0, 0, W, H);
+kelimeYaz(aktifKelime);
+requestAnimationFrame(kare);
+(document.fonts ? document.fonts.load('800 200px "Syne"') : Promise.resolve())
+  .then(() => kelimeYaz(aktifKelime))
+  .catch(() => {});
+</script>
