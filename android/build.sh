@@ -31,7 +31,9 @@ echo "3/6 Dosyalar yerleştiriliyor"
 cp "$AND/AndroidManifest.xml" "$OUT/apk/"
 cp -r "$AND/res" "$OUT/apk/resources/package_1/"
 printf '{"package_id":127,"package_name":"com.mmurat.kelimeatolyesi"}' > "$OUT/apk/resources/package_1/package.json"
-cp "$KOK/kelime-atolyesi.html" "$OUT/apk/root/assets/index.html"
+python3 "$KOK/yokdil/build.py"
+{ printf '<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body>\n'
+  cat "$KOK/kelime-atolyesi.html"; printf '\n</body></html>\n'; } > "$OUT/apk/root/assets/index.html"
 
 echo "4/6 Manifest ve kaynaklar kodlanıyor"
 javac -nowarn -cp "$ARAC/ARSCLib-1.4.0.jar:$ARAC/apksig-2.3.0.jar" -d "$OUT/tools" "$AND"/build-tools/*.java

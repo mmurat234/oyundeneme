@@ -1,2 +1,5 @@
 android/.tools/
 android/.build/
+yokdil/veri/siklik.csv
+yokdil/veri/kelimeler_siklik.json
+__pycache__/

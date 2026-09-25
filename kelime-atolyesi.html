@@ -1,300 +1,316 @@
-<title>C1 Kelime Atölyesi</title>
+<title>YÖKDİL Kelime Atölyesi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap">
 <style>
   :root {
     --zemin: #edf0f5;
     --yuzey: #ffffff;
-    --yuzey2: #f5f7fb;
-    --murekkep: #1a2030;
-    --soluk: #5b6479;
-    --cizgi: #d7dce6;
+    --yuzey2: #f4f6fa;
+    --murekkep: #182031;
+    --soluk: #5a6378;
+    --cizgi: #d8dde7;
     --vurgu: #2945c4;
     --vurgu-yazi: #ffffff;
-    --vurgu-acik: #e4e9fb;
+    --vurgu-acik: #e5eafb;
+    --amber: #b7791f;
+    --amber-acik: #fbf0da;
     --dogru: #1c7f52;
     --dogru-acik: #dff3e8;
     --yanlis: #b83a33;
     --yanlis-acik: #f8e1df;
-    --golge: 0 1px 2px rgba(26, 32, 48, .06), 0 8px 24px rgba(26, 32, 48, .06);
+    --golge: 0 1px 2px rgba(24, 32, 49, .06), 0 10px 28px rgba(24, 32, 49, .07);
+    --serif: "Newsreader", Georgia, "Noto Serif", serif;
+    --sans: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "Roboto Mono", monospace;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       color-scheme: dark;
-      --zemin: #10131b;
-      --yuzey: #181c27;
-      --yuzey2: #1e2330;
-      --murekkep: #e7eaf2;
-      --soluk: #9aa2b8;
-      --cizgi: #2c3242;
-      --vurgu: #8ea2ff;
-      --vurgu-yazi: #0e1330;
-      --vurgu-acik: #242c4d;
-      --dogru: #5fd39a;
-      --dogru-acik: #173427;
-      --yanlis: #ff8a80;
-      --yanlis-acik: #3a1d1d;
-      --golge: 0 1px 2px rgba(0, 0, 0, .3);
+      --zemin: #0f121a; --yuzey: #171b26; --yuzey2: #1d2230; --murekkep: #e8ebf3; --soluk: #9aa2b8;
+      --cizgi: #2b3142; --vurgu: #8ea2ff; --vurgu-yazi: #0e1330; --vurgu-acik: #232b4b;
+      --amber: #f0bd5e; --amber-acik: #3a2e17; --dogru: #5fd39a; --dogru-acik: #16332a;
+      --yanlis: #ff8a80; --yanlis-acik: #3b1e1e; --golge: 0 1px 2px rgba(0, 0, 0, .35);
     }
   }
   :root[data-theme="dark"] {
     color-scheme: dark;
-    --zemin: #10131b;
-    --yuzey: #181c27;
-    --yuzey2: #1e2330;
-    --murekkep: #e7eaf2;
-    --soluk: #9aa2b8;
-    --cizgi: #2c3242;
-    --vurgu: #8ea2ff;
-    --vurgu-yazi: #0e1330;
-    --vurgu-acik: #242c4d;
-    --dogru: #5fd39a;
-    --dogru-acik: #173427;
-    --yanlis: #ff8a80;
-    --yanlis-acik: #3a1d1d;
-    --golge: 0 1px 2px rgba(0, 0, 0, .3);
+    --zemin: #0f121a; --yuzey: #171b26; --yuzey2: #1d2230; --murekkep: #e8ebf3; --soluk: #9aa2b8;
+    --cizgi: #2b3142; --vurgu: #8ea2ff; --vurgu-yazi: #0e1330; --vurgu-acik: #232b4b;
+    --amber: #f0bd5e; --amber-acik: #3a2e17; --dogru: #5fd39a; --dogru-acik: #16332a;
+    --yanlis: #ff8a80; --yanlis-acik: #3b1e1e; --golge: 0 1px 2px rgba(0, 0, 0, .35);
   }
 
   * { box-sizing: border-box; }
   [hidden] { display: none !important; }
+  html, body { height: 100%; }
   body {
     margin: 0;
     background: var(--zemin);
     color: var(--murekkep);
-    font-family: "Manrope", system-ui, sans-serif;
+    font-family: var(--sans);
     font-size: 15px;
     line-height: 1.55;
-    padding-inline: 16px;
-    padding-block: 24px 48px;
+    -webkit-tap-highlight-color: transparent;
   }
-  .kap { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+  button { font: inherit; color: inherit; }
+  button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 2px; }
 
-  header { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
-  header h1 {
-    margin: 0;
-    font-family: "Newsreader", Georgia, serif;
-    font-weight: 600;
-    font-size: clamp(26px, 5vw, 34px);
-    line-height: 1.1;
-    text-wrap: balance;
+  .ust {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+    background: color-mix(in srgb, var(--zemin) 88%, transparent);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--cizgi);
   }
-  header p { margin: 4px 0 0; color: var(--soluk); font-size: 14px; }
-  .ilerleme { text-align: right; font-size: 13px; color: var(--soluk); font-variant-numeric: tabular-nums; }
-  .ilerleme strong { display: block; font-size: 22px; color: var(--murekkep); font-weight: 700; }
+  .ust-ic { max-width: 760px; margin: 0 auto; padding: 12px 16px; display: flex; align-items: center; gap: 12px; }
+  .marka { font-family: var(--serif); font-weight: 600; font-size: 20px; line-height: 1.1; }
+  .marka small { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--soluk); font-weight: 500; }
+  .ust .seri { margin-left: auto; display: flex; align-items: center; gap: 6px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--amber); background: var(--amber-acik); padding: 4px 10px; border-radius: 99px; font-size: 14px; }
+  .ikon-btn { border: 1px solid var(--cizgi); background: var(--yuzey); border-radius: 10px; width: 38px; height: 38px; cursor: pointer; display: grid; place-items: center; }
+  .ikon-btn svg { width: 18px; height: 18px; }
 
-  .araclar { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; }
-  .sekmeler, .seviyeler { display: flex; gap: 4px; padding: 4px; background: var(--yuzey); border: 1px solid var(--cizgi); border-radius: 10px; }
-  .sekmeler button, .seviyeler button {
-    border: 0; background: transparent; color: var(--soluk);
-    font: inherit; font-weight: 600; font-size: 14px;
-    padding: 7px 14px; border-radius: 7px; cursor: pointer;
-  }
-  .sekmeler button[aria-selected="true"], .seviyeler button[aria-pressed="true"] { background: var(--vurgu); color: var(--vurgu-yazi); }
-  button:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 2px; }
+  main { max-width: 760px; margin: 0 auto; padding: 20px 16px 110px; display: flex; flex-direction: column; gap: 16px; }
 
-  .kart {
-    background: var(--yuzey);
-    border: 1px solid var(--cizgi);
-    border-radius: 14px;
-    box-shadow: var(--golge);
-    padding: 28px;
+  .alt-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 5;
+    background: var(--yuzey); border-top: 1px solid var(--cizgi);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
-  @media (max-width: 480px) { .kart { padding: 20px; } }
+  .alt-bar nav { max-width: 760px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .alt-bar button {
+    border: 0; background: transparent; cursor: pointer; padding: 9px 4px 10px;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    font-size: 12px; font-weight: 600; color: var(--soluk);
+  }
+  .alt-bar button svg { width: 22px; height: 22px; }
+  .alt-bar button[aria-current="page"] { color: var(--vurgu); }
 
-  .etiket {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
-    font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--soluk);
-  }
-  .madde-bas { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-  .kelime {
-    font-family: "Newsreader", Georgia, serif;
-    font-weight: 600;
-    font-size: clamp(38px, 9vw, 56px);
-    line-height: 1;
-    letter-spacing: -.01em;
-    overflow-wrap: anywhere;
-  }
-  .rozet {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
-    font-size: 11px; font-weight: 500;
-    padding: 3px 8px; border-radius: 99px;
-    background: var(--vurgu-acik); color: var(--vurgu);
-  }
-  .seslendir {
-    margin-left: auto;
-    border: 1px solid var(--cizgi); background: var(--yuzey2); color: var(--murekkep);
-    border-radius: 99px; width: 38px; height: 38px; cursor: pointer; font-size: 16px;
-  }
-  .anlam { margin-top: 20px; display: grid; gap: 16px; }
-  .anlam .tanim { font-family: "Newsreader", Georgia, serif; font-size: 20px; line-height: 1.4; margin: 4px 0 0; }
-  .anlam .tr { font-size: 17px; font-weight: 600; margin: 4px 0 0; }
-  .ornek { margin: 4px 0 0; font-family: "Newsreader", Georgia, serif; font-style: italic; font-size: 18px; border-left: 3px solid var(--cizgi); padding-left: 12px; }
-  .ornek b { font-style: normal; color: var(--vurgu); }
-  .es { margin: 4px 0 0; color: var(--soluk); }
-  .gizli-anlam { filter: blur(7px); user-select: none; transition: filter .25s; }
+  .kart { background: var(--yuzey); border: 1px solid var(--cizgi); border-radius: 16px; box-shadow: var(--golge); padding: 22px; }
+  @media (max-width: 480px) { .kart { padding: 18px; } }
+  .etiket { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--soluk); }
+  h2 { font-family: var(--serif); font-weight: 600; font-size: 24px; line-height: 1.2; margin: 0; text-wrap: balance; }
+  .ikincil { color: var(--soluk); font-size: 14px; margin: 0; }
 
-  .dugmeler { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
   .btn {
-    font: inherit; font-weight: 600; font-size: 14px;
-    border-radius: 9px; padding: 10px 16px; cursor: pointer;
+    font-weight: 700; font-size: 15px; border-radius: 12px; padding: 12px 18px; cursor: pointer;
     border: 1px solid var(--cizgi); background: var(--yuzey); color: var(--murekkep);
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   }
   .btn.ana { background: var(--vurgu); color: var(--vurgu-yazi); border-color: var(--vurgu); }
+  .btn.genis { width: 100%; }
   .btn:disabled { opacity: .5; cursor: default; }
-  .sayac { margin-left: auto; align-self: center; color: var(--soluk); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .satir { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 
-  .uret { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding: 16px 20px; background: var(--yuzey2); border: 1px dashed var(--cizgi); border-radius: 12px; }
-  .uret p { margin: 0; flex: 1; min-width: 220px; font-size: 14px; color: var(--soluk); }
-  .uret p strong { color: var(--murekkep); }
+  /* Bugün */
+  .hero { display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: center; }
+  .halka { position: relative; width: 112px; height: 112px; }
+  .halka svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .halka .ortasi { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; line-height: 1.1; }
+  .halka .ortasi b { font-size: 26px; font-variant-numeric: tabular-nums; }
+  .halka .ortasi span { font-size: 11px; color: var(--soluk); }
+  .sayilar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--cizgi); border: 1px solid var(--cizgi); border-radius: 14px; overflow: hidden; }
+  .sayilar div { background: var(--yuzey); padding: 14px 12px; }
+  .sayilar b { display: block; font-size: 24px; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .sayilar span { font-size: 12px; color: var(--soluk); }
+  .ilerleme-cubuk { display: flex; height: 10px; border-radius: 99px; overflow: hidden; background: var(--yuzey2); }
+  .ilerleme-cubuk i { display: block; height: 100%; }
+  .aciklama { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--soluk); margin-top: 8px; }
+  .aciklama span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; background: var(--r); }
+  .hafta { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; align-items: end; height: 96px; margin-top: 12px; }
+  .hafta div { display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+  .hafta i { display: block; width: 100%; max-width: 28px; border-radius: 6px 6px 2px 2px; background: var(--vurgu); min-height: 3px; }
+  .hafta i.bos { background: var(--cizgi); }
+  .hafta span { font-size: 11px; color: var(--soluk); font-variant-numeric: tabular-nums; }
+  .cipler { display: flex; flex-wrap: wrap; gap: 6px; }
+  .cip { border: 1px solid var(--cizgi); background: var(--yuzey2); border-radius: 99px; padding: 5px 11px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .cip[aria-pressed="true"] { background: var(--vurgu); color: var(--vurgu-yazi); border-color: var(--vurgu); }
+
+  /* Kelime kartı */
+  .madde-bas { display: flex; align-items: flex-start; gap: 10px; }
+  .kelime { font-family: var(--serif); font-weight: 600; font-size: clamp(36px, 10vw, 52px); line-height: 1; letter-spacing: -.01em; overflow-wrap: anywhere; }
+  .madde-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
+  .rozet { font-family: var(--mono); font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 99px; background: var(--vurgu-acik); color: var(--vurgu); }
+  .rozet.amber { background: var(--amber-acik); color: var(--amber); }
+  .rozet.yesil { background: var(--dogru-acik); color: var(--dogru); }
+  .madde-bas .araclar { margin-left: auto; display: flex; gap: 6px; }
+  .yildiz[aria-pressed="true"] svg { fill: var(--amber); stroke: var(--amber); }
+  .bolumler { display: grid; gap: 16px; margin-top: 20px; }
+  .bolumler p { margin: 4px 0 0; }
+  .tr { font-size: 18px; font-weight: 700; }
+  .tanim { font-family: var(--serif); font-size: 19px; line-height: 1.4; }
+  .ornek { font-family: var(--serif); font-style: italic; font-size: 18px; line-height: 1.45; border-left: 3px solid var(--vurgu); padding-left: 12px; }
+  .ornek b { font-style: normal; color: var(--vurgu); }
+  .aile { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .aile span { background: var(--yuzey2); border: 1px solid var(--cizgi); border-radius: 8px; padding: 3px 9px; font-size: 14px; }
+  .aile span em { font-style: normal; color: var(--soluk); font-size: 12px; margin-left: 4px; }
+  .gizli { position: relative; }
+  .perde {
+    position: absolute; inset: -4px; border-radius: 12px; cursor: pointer;
+    background: var(--yuzey2); border: 1px dashed var(--cizgi);
+    display: grid; place-items: center; color: var(--soluk); font-weight: 600; font-size: 14px;
+  }
+  .puanla { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 22px; }
+  .puanla .btn { flex-direction: column; gap: 0; padding: 10px 6px; }
+  .puanla .btn small { font-weight: 500; font-size: 11px; opacity: .8; }
+  .puanla .tekrar { color: var(--yanlis); }
+  .puanla .zor { color: var(--amber); }
+  .oturum-ust { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .cubuk { height: 5px; background: var(--yuzey2); border-radius: 5px; overflow: hidden; margin-top: 8px; }
+  .cubuk span { display: block; height: 100%; background: var(--vurgu); transition: width .3s; }
+  .ai-ornekler { margin-top: 8px; display: grid; gap: 6px; }
+  .ai-ornekler p { font-family: var(--serif); font-style: italic; font-size: 16px; margin: 0; }
+  .ai-ornekler p b { font-style: normal; color: var(--vurgu); }
 
   /* Test */
-  .soru-ust { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
-  .cubuk { height: 4px; background: var(--yuzey2); border-radius: 4px; overflow: hidden; margin-top: 10px; }
-  .cubuk span { display: block; height: 100%; background: var(--vurgu); transition: width .3s; }
-  .soru { font-family: "Newsreader", Georgia, serif; font-size: 22px; line-height: 1.4; margin: 20px 0; }
-  .soru .bosluk { display: inline-block; min-width: 90px; border-bottom: 2px solid var(--vurgu); }
-  .secenekler { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  @media (max-width: 520px) { .secenekler { grid-template-columns: 1fr; } }
-  .secenek {
-    text-align: left; font: inherit; font-size: 15px; font-weight: 500;
-    padding: 14px 16px; border-radius: 10px; cursor: pointer;
-    border: 1px solid var(--cizgi); background: var(--yuzey2); color: var(--murekkep);
+  .mod-liste { display: grid; gap: 10px; }
+  .mod {
+    text-align: left; border: 1px solid var(--cizgi); background: var(--yuzey); border-radius: 14px; padding: 14px 16px; cursor: pointer;
+    display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; align-items: center;
   }
+  .mod[aria-pressed="true"] { border-color: var(--vurgu); box-shadow: 0 0 0 1px var(--vurgu); }
+  .mod b { font-size: 15px; }
+  .mod span { font-size: 13px; color: var(--soluk); grid-column: 1; }
+  .mod i { grid-row: 1 / span 2; grid-column: 2; font-style: normal; font-family: var(--mono); font-size: 11px; color: var(--vurgu); }
+  .soru { font-family: var(--serif); font-size: 21px; line-height: 1.45; margin: 16px 0 18px; }
+  .soru .bosluk { display: inline-block; min-width: 88px; border-bottom: 2px solid var(--vurgu); }
+  .soru .anahtar { font-weight: 600; font-style: normal; color: var(--vurgu); }
+  .secenekler { display: grid; gap: 8px; }
+  .secenek {
+    text-align: left; font-size: 16px; font-weight: 500; padding: 12px 14px; border-radius: 12px; cursor: pointer;
+    border: 1px solid var(--cizgi); background: var(--yuzey2); display: flex; gap: 12px; align-items: baseline;
+  }
+  .secenek .harf { font-family: var(--mono); font-size: 12px; color: var(--soluk); min-width: 14px; }
   .secenek:hover:not(:disabled) { border-color: var(--vurgu); }
+  .secenek:disabled { cursor: default; }
   .secenek.dogru { background: var(--dogru-acik); border-color: var(--dogru); color: var(--dogru); }
   .secenek.yanlis { background: var(--yanlis-acik); border-color: var(--yanlis); color: var(--yanlis); }
-  .secenek:disabled { cursor: default; }
-  .geri-bildirim { margin-top: 16px; min-height: 24px; font-size: 14px; }
+  .geri { margin-top: 14px; font-size: 14px; }
+  .skor { font-family: var(--serif); font-size: 64px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
 
-  .sonuc-skor { font-family: "Newsreader", Georgia, serif; font-size: 64px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
-  .liste { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 1px; background: var(--cizgi); border-radius: 10px; overflow: hidden; }
-  .liste li { background: var(--yuzey); padding: 12px 16px; display: flex; gap: 12px; justify-content: space-between; flex-wrap: wrap; }
-  .liste li b { font-family: "Newsreader", Georgia, serif; font-size: 18px; }
-  .liste li span { color: var(--soluk); }
-  .durum { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 99px; align-self: center; }
-  .durum.ok { background: var(--dogru-acik); color: var(--dogru); }
-  .durum.yeni { background: var(--yuzey2); color: var(--soluk); }
-  .not { font-size: 12px; color: var(--soluk); text-align: center; }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  /* Sözlük */
+  .ara { width: 100%; font-size: 16px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--cizgi); background: var(--yuzey); color: var(--murekkep); }
+  .liste { list-style: none; margin: 0; padding: 0; border: 1px solid var(--cizgi); border-radius: 14px; overflow: hidden; background: var(--cizgi); display: grid; gap: 1px; }
+  .liste li button { width: 100%; text-align: left; border: 0; background: var(--yuzey); padding: 12px 14px; cursor: pointer; display: grid; grid-template-columns: 1fr auto; gap: 0 10px; align-items: center; }
+  .liste li b { font-family: var(--serif); font-size: 19px; font-weight: 600; }
+  .liste li .alt { grid-column: 1; font-size: 14px; color: var(--soluk); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .liste li .sag { grid-row: 1 / span 2; grid-column: 2; display: flex; gap: 6px; align-items: center; }
+  .nokta { width: 10px; height: 10px; border-radius: 50%; background: var(--cizgi); }
+  .nokta.ogren { background: var(--amber); }
+  .nokta.kalici { background: var(--dogru); }
+
+  /* Alt sayfa */
+  .perde-arka { position: fixed; inset: 0; background: rgba(10, 14, 24, .45); z-index: 20; display: flex; align-items: flex-end; justify-content: center; }
+  .sayfa { background: var(--zemin); width: 100%; max-width: 760px; max-height: 92vh; overflow-y: auto; border-radius: 20px 20px 0 0; padding: 12px 16px calc(24px + env(safe-area-inset-bottom, 0px)); }
+  .sayfa .tutamak { width: 40px; height: 4px; border-radius: 4px; background: var(--cizgi); margin: 0 auto 12px; }
+  .ayar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--cizgi); }
+  .ayar:last-child { border-bottom: 0; }
+  select { font: inherit; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--cizgi); background: var(--yuzey); color: var(--murekkep); }
+  .kaynak { font-size: 13px; color: var(--soluk); line-height: 1.6; }
+  .kaynak p { margin: 0 0 8px; }
+  .bos-durum { text-align: center; padding: 28px 12px; color: var(--soluk); }
+  .toast { position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%); background: var(--murekkep); color: var(--zemin); padding: 10px 16px; border-radius: 10px; font-size: 14px; font-weight: 600; z-index: 30; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 
-<div class="kap">
-  <header>
-    <div>
-      <h1>C1 Kelime Atölyesi</h1>
-      <p>İleri düzey İngilizce kelimeleri öğren, sonra kendini sına.</p>
-    </div>
-    <div class="ilerleme"><strong id="ogrenilen">0 / 0</strong>kelime öğrenildi</div>
-  </header>
-
-  <div class="araclar">
-    <div class="sekmeler" role="tablist">
-      <button role="tab" aria-selected="true" data-sekme="ogren">Öğren</button>
-      <button role="tab" aria-selected="false" data-sekme="test">Test</button>
-      <button role="tab" aria-selected="false" data-sekme="liste">Kelimelerim</button>
-    </div>
-    <div class="seviyeler" aria-label="Seviye">
-      <button aria-pressed="false" data-seviye="C1">C1</button>
-      <button aria-pressed="false" data-seviye="C2">C2</button>
-      <button aria-pressed="true" data-seviye="hepsi">Hepsi</button>
-    </div>
+<header class="ust">
+  <div class="ust-ic">
+    <div class="marka"><small>YÖKDİL · Sosyal Bilimler</small>Kelime Atölyesi</div>
+    <span class="seri" id="seri" title="Art arda çalışılan gün">🔥 <span id="seriSayi">0</span></span>
+    <button class="ikon-btn" id="ayarBtn" type="button" aria-label="Ayarlar ve kaynak">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+    </button>
   </div>
+</header>
 
-  <main id="alan"></main>
+<main id="alan"></main>
 
-  <div class="uret" id="uretKutu" hidden>
-    <p><strong>Yeni kelime üret.</strong> Claude, listende olmayan 8 yeni C1–C2 kelimeyi anlamı ve örnek cümlesiyle hazırlar.</p>
-    <button class="btn ana" id="uretBtn" type="button">Yeni kelimeler üret</button>
-  </div>
-
-  <p class="not">Seviye etiketleri yaklaşıktır; CEFR kaynakları arasında küçük farklar olabilir.</p>
-</div>
+<footer class="alt-bar">
+  <nav aria-label="Bölümler">
+    <button type="button" data-git="bugun" aria-current="page">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Bugün</button>
+    <button type="button" data-git="calis">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/></svg>Çalış</button>
+    <button type="button" data-git="test">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>Test</button>
+    <button type="button" data-git="sozluk">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>Sözlük</button>
+  </nav>
+</footer>
 
 <script>
-// Hazır kelime havuzu. Örnek cümlede hedef kelime [köşeli parantez] içindedir.
-const HAVUZ = [
-  { w: "ambiguous", pos: "adj", lv: "C1", def: "having more than one possible meaning", tr: "belirsiz, iki anlamlı", ex: "The wording of the contract is [ambiguous], so both sides read it differently.", syn: "unclear, equivocal" },
-  { w: "undermine", pos: "verb", lv: "C1", def: "to gradually make something weaker or less effective", tr: "baltalamak, zayıflatmak", ex: "Constant criticism can [undermine] a child's confidence.", syn: "weaken, erode" },
-  { w: "scrutiny", pos: "noun", lv: "C1", def: "careful and detailed examination", tr: "titiz inceleme", ex: "The minister's expenses came under close [scrutiny].", syn: "examination, inspection" },
-  { w: "plausible", pos: "adj", lv: "C1", def: "seeming likely to be true or reasonable", tr: "akla yatkın, makul", ex: "She gave a [plausible] explanation for her absence.", syn: "credible, believable" },
-  { w: "reluctant", pos: "adj", lv: "C1", def: "unwilling and therefore slow to do something", tr: "isteksiz, gönülsüz", ex: "He was [reluctant] to admit that he had made a mistake.", syn: "unwilling, hesitant" },
-  { w: "feasible", pos: "adj", lv: "C1", def: "possible to do or achieve in practice", tr: "uygulanabilir, yapılabilir", ex: "The engineers doubt that the plan is financially [feasible].", syn: "viable, practicable" },
-  { w: "mitigate", pos: "verb", lv: "C1", def: "to make something bad less severe or harmful", tr: "hafifletmek, azaltmak", ex: "Planting trees can help [mitigate] the effects of urban heat.", syn: "alleviate, reduce" },
-  { w: "profound", pos: "adj", lv: "C1", def: "very great or intense; showing deep understanding", tr: "derin, köklü", ex: "The war had a [profound] effect on the whole generation.", syn: "deep, far-reaching" },
-  { w: "deteriorate", pos: "verb", lv: "C1", def: "to become gradually worse", tr: "kötüleşmek, bozulmak", ex: "His health began to [deteriorate] rapidly after the operation.", syn: "worsen, decline" },
-  { w: "discrepancy", pos: "noun", lv: "C1", def: "a difference between things that should be the same", tr: "tutarsızlık, uyuşmazlık", ex: "Auditors found a [discrepancy] between the two sets of figures.", syn: "inconsistency, mismatch" },
-  { w: "inherent", pos: "adj", lv: "C1", def: "existing as a natural, permanent part of something", tr: "doğasında olan, içkin", ex: "Every investment carries [inherent] risks.", syn: "intrinsic, built-in" },
-  { w: "prevalent", pos: "adj", lv: "C1", def: "common or widespread at a particular time or place", tr: "yaygın", ex: "The disease is more [prevalent] in rural areas.", syn: "widespread, common" },
-  { w: "coherent", pos: "adj", lv: "C1", def: "logical and consistent; clearly connected", tr: "tutarlı, bağlantılı", ex: "The report fails to present a [coherent] argument.", syn: "logical, consistent" },
-  { w: "hinder", pos: "verb", lv: "C1", def: "to make it difficult for something to happen or progress", tr: "engel olmak, sekteye uğratmak", ex: "Heavy snow [hindered] the rescue efforts.", syn: "hamper, obstruct" },
-  { w: "alleviate", pos: "verb", lv: "C1", def: "to make pain or a problem less severe", tr: "hafifletmek, dindirmek", ex: "The drug is used to [alleviate] chronic pain.", syn: "ease, relieve" },
-  { w: "compelling", pos: "adj", lv: "C1", def: "very convincing or interesting, demanding attention", tr: "ikna edici, sürükleyici", ex: "The prosecution presented [compelling] evidence.", syn: "convincing, persuasive" },
-  { w: "notion", pos: "noun", lv: "C1", def: "a belief or idea about something", tr: "kavram, fikir", ex: "She rejected the [notion] that success depends only on luck.", syn: "idea, concept" },
-  { w: "substantial", pos: "adj", lv: "C1", def: "large in amount, size or importance", tr: "önemli ölçüde, kayda değer", ex: "The company made a [substantial] profit last year.", syn: "considerable, significant" },
-  { w: "constrain", pos: "verb", lv: "C1", def: "to limit or restrict what someone or something can do", tr: "kısıtlamak, sınırlamak", ex: "Our research was [constrained] by a lack of funding.", syn: "restrict, limit" },
-  { w: "controversial", pos: "adj", lv: "C1", def: "causing a lot of public disagreement", tr: "tartışmalı", ex: "The new law remains highly [controversial].", syn: "disputed, contentious" },
-  { w: "advocate", pos: "verb", lv: "C1", def: "to publicly support a particular policy or way of doing things", tr: "savunmak, desteklemek", ex: "Many doctors [advocate] a diet rich in vegetables.", syn: "support, champion" },
-  { w: "inevitable", pos: "adj", lv: "C1", def: "certain to happen and impossible to avoid", tr: "kaçınılmaz", ex: "Some job losses seem [inevitable] after the merger.", syn: "unavoidable, certain" },
+const KELIMELER = [{"w":"analyse","pos":"v","sub":1,"tr":"çözümlemek, analiz etmek","def":"to examine something in detail in order to understand it","ex":"The researchers [analysed] survey data from 2,000 households.","syn":["examine","scrutinise","study"],"fam":["analysis (n)","analyst (n)","analytical (adj)","analytically (adv)","US: analyze"],"col":["analyse data","analyse the causes of"]},{"w":"approach","pos":"n","sub":1,"tr":"yaklaşım, yöntem","def":"a way of dealing with a problem or of thinking about something","ex":"A comparative [approach] reveals how welfare systems differ across Europe.","syn":["method","strategy","perspective"],"fam":["approach (v)","approachable (adj)"],"col":["adopt an approach","a new approach to"]},{"w":"assess","pos":"v","sub":1,"tr":"değerlendirmek, ölçmek","def":"to judge the nature, quality or value of something","ex":"The study [assesses] the impact of migration on local wages.","syn":["evaluate","appraise","gauge"],"fam":["assessment (n)","assessor (n)","assessable (adj)"],"col":["assess the impact of","assess the extent to which"]},{"w":"assume","pos":"v","sub":1,"tr":"varsaymak; (görev) üstlenmek","def":"to accept something as true without proof; to take on a role or responsibility","ex":"Classical economists [assumed] that individuals act rationally.","syn":["presume","suppose","take on"],"fam":["assumption (n)","assumed (adj)"],"col":["it is assumed that","assume responsibility for"]},{"w":"authority","pos":"n","sub":1,"tr":"otorite, yetki; yetkili makam","def":"the power to make decisions or give orders; an official body with that power","ex":"Local [authorities] are responsible for primary education.","syn":["power","control","jurisdiction"],"fam":["authorise (v)","authoritative (adj)","authoritarian (adj)"],"col":["local authorities","have the authority to"]},{"w":"benefit","pos":"n","sub":1,"tr":"yarar, fayda; (sosyal) yardım","def":"an advantage or profit gained from something; money given by the state to those in need","ex":"The economic [benefits] of trade are not shared equally.","syn":["advantage","gain","profit"],"fam":["benefit (v)","beneficial (adj)","beneficiary (n)"],"col":["social benefits","benefit from"]},{"w":"concept","pos":"n","sub":1,"tr":"kavram","def":"an abstract idea or general notion","ex":"The [concept] of social capital was popularised by Putnam.","syn":["notion","idea","construct"],"fam":["conceptual (adj)","conceptualise (v)","conception (n)"],"col":["the concept of","a key concept"]},{"w":"consist","pos":"v","sub":1,"tr":"oluşmak (of); ibaret olmak (in)","def":"to be made up of particular parts; to have something as its main feature","ex":"The sample [consisted] of 450 university students.","syn":["comprise","be composed of","contain"],"fam":["consistent (adj)","consistency (n)","consistently (adv)"],"col":["consist of","consist in"]},{"w":"constitute","pos":"v","sub":1,"tr":"oluşturmak, teşkil etmek","def":"to be the parts or elements that form something; to amount to","ex":"Women [constitute] nearly half of the labour force.","syn":["make up","form","represent"],"fam":["constitution (n)","constitutional (adj)","constituent (n)"],"col":["constitute a threat","constitute the majority"]},{"w":"context","pos":"n","sub":1,"tr":"bağlam","def":"the circumstances or setting in which an event or idea exists","ex":"These findings must be interpreted in their historical [context].","syn":["setting","background","circumstances"],"fam":["contextual (adj)","contextualise (v)"],"col":["in the context of","social context"]},{"w":"contract","pos":"n","sub":1,"tr":"sözleşme","def":"a formal, legally binding agreement between two or more parties","ex":"Many young workers are employed on short-term [contracts].","syn":["agreement","deal","treaty"],"fam":["contract (v: daralmak, küçülmek)","contractual (adj)","contractor (n)"],"col":["sign a contract","breach of contract"]},{"w":"define","pos":"v","sub":1,"tr":"tanımlamak","def":"to state or explain the exact meaning or nature of something","ex":"Poverty can be [defined] in absolute or relative terms.","syn":["specify","describe","characterise"],"fam":["definition (n)","definite (adj)","definitive (adj)"],"col":["be defined as","clearly defined"]},{"w":"derive","pos":"v","sub":1,"tr":"türemek, kaynaklanmak; elde etmek","def":"to obtain something from a source; to originate from","ex":"Much of the region's income is [derived] from tourism.","syn":["obtain","stem from","originate"],"fam":["derivation (n)","derivative (n, adj)"],"col":["derive from","be derived from"]},{"w":"distribute","pos":"v","sub":1,"tr":"dağıtmak, paylaştırmak","def":"to share or spread something among people or over an area","ex":"Wealth is unevenly [distributed] in most societies.","syn":["allocate","share out","disperse"],"fam":["distribution (n)","distributor (n)","distributive (adj)"],"col":["distribute resources","evenly distributed"]},{"w":"economy","pos":"n","sub":1,"tr":"ekonomi; tasarruf","def":"the system by which a country's money and goods are produced and used","ex":"The informal [economy] employs millions of people.","syn":["financial system","market"],"fam":["economic (adj)","economical (adj: tutumlu)","economist (n)"],"col":["a market economy","economy of scale"]},{"w":"environment","pos":"n","sub":1,"tr":"çevre, ortam","def":"the surroundings or conditions in which people live or work; the natural world","ex":"Children learn best in a supportive [environment].","syn":["surroundings","setting","milieu"],"fam":["environmental (adj)","environmentalist (n)","environmentally (adv)"],"col":["learning environment","protect the environment"]},{"w":"establish","pos":"v","sub":1,"tr":"kurmak; saptamak, kanıtlamak","def":"to set up an organisation or system; to discover or prove facts","ex":"The university was [established] in 1933.","syn":["found","set up","determine"],"fam":["establishment (n)","established (adj)"],"col":["establish a link between","well established"]},{"w":"estimate","pos":"v","sub":1,"tr":"tahmin etmek, kestirmek","def":"to roughly calculate the value, size or amount of something","ex":"It is [estimated] that one billion people live in informal settlements.","syn":["approximate","calculate","gauge"],"fam":["estimate (n)","estimation (n)","overestimate (v)","underestimate (v)"],"col":["it is estimated that","a rough estimate"]},{"w":"evident","pos":"adj","sub":1,"tr":"açık, belli, apaçık","def":"clearly seen or understood; obvious","ex":"The effects of the reform were [evident] within two years.","syn":["obvious","apparent","clear"],"fam":["evidence (n)","evidently (adv)"],"col":["it is evident that","become evident"]},{"w":"export","pos":"v","sub":1,"tr":"ihraç etmek","def":"to send goods to another country for sale","ex":"Turkey [exports] textiles to many European countries.","syn":["ship","sell abroad"],"fam":["export (n)","exporter (n)"],"col":["export goods to","export revenue"]},{"w":"factor","pos":"n","sub":1,"tr":"etken, etmen, faktör","def":"a circumstance or influence that contributes to a result","ex":"Education is a key [factor] in social mobility.","syn":["element","cause","determinant"],"fam":["factor (v: hesaba katmak)"],"col":["a key factor","risk factor"]},{"w":"finance","pos":"n","sub":1,"tr":"finans, maliye","def":"the management of money, especially by governments or large organisations","ex":"Public [finance] came under strain after the crisis.","syn":["funding","economics","capital"],"fam":["finance (v: finanse etmek)","financial (adj)","financially (adv)"],"col":["public finance","finance a project"]},{"w":"formula","pos":"n","sub":1,"tr":"formül; kalıp, çözüm yolu","def":"a fixed method or plan for achieving something; a mathematical rule","ex":"There is no simple [formula] for reducing inequality.","syn":["method","recipe","blueprint"],"fam":["formulate (v)","formulation (n)"],"col":["a formula for success","peace formula"]},{"w":"function","pos":"n","sub":1,"tr":"işlev, görev","def":"the purpose or natural role of something","ex":"One [function] of rituals is to strengthen group identity.","syn":["role","purpose","task"],"fam":["function (v: işlemek)","functional (adj)","functionalism (n)"],"col":["perform a function","social function"]},{"w":"identify","pos":"v","sub":1,"tr":"belirlemek, saptamak; özdeşleşmek (with)","def":"to recognise or establish who or what something is; to feel close to","ex":"The report [identifies] three main causes of unemployment.","syn":["recognise","pinpoint","determine"],"fam":["identification (n)","identity (n)","identifiable (adj)"],"col":["identify with","identify the causes of"]},{"w":"income","pos":"n","sub":1,"tr":"gelir","def":"money received regularly for work or from investments","ex":"Household [income] fell sharply during the recession.","syn":["earnings","revenue","wages"],"fam":[],"col":["low-income families","income inequality"]},{"w":"indicate","pos":"v","sub":1,"tr":"göstermek, işaret etmek","def":"to point out or show something; to suggest","ex":"The data [indicate] a strong link between poverty and poor health.","syn":["show","suggest","signal"],"fam":["indication (n)","indicator (n)","indicative (adj)"],"col":["indicate that","social indicators"]},{"w":"interpret","pos":"v","sub":1,"tr":"yorumlamak; sözlü çevirmek","def":"to explain the meaning of something; to understand something in a particular way","ex":"Historians [interpret] the same events in very different ways.","syn":["explain","construe","read"],"fam":["interpretation (n)","interpreter (n)","interpretive (adj)"],"col":["interpret the results","be interpreted as"]},{"w":"involve","pos":"v","sub":1,"tr":"içermek, gerektirmek; dahil etmek","def":"to include something as a necessary part; to cause someone to take part","ex":"The project [involved] interviews with 60 teachers.","syn":["include","entail","engage"],"fam":["involvement (n)","involved (adj)"],"col":["be involved in","involve risk"]},{"w":"labour","pos":"n","sub":1,"tr":"emek, iş gücü, işçi sınıfı","def":"work, especially physical work; workers as a group","ex":"Cheap [labour] attracted foreign manufacturers to the region.","syn":["work","workforce","toil"],"fam":["labourer (n)","laborious (adj: zahmetli)","US: labor"],"col":["labour market","division of labour"]},{"w":"legislate","pos":"v","sub":1,"tr":"yasa yapmak, yasayla düzenlemek","def":"to make laws","ex":"Parliament [legislated] to protect workers' rights.","syn":["enact laws","regulate"],"fam":["legislation (n)","legislative (adj)","legislator (n)","legislature (n)"],"col":["legislate for","legislate against"]},{"w":"method","pos":"n","sub":1,"tr":"yöntem","def":"a particular procedure for doing something, especially a systematic one","ex":"Qualitative [methods] were used to explore participants' experiences.","syn":["technique","procedure","approach"],"fam":["methodology (n)","methodical (adj)","methodological (adj)"],"col":["research method","teaching method"]},{"w":"occur","pos":"v","sub":1,"tr":"meydana gelmek, olmak; (aklına) gelmek","def":"to happen; to exist or be found","ex":"Most road accidents [occur] in urban areas.","syn":["happen","take place","arise"],"fam":["occurrence (n)"],"col":["occur in","it occurred to me that"]},{"w":"principle","pos":"n","sub":1,"tr":"ilke, prensip","def":"a fundamental truth or rule that serves as the basis of a system of belief or behaviour","ex":"Equality before the law is a basic [principle] of democracy.","syn":["rule","tenet","doctrine"],"fam":["principled (adj)"],"col":["in principle","the principle of"]},{"w":"proceed","pos":"v","sub":1,"tr":"devam etmek, ilerlemek","def":"to continue or move forward, especially after a pause","ex":"After the pilot study, the team [proceeded] with the main survey.","syn":["continue","carry on","advance"],"fam":["procedure (n)","process (n)","proceedings (n: işlemler, tutanak)"],"col":["proceed with","proceed to"]},{"w":"require","pos":"v","sub":1,"tr":"gerektirmek; zorunlu kılmak","def":"to need something; to make something necessary or compulsory","ex":"The new policy will [require] significant investment.","syn":["need","demand","necessitate"],"fam":["requirement (n)","required (adj)"],"col":["be required to","require that"]},{"w":"respond","pos":"v","sub":1,"tr":"yanıt vermek, tepki göstermek","def":"to say or do something as a reaction","ex":"Governments [responded] to the crisis with emergency spending.","syn":["react","reply","answer"],"fam":["response (n)","respondent (n: katılımcı)","responsive (adj)"],"col":["respond to","respond positively"]},{"w":"sector","pos":"n","sub":1,"tr":"sektör, kesim","def":"a distinct part of an economy or society","ex":"The service [sector] now employs most of the workforce.","syn":["area","branch","field"],"fam":[],"col":["public sector","private sector"]},{"w":"significant","pos":"adj","sub":1,"tr":"önemli, anlamlı, kayda değer","def":"large or important enough to have an effect or be noticed","ex":"There was a [significant] increase in youth unemployment.","syn":["considerable","substantial","notable"],"fam":["significance (n)","significantly (adv)","signify (v)"],"col":["statistically significant","a significant role"]},{"w":"structure","pos":"n","sub":1,"tr":"yapı","def":"the arrangement of and relations between the parts of something complex","ex":"Family [structure] has changed considerably since the 1960s.","syn":["organisation","framework","system"],"fam":["structural (adj)","structure (v)","restructure (v)"],"col":["social structure","power structure"]},{"w":"theory","pos":"n","sub":1,"tr":"kuram, teori","def":"a system of ideas intended to explain something","ex":"According to modernisation [theory], societies develop in stages.","syn":["hypothesis","thesis","model"],"fam":["theoretical (adj)","theorist (n)","theorise (v)"],"col":["in theory","social theory"]},{"w":"vary","pos":"v","sub":1,"tr":"değişmek, farklılık göstermek","def":"to differ in size, amount or degree; to change","ex":"Attitudes to marriage [vary] widely across cultures.","syn":["differ","fluctuate","range"],"fam":["variation (n)","variable (n, adj)","variety (n)","various (adj)"],"col":["vary from ... to","vary widely"]},{"w":"achieve","pos":"v","sub":2,"tr":"başarmak, elde etmek, ulaşmak","def":"to succeed in reaching a goal through effort","ex":"Few countries have [achieved] full gender equality in pay.","syn":["attain","accomplish","reach"],"fam":["achievement (n)","achievable (adj)"],"col":["achieve a goal","achieve success"]},{"w":"acquire","pos":"v","sub":2,"tr":"edinmek, kazanmak","def":"to gain or obtain something, especially knowledge or skills","ex":"Children [acquire] language through interaction with others.","syn":["obtain","gain","get"],"fam":["acquisition (n)","acquired (adj)"],"col":["acquire skills","language acquisition"]},{"w":"administrate","pos":"v","sub":2,"tr":"yönetmek, idare etmek","def":"to manage the operation of an organisation or system","ex":"The funds are [administrated] by a regional board.","syn":["manage","run","direct"],"fam":["administration (n)","administrative (adj)","administrator (n)","administer (v)"],"col":["public administration","administrative staff"]},{"w":"affect","pos":"v","sub":2,"tr":"etkilemek","def":"to have an influence on someone or something","ex":"Rising rents mainly [affect] young and low-income tenants.","syn":["influence","impact","alter"],"fam":["affected (adj)","affective (adj: duygusal)"],"col":["be affected by","adversely affect"]},{"w":"appropriate","pos":"adj","sub":2,"tr":"uygun, yerinde","def":"suitable or proper in a particular situation","ex":"Researchers must choose an [appropriate] sample size.","syn":["suitable","proper","fitting"],"fam":["appropriately (adv)","inappropriate (adj)","appropriate (v: el koymak)"],"col":["appropriate for","it is appropriate to"]},{"w":"aspect","pos":"n","sub":2,"tr":"yön, boyut, açı","def":"a particular part or feature of something","ex":"Language is a central [aspect] of cultural identity.","syn":["facet","feature","dimension"],"fam":[],"col":["an important aspect of","in all aspects"]},{"w":"assist","pos":"v","sub":2,"tr":"yardım etmek","def":"to help someone do something","ex":"Volunteers [assisted] refugees in finding accommodation.","syn":["help","aid","support"],"fam":["assistance (n)","assistant (n)"],"col":["assist in","assist with"]},{"w":"category","pos":"n","sub":2,"tr":"kategori, ulam","def":"a class or group of things with shared characteristics","ex":"Respondents were divided into three age [categories].","syn":["class","group","type"],"fam":["categorise (v)","categorical (adj: kesin)"],"col":["fall into a category"]},{"w":"chapter","pos":"n","sub":2,"tr":"bölüm; (tarihte) dönem","def":"a main division of a book; a distinct period","ex":"The second [chapter] reviews the literature on migration.","syn":["section","part","period"],"fam":[],"col":["in chapter two","a new chapter in"]},{"w":"commission","pos":"n","sub":2,"tr":"komisyon, kurul; görevlendirme","def":"an official group given a particular task; a formal request to do a piece of work","ex":"A [commission] was set up to investigate the causes of the riots.","syn":["committee","board","council"],"fam":["commission (v: sipariş etmek, görevlendirmek)","commissioner (n)"],"col":["set up a commission","European Commission"]},{"w":"complex","pos":"adj","sub":2,"tr":"karmaşık, çok yönlü","def":"consisting of many connected parts; difficult to understand","ex":"Migration is a [complex] process shaped by many factors.","syn":["complicated","intricate","elaborate"],"fam":["complexity (n)","complex (n: kompleks)"],"col":["highly complex","a complex issue"]},{"w":"compute","pos":"v","sub":2,"tr":"hesaplamak","def":"to calculate a figure or amount","ex":"The index was [computed] using data from 30 countries.","syn":["calculate","work out","reckon"],"fam":["computation (n)","computational (adj)"],"col":["compute the average"]},{"w":"conclude","pos":"v","sub":2,"tr":"sonuca varmak; sonuçlandırmak","def":"to arrive at a judgement by reasoning; to bring something to an end","ex":"The authors [conclude] that the policy had little effect.","syn":["infer","deduce","finish"],"fam":["conclusion (n)","conclusive (adj: kesin)"],"col":["conclude that","conclude an agreement"]},{"w":"conduct","pos":"v","sub":2,"tr":"yürütmek, yapmak, yönetmek","def":"to organise and carry out an activity","ex":"The interviews were [conducted] in Turkish.","syn":["carry out","perform","undertake"],"fam":["conduct (n: davranış)","conductor (n)"],"col":["conduct research","conduct a survey"]},{"w":"consequent","pos":"adj","sub":2,"tr":"sonucunda ortaya çıkan, bundan doğan","def":"following as a result of something","ex":"The factory closed, with [consequent] job losses in the town.","syn":["resulting","ensuing","subsequent"],"fam":["consequence (n)","consequently (adv: sonuç olarak)"],"col":["as a consequence","consequently"]},{"w":"construct","pos":"v","sub":2,"tr":"inşa etmek; kurmak, oluşturmak","def":"to build something; to form an idea or theory","ex":"Identity is socially [constructed] through interaction.","syn":["build","create","form"],"fam":["construction (n)","constructive (adj: yapıcı)","construct (n: yapı, kavram)"],"col":["socially constructed","construct a model"]},{"w":"consume","pos":"v","sub":2,"tr":"tüketmek","def":"to use up resources; to eat or drink","ex":"Rich countries [consume] a disproportionate share of energy.","syn":["use up","deplete","exhaust"],"fam":["consumption (n)","consumer (n)","consumerism (n)"],"col":["consume resources","energy consumption"]},{"w":"distinct","pos":"adj","sub":2,"tr":"belirgin; ayrı, farklı","def":"clearly noticeable; recognisably different","ex":"The study identified two [distinct] groups of voters.","syn":["separate","different","clear"],"fam":["distinction (n)","distinctive (adj: kendine özgü)","distinctly (adv)"],"col":["distinct from","a distinct possibility"]},{"w":"element","pos":"n","sub":2,"tr":"öğe, unsur","def":"a basic part of something","ex":"Trust is an essential [element] of any stable society.","syn":["component","part","ingredient"],"fam":["elemental (adj)","elementary (adj: temel)"],"col":["a key element","an element of risk"]},{"w":"equate","pos":"v","sub":2,"tr":"eşit saymak, bir tutmak","def":"to consider one thing as equal or equivalent to another","ex":"Many people wrongly [equate] wealth with happiness.","syn":["identify","associate","liken"],"fam":["equation (n)","equal (adj)","equality (n)"],"col":["equate A with B"]},{"w":"evaluate","pos":"v","sub":2,"tr":"değerlendirmek","def":"to judge the value, quality or importance of something","ex":"The programme was [evaluated] after three years.","syn":["assess","appraise","judge"],"fam":["evaluation (n)","evaluative (adj)"],"col":["evaluate the effectiveness of"]},{"w":"feature","pos":"n","sub":2,"tr":"özellik","def":"a distinctive characteristic or attribute","ex":"A key [feature] of the Ottoman system was religious autonomy.","syn":["characteristic","trait","attribute"],"fam":["feature (v: yer vermek, öne çıkarmak)"],"col":["a common feature","a distinctive feature"]},{"w":"impact","pos":"n","sub":2,"tr":"etki","def":"a strong effect or influence","ex":"The internet has had a profound [impact] on political participation.","syn":["effect","influence","consequence"],"fam":["impact (v)"],"col":["have an impact on","environmental impact"]},{"w":"injure","pos":"v","sub":2,"tr":"yaralamak, zarar vermek","def":"to harm or damage someone physically or their reputation","ex":"Hundreds of protesters were [injured] in the clashes.","syn":["hurt","harm","wound"],"fam":["injury (n)","injured (adj)","injurious (adj)"],"col":["seriously injured"]},{"w":"institute","pos":"n","sub":2,"tr":"enstitü, kurum","def":"an organisation for research or education","ex":"The [institute] publishes an annual report on poverty.","syn":["institution","organisation","academy"],"fam":["institute (v: başlatmak, kurmak)","institution (n)","institutional (adj)"],"col":["research institute","institutional change"]},{"w":"invest","pos":"v","sub":2,"tr":"yatırım yapmak","def":"to put money, time or effort into something to gain an advantage","ex":"The government [invested] heavily in vocational training.","syn":["fund","spend on","finance"],"fam":["investment (n)","investor (n)"],"col":["invest in","foreign investment"]},{"w":"item","pos":"n","sub":2,"tr":"madde, öğe, kalem","def":"a single article or unit in a list or collection","ex":"The questionnaire contained 25 [items] on political trust.","syn":["article","unit","entry"],"fam":["itemise (v)"],"col":["questionnaire items","an item of news"]},{"w":"journal","pos":"n","sub":2,"tr":"dergi (bilimsel); günlük","def":"a scholarly periodical; a daily record of events","ex":"The article was published in a leading sociology [journal].","syn":["periodical","publication","diary"],"fam":["journalism (n)","journalist (n)"],"col":["academic journal","peer-reviewed journal"]},{"w":"maintain","pos":"v","sub":2,"tr":"sürdürmek; savunmak, ileri sürmek","def":"to keep something in the same state; to claim that something is true","ex":"Weber [maintained] that ideas can shape economic behaviour.","syn":["preserve","sustain","assert"],"fam":["maintenance (n)"],"col":["maintain order","maintain that"]},{"w":"obtain","pos":"v","sub":2,"tr":"elde etmek, sağlamak","def":"to get something, especially through effort","ex":"Permission was [obtained] from all participants.","syn":["acquire","gain","secure"],"fam":["obtainable (adj)"],"col":["obtain data","obtain consent"]},{"w":"participate","pos":"v","sub":2,"tr":"katılmak","def":"to take part in an activity or event","ex":"Only 40% of young people [participated] in the last election.","syn":["take part","engage","join in"],"fam":["participation (n)","participant (n)","participatory (adj)"],"col":["participate in","political participation"]},{"w":"perceive","pos":"v","sub":2,"tr":"algılamak, fark etmek","def":"to become aware of something; to regard in a particular way","ex":"Immigrants are often [perceived] as a threat to national identity.","syn":["regard","view","recognise"],"fam":["perception (n)","perceptive (adj)","perceptible (adj)"],"col":["be perceived as","perceived risk"]},{"w":"positive","pos":"adj","sub":2,"tr":"olumlu, pozitif; kesin","def":"good or useful; expressing agreement; certain","ex":"The reform had a [positive] effect on school attendance.","syn":["favourable","beneficial","constructive"],"fam":["positively (adv)","positivism (n)"],"col":["a positive correlation","positive effect"]},{"w":"primary","pos":"adj","sub":2,"tr":"temel, birincil; ilk (öğretim)","def":"main or most important; first in time or order","ex":"The [primary] aim of the study was to test this hypothesis.","syn":["main","principal","chief"],"fam":["primarily (adv: esas olarak)"],"col":["primary school","primary source"]},{"w":"purchase","pos":"v","sub":2,"tr":"satın almak","def":"to buy something","ex":"Households [purchased] fewer durable goods during the crisis.","syn":["buy","acquire","procure"],"fam":["purchase (n)","purchaser (n)"],"col":["purchasing power"]},{"w":"regulate","pos":"v","sub":2,"tr":"düzenlemek, denetlemek","def":"to control something by means of rules","ex":"The state [regulates] the activities of private banks.","syn":["control","govern","supervise"],"fam":["regulation (n)","regulator (n)","regulatory (adj)","deregulate (v)"],"col":["strictly regulated","regulate the market"]},{"w":"relevant","pos":"adj","sub":2,"tr":"ilgili, konuyla bağlantılı","def":"closely connected or appropriate to the matter in hand","ex":"Only studies [relevant] to the research question were included.","syn":["pertinent","applicable","related"],"fam":["relevance (n)","irrelevant (adj)"],"col":["relevant to","highly relevant"]},{"w":"reside","pos":"v","sub":2,"tr":"ikamet etmek, oturmak; bulunmak (in)","def":"to live in a particular place; to be present in","ex":"Most of the participants [resided] in rural areas.","syn":["live","dwell","inhabit"],"fam":["residence (n)","resident (n)","residential (adj)"],"col":["reside in"]},{"w":"resource","pos":"n","sub":2,"tr":"kaynak","def":"a stock or supply of money, materials or people","ex":"Poorer schools lack the [resources] to hire specialist teachers.","syn":["asset","supply","means"],"fam":["resourceful (adj: becerikli)"],"col":["natural resources","allocate resources"]},{"w":"restrict","pos":"v","sub":2,"tr":"kısıtlamak, sınırlamak","def":"to put a limit on something","ex":"The new law [restricts] the right to protest.","syn":["limit","constrain","curb"],"fam":["restriction (n)","restrictive (adj)"],"col":["restrict access to"]},{"w":"secure","pos":"v","sub":2,"tr":"sağlamak, elde etmek; güvenceye almak","def":"to succeed in obtaining something; to make safe","ex":"The project [secured] funding from the European Union.","syn":["obtain","gain","protect"],"fam":["security (n)","secure (adj: güvenli)","insecure (adj)"],"col":["secure funding","job security"]},{"w":"seek","pos":"v","sub":2,"tr":"aramak; çabalamak (to)","def":"to try to find or obtain; to attempt","ex":"This study [seeks] to explain why turnout is declining.","syn":["look for","pursue","attempt"],"fam":["seeker (n)"],"col":["seek to","asylum seeker"]},{"w":"select","pos":"v","sub":2,"tr":"seçmek","def":"to choose carefully from a group","ex":"Participants were randomly [selected] from the electoral register.","syn":["choose","pick","opt for"],"fam":["selection (n)","selective (adj)"],"col":["randomly selected","natural selection"]},{"w":"strategy","pos":"n","sub":2,"tr":"strateji","def":"a plan of action designed to achieve a long-term aim","ex":"The government's anti-poverty [strategy] focused on education.","syn":["plan","approach","policy"],"fam":["strategic (adj)","strategist (n)"],"col":["adopt a strategy","coping strategy"]},{"w":"survey","pos":"n","sub":2,"tr":"anket, araştırma; inceleme","def":"an investigation of opinions or behaviour by questioning people","ex":"A national [survey] of 5,000 adults was carried out in 2019.","syn":["poll","study","questionnaire"],"fam":["survey (v)"],"col":["conduct a survey","survey data"]},{"w":"tradition","pos":"n","sub":2,"tr":"gelenek","def":"a custom or belief passed from generation to generation","ex":"Oral [tradition] preserved the history of many nomadic groups.","syn":["custom","convention","heritage"],"fam":["traditional (adj)","traditionally (adv)"],"col":["a long tradition of","oral tradition"]},{"w":"transfer","pos":"v","sub":2,"tr":"aktarmak, nakletmek","def":"to move someone or something from one place to another","ex":"Knowledge is [transferred] from one generation to the next.","syn":["move","convey","transmit"],"fam":["transfer (n)","transferable (adj)"],"col":["transfer to","technology transfer"]},{"w":"alternative","pos":"n","sub":3,"tr":"alternatif, seçenek","def":"another possibility or choice","ex":"Cooperatives offer an [alternative] to traditional firms.","syn":["option","choice","substitute"],"fam":["alternative (adj)","alternatively (adv)"],"col":["an alternative to","there is no alternative"]},{"w":"circumstance","pos":"n","sub":3,"tr":"durum, koşul","def":"a fact or condition connected with an event or action","ex":"Under no [circumstances] should participants be identified.","syn":["condition","situation","context"],"fam":["circumstantial (adj: dolaylı)"],"col":["under the circumstances","economic circumstances"]},{"w":"comment","pos":"v","sub":3,"tr":"yorum yapmak","def":"to express an opinion or reaction","ex":"Several respondents [commented] on the lack of public transport.","syn":["remark","observe","note"],"fam":["comment (n)","commentary (n)","commentator (n)"],"col":["comment on","no comment"]},{"w":"compensate","pos":"v","sub":3,"tr":"telafi etmek; tazminat ödemek","def":"to make up for a loss or problem; to pay someone for loss or damage","ex":"Farmers were [compensated] for land taken for the dam.","syn":["make up for","offset","reimburse"],"fam":["compensation (n)","compensatory (adj)"],"col":["compensate for","compensate someone for"]},{"w":"component","pos":"n","sub":3,"tr":"bileşen, parça","def":"a part or element of a larger whole","ex":"Trust is a core [component] of social capital.","syn":["element","part","constituent"],"fam":[],"col":["a key component of"]},{"w":"consent","pos":"n","sub":3,"tr":"onay, rıza, izin","def":"permission for something to happen or agreement to do something","ex":"Informed [consent] was obtained from all participants.","syn":["permission","approval","agreement"],"fam":["consent (v)"],"col":["informed consent","give consent"]},{"w":"considerable","pos":"adj","sub":3,"tr":"hatırı sayılır, önemli ölçüde","def":"notably large in size, amount or extent","ex":"There is [considerable] debate about the causes of the decline.","syn":["substantial","significant","sizeable"],"fam":["considerably (adv)"],"col":["considerable amount of","to a considerable extent"]},{"w":"constant","pos":"adj","sub":3,"tr":"sabit, değişmez; sürekli","def":"remaining the same; occurring continuously","ex":"The population remained relatively [constant] over the decade.","syn":["stable","steady","continuous"],"fam":["constantly (adv)","constancy (n)"],"col":["remain constant","constant pressure"]},{"w":"constrain","pos":"v","sub":3,"tr":"kısıtlamak, sınırlamak; zorlamak","def":"to limit or restrict something; to force someone to act","ex":"Economic growth was [constrained] by a lack of skilled labour.","syn":["restrict","limit","restrain"],"fam":["constraint (n)"],"col":["be constrained by","budget constraints"]},{"w":"contribute","pos":"v","sub":3,"tr":"katkıda bulunmak; neden olmak (to)","def":"to give something to help achieve a result; to help cause something","ex":"Poor housing [contributes] to health inequalities.","syn":["add to","lead to","donate"],"fam":["contribution (n)","contributor (n)"],"col":["contribute to","make a contribution"]},{"w":"convene","pos":"v","sub":3,"tr":"toplanmak, toplantıya çağırmak","def":"to come or bring together for a meeting","ex":"An expert panel was [convened] to review the evidence.","syn":["assemble","gather","summon"],"fam":["convention (n: sözleşme; toplantı; gelenek)"],"col":["convene a meeting"]},{"w":"coordinate","pos":"v","sub":3,"tr":"koordine etmek, eşgüdüm sağlamak","def":"to organise different elements so that they work together","ex":"The ministry [coordinates] the work of regional offices.","syn":["organise","integrate","harmonise"],"fam":["coordination (n)","coordinator (n)"],"col":["coordinate efforts","closely coordinated"]},{"w":"core","pos":"adj","sub":3,"tr":"temel, çekirdek, ana","def":"central or most important","ex":"Equality is a [core] value of the welfare state.","syn":["central","fundamental","key"],"fam":["core (n: öz, çekirdek)"],"col":["core values","core curriculum"]},{"w":"corporate","pos":"adj","sub":3,"tr":"kurumsal, şirketlere ait","def":"relating to a large company or group","ex":"[Corporate] taxes were cut to attract foreign investment.","syn":["business","company","commercial"],"fam":["corporation (n)"],"col":["corporate social responsibility"]},{"w":"correspond","pos":"v","sub":3,"tr":"karşılık gelmek, uyuşmak; yazışmak","def":"to match or be similar to; to exchange letters","ex":"The survey results [correspond] closely with census data.","syn":["match","tally","agree"],"fam":["correspondence (n)","corresponding (adj)","correspondent (n: muhabir)"],"col":["correspond to","correspond with"]},{"w":"criteria","pos":"n","sub":3,"tr":"ölçütler, kriterler (tekil: criterion)","def":"standards by which something is judged or decided","ex":"Studies were selected according to strict [criteria].","syn":["standards","measures","benchmarks"],"fam":["criterion (tekil)"],"col":["inclusion criteria","meet the criteria"]},{"w":"deduce","pos":"v","sub":3,"tr":"sonuç çıkarmak, çıkarsamak","def":"to reach a conclusion by reasoning from evidence","ex":"From the records, historians [deduced] that the town was abandoned.","syn":["infer","conclude","derive"],"fam":["deduction (n)","deductive (adj)"],"col":["deduce from"]},{"w":"demonstrate","pos":"v","sub":3,"tr":"göstermek, kanıtlamak; gösteri yapmak","def":"to show clearly with evidence; to take part in a public protest","ex":"The study [demonstrates] a clear link between income and life expectancy.","syn":["show","prove","illustrate"],"fam":["demonstration (n)","demonstrator (n)","demonstrable (adj)"],"col":["demonstrate that"]},{"w":"document","pos":"n","sub":3,"tr":"belge","def":"a written or printed record of information","ex":"Official [documents] reveal the extent of the famine.","syn":["record","paper","file"],"fam":["document (v: belgelemek)","documentation (n)","documentary (n, adj)"],"col":["historical documents","well documented"]},{"w":"dominate","pos":"v","sub":3,"tr":"egemen olmak, hâkim olmak","def":"to have control over; to be the most important or noticeable","ex":"A few large firms [dominate] the media market.","syn":["control","prevail","govern"],"fam":["dominant (adj)","domination (n)","dominance (n)"],"col":["dominate the market","male-dominated"]},{"w":"emphasis","pos":"n","sub":3,"tr":"vurgu, önem","def":"special importance or attention given to something","ex":"The curriculum places great [emphasis] on critical thinking.","syn":["stress","focus","weight"],"fam":["emphasise (v)","emphatic (adj)"],"col":["place emphasis on","with emphasis on"]},{"w":"ensure","pos":"v","sub":3,"tr":"sağlamak, garanti etmek","def":"to make certain that something happens","ex":"Anonymity was [ensured] by removing all names.","syn":["guarantee","secure","make sure"],"fam":[],"col":["ensure that"]},{"w":"exclude","pos":"v","sub":3,"tr":"dışlamak, hariç tutmak","def":"to deny access to; to leave out","ex":"Incomplete questionnaires were [excluded] from the analysis.","syn":["omit","leave out","bar"],"fam":["exclusion (n)","exclusive (adj)","exclusively (adv)"],"col":["exclude from","social exclusion"]},{"w":"framework","pos":"n","sub":3,"tr":"çerçeve","def":"a basic structure of ideas or rules","ex":"The study uses Bourdieu's theory as its conceptual [framework].","syn":["structure","model","scheme"],"fam":[],"col":["theoretical framework","legal framework"]},{"w":"fund","pos":"n","sub":3,"tr":"fon, kaynak, ödenek","def":"a sum of money saved or made available for a purpose","ex":"The International Monetary [Fund] provided emergency loans.","syn":["finance","capital","resources"],"fam":["fund (v: finanse etmek)","funding (n)"],"col":["public funds","raise funds"]},{"w":"illustrate","pos":"v","sub":3,"tr":"örneklerle açıklamak, göstermek; resimlemek","def":"to explain or make clear by using examples","ex":"This case [illustrates] the limits of market reform.","syn":["demonstrate","exemplify","show"],"fam":["illustration (n)","illustrative (adj)"],"col":["illustrate the point"]},{"w":"immigrate","pos":"v","sub":3,"tr":"göç etmek (bir ülkeye gelmek)","def":"to come to live permanently in a foreign country","ex":"Many families [immigrated] to Germany in the 1960s.","syn":["migrate","settle","move"],"fam":["immigration (n)","immigrant (n)"],"col":["immigrate to"]},{"w":"imply","pos":"v","sub":3,"tr":"ima etmek; anlamına gelmek, gerektirmek","def":"to suggest something without saying it directly; to involve as a consequence","ex":"The findings [imply] that early intervention is effective.","syn":["suggest","indicate","entail"],"fam":["implication (n)","implicit (adj)"],"col":["imply that"]},{"w":"initial","pos":"adj","sub":3,"tr":"ilk, başlangıçtaki","def":"existing or occurring at the beginning","ex":"[Initial] results suggest that the policy is working.","syn":["first","early","preliminary"],"fam":["initially (adv)","initiate (v)"],"col":["initial stage","initial findings"]},{"w":"instance","pos":"n","sub":3,"tr":"örnek, durum","def":"an example or single occurrence of something","ex":"There were several [instances] of electoral fraud.","syn":["example","case","occurrence"],"fam":[],"col":["for instance","in this instance"]},{"w":"interact","pos":"v","sub":3,"tr":"etkileşimde bulunmak","def":"to communicate or act with each other; to influence each other","ex":"Children learn norms by [interacting] with their peers.","syn":["communicate","engage","relate"],"fam":["interaction (n)","interactive (adj)"],"col":["interact with","social interaction"]},{"w":"justify","pos":"v","sub":3,"tr":"haklı çıkarmak, gerekçelendirmek","def":"to show or prove to be right or reasonable","ex":"The government struggled to [justify] the cuts.","syn":["defend","vindicate","warrant"],"fam":["justification (n)","justifiable (adj)","unjustified (adj)"],"col":["justify the decision"]},{"w":"layer","pos":"n","sub":3,"tr":"katman, tabaka","def":"a level of something that lies over or under another","ex":"Society is made up of several [layers] of social class.","syn":["level","stratum","tier"],"fam":["layer (v)"],"col":["a layer of","multi-layered"]},{"w":"link","pos":"n","sub":3,"tr":"bağlantı, bağ","def":"a relationship or connection between things","ex":"Researchers found a strong [link] between education and voting.","syn":["connection","relationship","association"],"fam":["link (v)"],"col":["a link between","linked to"]},{"w":"locate","pos":"v","sub":3,"tr":"yerini bulmak; yerleştirmek","def":"to find the exact position of; to situate in a place","ex":"The archive is [located] in the city centre.","syn":["find","position","situate"],"fam":["location (n)"],"col":["be located in"]},{"w":"maximise","pos":"v","sub":3,"tr":"en üst düzeye çıkarmak","def":"to make something as large or great as possible","ex":"Firms aim to [maximise] profits.","syn":["increase","optimise","boost"],"fam":["maximum (n, adj)","maximisation (n)","US: maximize"],"col":["maximise profit"]},{"w":"minor","pos":"adj","sub":3,"tr":"küçük, önemsiz; ikincil","def":"lesser in importance, seriousness or size","ex":"Only [minor] changes were made to the questionnaire.","syn":["slight","small","secondary"],"fam":["minority (n: azınlık)","minor (n: reşit olmayan)"],"col":["a minor role","ethnic minority"]},{"w":"negate","pos":"v","sub":3,"tr":"geçersiz kılmak, etkisiz hâle getirmek; inkâr etmek","def":"to cancel the effect of; to deny the existence of","ex":"Rising prices [negated] the benefits of the wage increase.","syn":["cancel out","nullify","invalidate"],"fam":["negation (n)","negative (adj)"],"col":["negate the effect of"]},{"w":"outcome","pos":"n","sub":3,"tr":"sonuç","def":"the way something turns out; a consequence","ex":"Educational [outcomes] vary widely between regions.","syn":["result","consequence","effect"],"fam":[],"col":["the outcome of","health outcomes"]},{"w":"partner","pos":"n","sub":3,"tr":"ortak, eş","def":"a person or organisation that shares in an activity","ex":"Germany is one of Turkey's largest trading [partners].","syn":["associate","ally","collaborator"],"fam":["partnership (n)","partner (v)"],"col":["trading partner","social partners"]},{"w":"philosophy","pos":"n","sub":3,"tr":"felsefe; yaklaşım","def":"the study of the nature of knowledge and existence; a set of guiding beliefs","ex":"The school's [philosophy] emphasises learning through play.","syn":["thinking","ideology","principles"],"fam":["philosopher (n)","philosophical (adj)"],"col":["political philosophy"]},{"w":"physical","pos":"adj","sub":3,"tr":"fiziksel, bedensel","def":"relating to the body or to material things","ex":"Poverty affects both [physical] and mental health.","syn":["bodily","material","tangible"],"fam":["physically (adv)"],"col":["physical activity","physical environment"]},{"w":"proportion","pos":"n","sub":3,"tr":"oran, pay; orantı","def":"a part or share of a whole; the relationship between quantities","ex":"A large [proportion] of the population lives in cities.","syn":["share","percentage","ratio"],"fam":["proportional (adj)","proportionate (adj)","disproportionate (adj)"],"col":["in proportion to","a high proportion of"]},{"w":"publish","pos":"v","sub":3,"tr":"yayımlamak","def":"to prepare and issue a book, article or report for the public","ex":"The findings were [published] in 2021.","syn":["issue","release","print"],"fam":["publication (n)","publisher (n)"],"col":["publish results"]},{"w":"react","pos":"v","sub":3,"tr":"tepki vermek","def":"to respond to something in a particular way","ex":"Markets [reacted] nervously to the election result.","syn":["respond","reply","behave"],"fam":["reaction (n)","reactive (adj)","reactionary (adj: gerici)"],"col":["react to","react against"]},{"w":"register","pos":"v","sub":3,"tr":"kaydolmak, kaydetmek","def":"to enter one's name on an official list","ex":"Only 60% of eligible voters were [registered].","syn":["enrol","record","sign up"],"fam":["register (n)","registration (n)","registry (n)"],"col":["register for","registered voters"]},{"w":"rely","pos":"v","sub":3,"tr":"güvenmek, bel bağlamak (on)","def":"to depend on someone or something with trust","ex":"Many rural households [rely] on remittances from abroad.","syn":["depend","count on","trust"],"fam":["reliable (adj)","reliability (n)","reliance (n)"],"col":["rely on","heavily rely on"]},{"w":"remove","pos":"v","sub":3,"tr":"kaldırmak, çıkarmak","def":"to take something away from a place; to get rid of","ex":"Trade barriers were gradually [removed].","syn":["eliminate","take away","abolish"],"fam":["removal (n)"],"col":["remove barriers"]},{"w":"scheme","pos":"n","sub":3,"tr":"plan, program, düzen","def":"a systematic plan or arrangement for achieving a purpose","ex":"A pension [scheme] was introduced for agricultural workers.","syn":["plan","programme","system"],"fam":["scheme (v: entrika çevirmek)"],"col":["pension scheme","government scheme"]},{"w":"sequence","pos":"n","sub":3,"tr":"sıra, dizi","def":"a particular order in which related events follow each other","ex":"Events are presented in chronological [sequence].","syn":["order","series","succession"],"fam":["sequential (adj)","sequence (v)"],"col":["in sequence","a sequence of events"]},{"w":"shift","pos":"n","sub":3,"tr":"değişim, kayma; vardiya","def":"a change in position, direction or tendency; a period of work","ex":"There has been a [shift] in public attitudes towards immigration.","syn":["change","move","transition"],"fam":["shift (v)"],"col":["a shift in","night shift"]},{"w":"specify","pos":"v","sub":3,"tr":"belirtmek, açıkça belirlemek","def":"to identify clearly and definitely","ex":"The law [specifies] the conditions for citizenship.","syn":["state","define","stipulate"],"fam":["specification (n)","specific (adj)"],"col":["unless otherwise specified"]},{"w":"sufficient","pos":"adj","sub":3,"tr":"yeterli","def":"enough for a particular purpose","ex":"There was not [sufficient] evidence to support the claim.","syn":["adequate","enough","ample"],"fam":["sufficiency (n)","insufficient (adj)","sufficiently (adv)"],"col":["sufficient evidence"]},{"w":"task","pos":"n","sub":3,"tr":"görev, iş","def":"a piece of work to be done","ex":"Participants completed a memory [task].","syn":["job","duty","assignment"],"fam":[],"col":["carry out a task","a difficult task"]},{"w":"technical","pos":"adj","sub":3,"tr":"teknik","def":"relating to a particular subject, art or craft, or its techniques","ex":"The report is written in highly [technical] language.","syn":["specialised","practical","mechanical"],"fam":["technically (adv)","technician (n)"],"col":["technical assistance"]},{"w":"technique","pos":"n","sub":3,"tr":"teknik, yöntem","def":"a particular way of carrying out a task","ex":"Snowball sampling is a common [technique] in qualitative research.","syn":["method","procedure","approach"],"fam":[],"col":["research technique"]},{"w":"valid","pos":"adj","sub":3,"tr":"geçerli; sağlam, mantıklı","def":"legally or officially acceptable; logically sound","ex":"The questionnaire was tested to ensure it was [valid].","syn":["sound","legitimate","well-founded"],"fam":["validity (n)","validate (v)","invalid (adj)"],"col":["a valid argument","statistically valid"]},{"w":"volume","pos":"n","sub":3,"tr":"hacim, miktar; cilt","def":"the amount of space something occupies; a quantity; a book in a series","ex":"The [volume] of trade between the two countries doubled.","syn":["amount","quantity","bulk"],"fam":["voluminous (adj)"],"col":["trade volume","volume two"]},{"w":"adequate","pos":"adj","sub":4,"tr":"yeterli, elverişli","def":"satisfactory or acceptable in quality or quantity","ex":"Many refugees lack [adequate] housing.","syn":["sufficient","satisfactory","acceptable"],"fam":["adequacy (n)","adequately (adv)","inadequate (adj)"],"col":["adequate for"]},{"w":"annual","pos":"adj","sub":4,"tr":"yıllık","def":"occurring once every year; calculated over a year","ex":"The [annual] growth rate fell to 2%.","syn":["yearly","per annum"],"fam":["annually (adv)"],"col":["annual report","annual income"]},{"w":"apparent","pos":"adj","sub":4,"tr":"açık, belli; görünürdeki","def":"clearly visible or understood; seeming real but not necessarily so","ex":"It soon became [apparent] that the plan would fail.","syn":["evident","obvious","seeming"],"fam":["apparently (adv: görünüşe göre)"],"col":["it is apparent that","for no apparent reason"]},{"w":"approximate","pos":"adj","sub":4,"tr":"yaklaşık","def":"close to the actual but not completely accurate","ex":"The [approximate] cost of the project is 2 million euros.","syn":["rough","estimated","close"],"fam":["approximately (adv)","approximation (n)","approximate (v)"],"col":["approximate number"]},{"w":"attitude","pos":"n","sub":4,"tr":"tutum","def":"a settled way of thinking or feeling about something","ex":"Public [attitudes] towards divorce have become more liberal.","syn":["view","opinion","stance"],"fam":["attitudinal (adj)"],"col":["attitude towards","change in attitude"]},{"w":"attribute","pos":"v","sub":4,"tr":"atfetmek, (bir nedene) bağlamak","def":"to regard something as caused by something","ex":"The decline in crime is often [attributed] to better policing.","syn":["ascribe","credit","assign"],"fam":["attribute (n: nitelik, özellik)","attribution (n)"],"col":["attribute A to B"]},{"w":"civil","pos":"adj","sub":4,"tr":"sivil; medeni; kamusal","def":"relating to ordinary citizens rather than the military or church; polite","ex":"[Civil] society organisations played a key role in the reforms.","syn":["civic","public","courteous"],"fam":["civilian (n)","civilisation (n)","civility (n)"],"col":["civil war","civil rights","civil society"]},{"w":"commit","pos":"v","sub":4,"tr":"işlemek (suç); taahhüt etmek, bağlanmak","def":"to carry out a crime or mistake; to pledge oneself","ex":"The government is [committed] to reducing child poverty.","syn":["perpetrate","pledge","devote"],"fam":["commitment (n)","committed (adj)","committee (n)"],"col":["be committed to","commit a crime"]},{"w":"communicate","pos":"v","sub":4,"tr":"iletişim kurmak, iletmek","def":"to share or exchange information or ideas","ex":"Social media allows politicians to [communicate] directly with voters.","syn":["convey","transmit","express"],"fam":["communication (n)","communicative (adj)"],"col":["communicate with"]},{"w":"concentrate","pos":"v","sub":4,"tr":"yoğunlaşmak; toplanmak","def":"to focus attention on; to gather in one place","ex":"Industry is [concentrated] in the western regions.","syn":["focus","centre","cluster"],"fam":["concentration (n)"],"col":["concentrate on","highly concentrated"]},{"w":"confer","pos":"v","sub":4,"tr":"vermek, bahşetmek; görüşmek","def":"to grant a title, right or benefit; to discuss","ex":"Citizenship [confers] certain rights and duties.","syn":["grant","bestow","consult"],"fam":["conference (n)"],"col":["confer on","confer with"]},{"w":"contrast","pos":"n","sub":4,"tr":"karşıtlık, zıtlık","def":"a striking difference between things","ex":"In [contrast] to the north, the south remained largely rural.","syn":["difference","disparity","opposition"],"fam":["contrast (v)","contrasting (adj)"],"col":["in contrast to","by contrast"]},{"w":"cycle","pos":"n","sub":4,"tr":"döngü, devre","def":"a series of events that repeat regularly","ex":"Poverty can become a [cycle] passed from parents to children.","syn":["circle","pattern","round"],"fam":["cyclical (adj)","recycle (v)"],"col":["economic cycle","life cycle"]},{"w":"debate","pos":"n","sub":4,"tr":"tartışma","def":"a formal discussion in which opposing arguments are put forward","ex":"The [debate] over headscarves divided public opinion.","syn":["discussion","dispute","controversy"],"fam":["debate (v)","debatable (adj)"],"col":["a heated debate","open to debate"]},{"w":"dimension","pos":"n","sub":4,"tr":"boyut","def":"an aspect or feature of a situation or problem","ex":"Poverty has economic, social and cultural [dimensions].","syn":["aspect","facet","element"],"fam":["dimensional (adj)"],"col":["a new dimension to"]},{"w":"domestic","pos":"adj","sub":4,"tr":"yerli, iç; ev içi, aileye ait","def":"relating to one's own country; relating to the home or family","ex":"[Domestic] demand fell as unemployment rose.","syn":["internal","national","household"],"fam":["domesticate (v: evcilleştirmek)"],"col":["domestic violence","domestic market"]},{"w":"emerge","pos":"v","sub":4,"tr":"ortaya çıkmak","def":"to become known or visible; to come into existence","ex":"New middle classes [emerged] in the rapidly growing cities.","syn":["appear","arise","surface"],"fam":["emergence (n)","emerging (adj)","emergent (adj)"],"col":["emerge from","emerging economies"]},{"w":"error","pos":"n","sub":4,"tr":"hata","def":"a mistake; the state of being wrong","ex":"The difference is within the margin of [error].","syn":["mistake","inaccuracy","fault"],"fam":["erroneous (adj: hatalı)"],"col":["margin of error","human error"]},{"w":"ethnic","pos":"adj","sub":4,"tr":"etnik","def":"relating to a group sharing a common national or cultural tradition","ex":"The country is home to several [ethnic] minorities.","syn":["cultural","racial","national"],"fam":["ethnicity (n)","ethnically (adv)"],"col":["ethnic group","ethnic conflict"]},{"w":"grant","pos":"v","sub":4,"tr":"vermek, bahşetmek; kabul etmek","def":"to give or allow something officially; to agree that something is true","ex":"In Turkey, women were [granted] the right to vote in national elections in 1934.","syn":["award","give","concede"],"fam":["grant (n: hibe, burs)"],"col":["take for granted","grant permission"]},{"w":"hence","pos":"adv","sub":4,"tr":"bu nedenle, dolayısıyla","def":"as a consequence; for this reason","ex":"Wages are low and, [hence], many graduates move abroad.","syn":["therefore","thus","consequently"],"fam":[],"col":["hence the need for"]},{"w":"hypothesis","pos":"n","sub":4,"tr":"hipotez, varsayım","def":"a proposed explanation that is tested through research","ex":"The results support the [hypothesis] that contact reduces prejudice.","syn":["theory","proposition","assumption"],"fam":["hypothesise (v)","hypothetical (adj)"],"col":["test a hypothesis"]},{"w":"implement","pos":"v","sub":4,"tr":"uygulamak, hayata geçirmek","def":"to put a plan or decision into effect","ex":"The reforms were [implemented] over a five-year period.","syn":["carry out","execute","apply"],"fam":["implementation (n)","implement (n: alet)"],"col":["implement a policy"]},{"w":"implicate","pos":"v","sub":4,"tr":"(suça) karıştırmak; ilişkilendirmek","def":"to show that someone is involved in a crime; to show as a cause","ex":"Several officials were [implicated] in the scandal.","syn":["involve","incriminate","associate"],"fam":["implication (n: sonuç, ima)"],"col":["be implicated in"]},{"w":"impose","pos":"v","sub":4,"tr":"dayatmak, uygulamak (vergi, yasak)","def":"to force something unwelcome to be accepted or put in place","ex":"The government [imposed] a curfew after the riots.","syn":["enforce","inflict","introduce"],"fam":["imposition (n)","imposing (adj: heybetli)"],"col":["impose a tax on","impose restrictions"]},{"w":"integrate","pos":"v","sub":4,"tr":"bütünleştirmek, uyum sağlamak","def":"to combine into a whole; to bring into equal participation in society","ex":"Language courses help migrants [integrate] into society.","syn":["incorporate","combine","assimilate"],"fam":["integration (n)","integrated (adj)","integral (adj)"],"col":["integrate into"]},{"w":"internal","pos":"adj","sub":4,"tr":"iç, dahili","def":"situated on the inside; relating to affairs within a country or organisation","ex":"[Internal] migration from villages to cities accelerated.","syn":["domestic","inner","interior"],"fam":["internally (adv)","internalise (v)"],"col":["internal affairs","internal migration"]},{"w":"investigate","pos":"v","sub":4,"tr":"araştırmak, soruşturmak","def":"to carry out a systematic inquiry into something","ex":"This study [investigates] the causes of school dropout.","syn":["examine","explore","inquire into"],"fam":["investigation (n)","investigator (n)"],"col":["investigate the effect of"]},{"w":"label","pos":"v","sub":4,"tr":"etiketlemek, damgalamak","def":"to describe or classify, often unfairly","ex":"Young people from poor areas are often [labelled] as troublemakers.","syn":["categorise","brand","stigmatise"],"fam":["label (n)","labelling theory (n)"],"col":["be labelled as"]},{"w":"mechanism","pos":"n","sub":4,"tr":"mekanizma, işleyiş","def":"a process or system by which something takes place","ex":"Markets are seen as a [mechanism] for allocating resources.","syn":["process","means","system"],"fam":["mechanical (adj)","mechanistic (adj)"],"col":["a mechanism for","defence mechanism"]},{"w":"obvious","pos":"adj","sub":4,"tr":"açık, belli, aşikâr","def":"easily seen or understood","ex":"There is no [obvious] solution to the housing crisis.","syn":["evident","clear","apparent"],"fam":["obviously (adv)"],"col":["it is obvious that"]},{"w":"occupy","pos":"v","sub":4,"tr":"işgal etmek; kaplamak; meşgul etmek","def":"to take control of a place by force; to fill space or time","ex":"The city was [occupied] by foreign troops for two years.","syn":["seize","fill","inhabit"],"fam":["occupation (n: meslek; işgal)","occupant (n)"],"col":["occupy a position"]},{"w":"option","pos":"n","sub":4,"tr":"seçenek","def":"a thing that is or may be chosen","ex":"Emigration was the only [option] for many young graduates.","syn":["choice","alternative","possibility"],"fam":["optional (adj)"],"col":["have no option but to"]},{"w":"output","pos":"n","sub":4,"tr":"çıktı, üretim","def":"the amount of something produced","ex":"Industrial [output] fell by 8% in 2009.","syn":["production","yield","product"],"fam":[],"col":["economic output"]},{"w":"overall","pos":"adj","sub":4,"tr":"genel, toplam","def":"taking everything into account","ex":"The [overall] rate of unemployment remained stable.","syn":["general","total","comprehensive"],"fam":["overall (adv)"],"col":["overall effect"]},{"w":"parallel","pos":"adj","sub":4,"tr":"paralel, benzer, eşzamanlı","def":"similar and happening at the same time","ex":"The two countries followed [parallel] paths of economic development.","syn":["similar","analogous","simultaneous"],"fam":["parallel (n: benzerlik)"],"col":["draw a parallel between"]},{"w":"parameter","pos":"n","sub":4,"tr":"parametre, sınır, ölçüt","def":"a limit or boundary that defines the scope of something","ex":"The committee set clear [parameters] for the inquiry.","syn":["limit","boundary","framework"],"fam":[],"col":["within the parameters of"]},{"w":"phase","pos":"n","sub":4,"tr":"evre, aşama","def":"a distinct period in a process of change","ex":"The second [phase] of the project focuses on rural schools.","syn":["stage","period","step"],"fam":["phase (v: aşamalı yapmak)"],"col":["phase out","the first phase"]},{"w":"predict","pos":"v","sub":4,"tr":"tahmin etmek, öngörmek","def":"to say that something will happen in the future","ex":"Few economists [predicted] the 2008 crisis.","syn":["forecast","foresee","anticipate"],"fam":["prediction (n)","predictable (adj)","unpredictable (adj)"],"col":["predict that"]},{"w":"principal","pos":"adj","sub":4,"tr":"başlıca, temel, ana","def":"first in order of importance; main","ex":"Agriculture was the [principal] source of income.","syn":["main","chief","primary"],"fam":["principally (adv)","principal (n: müdür)"],"col":["principal cause"]},{"w":"prior","pos":"adj","sub":4,"tr":"önceki","def":"existing or coming before in time or importance","ex":"Participants had no [prior] knowledge of the topic.","syn":["previous","earlier","preceding"],"fam":["priority (n: öncelik)","prioritise (v)"],"col":["prior to","prior knowledge"]},{"w":"promote","pos":"v","sub":4,"tr":"teşvik etmek, desteklemek; terfi ettirmek","def":"to support or encourage; to raise to a higher position","ex":"The campaign aims to [promote] gender equality.","syn":["encourage","foster","advance"],"fam":["promotion (n)","promoter (n)"],"col":["promote equality"]},{"w":"regime","pos":"n","sub":4,"tr":"rejim, yönetim; düzen","def":"a government, especially an authoritarian one; a system of rules","ex":"The military [regime] banned all political parties.","syn":["government","administration","system"],"fam":[],"col":["authoritarian regime","tax regime"]},{"w":"resolve","pos":"v","sub":4,"tr":"çözmek; karar vermek","def":"to find a solution to a problem; to decide firmly","ex":"The conflict was eventually [resolved] through negotiation.","syn":["solve","settle","decide"],"fam":["resolution (n)","resolute (adj: kararlı)"],"col":["resolve a dispute"]},{"w":"retain","pos":"v","sub":4,"tr":"korumak, muhafaza etmek, elde tutmak","def":"to continue to have or keep","ex":"Many migrants [retain] strong ties with their home villages.","syn":["keep","preserve","maintain"],"fam":["retention (n)"],"col":["retain control"]},{"w":"statistic","pos":"n","sub":4,"tr":"istatistik (veri)","def":"a fact or figure obtained from a study of numerical data","ex":"Official [statistics] underestimate the extent of poverty.","syn":["figure","data","number"],"fam":["statistical (adj)","statistically (adv)","statistician (n)"],"col":["official statistics"]},{"w":"status","pos":"n","sub":4,"tr":"statü, konum; durum","def":"relative social or professional position; the situation at a particular time","ex":"Education is closely linked to social [status].","syn":["position","standing","rank"],"fam":[],"col":["social status","legal status"]},{"w":"stress","pos":"v","sub":4,"tr":"vurgulamak","def":"to give particular emphasis to a point","ex":"The report [stresses] the need for early intervention.","syn":["emphasise","highlight","underline"],"fam":["stress (n: stres; vurgu)","stressful (adj)"],"col":["stress the importance of"]},{"w":"subsequent","pos":"adj","sub":4,"tr":"sonraki, ardından gelen","def":"coming after something in time","ex":"[Subsequent] studies confirmed these findings.","syn":["following","later","succeeding"],"fam":["subsequently (adv)"],"col":["subsequent to"]},{"w":"sum","pos":"n","sub":4,"tr":"toplam; miktar","def":"a quantity of money; the total from adding numbers","ex":"A large [sum] was spent on the new airport.","syn":["amount","total","quantity"],"fam":["sum (v: özetlemek, sum up)","summation (n)"],"col":["a large sum of","sum up"]},{"w":"summary","pos":"n","sub":4,"tr":"özet","def":"a brief statement of the main points","ex":"A [summary] of the findings is presented in Table 2.","syn":["synopsis","overview","outline"],"fam":["summarise (v)"],"col":["in summary","executive summary"]},{"w":"undertake","pos":"v","sub":4,"tr":"üstlenmek; girişmek, yapmak","def":"to commit oneself to and begin a task","ex":"The survey was [undertaken] by the national statistics office.","syn":["carry out","conduct","take on"],"fam":["undertaking (n)"],"col":["undertake research"]},{"w":"academy","pos":"n","sub":5,"tr":"akademi","def":"a place of study or training in a special field; a society of scholars","ex":"The [Academy] of Sciences funded the project.","syn":["institute","college","school"],"fam":["academic (adj, n)","academically (adv)"],"col":["military academy"]},{"w":"adjust","pos":"v","sub":5,"tr":"ayarlamak; uyum sağlamak","def":"to alter slightly; to adapt to a new situation","ex":"Immigrant children often [adjust] quickly to a new school.","syn":["adapt","modify","accommodate"],"fam":["adjustment (n)","adjustable (adj)"],"col":["adjust to","adjusted for inflation"]},{"w":"alter","pos":"v","sub":5,"tr":"değiştirmek","def":"to change in character or composition","ex":"Urbanisation [altered] traditional family roles.","syn":["change","modify","transform"],"fam":["alteration (n)"],"col":["alter the balance"]},{"w":"amend","pos":"v","sub":5,"tr":"değiştirmek, düzeltmek (yasa, metin)","def":"to make minor changes to a text, especially a law","ex":"The constitution was [amended] in 2017.","syn":["revise","modify","change"],"fam":["amendment (n)"],"col":["amend a law"]},{"w":"aware","pos":"adj","sub":5,"tr":"farkında, bilincinde","def":"having knowledge or perception of something","ex":"Few voters were [aware] of the new electoral rules.","syn":["conscious","informed","mindful"],"fam":["awareness (n)","unaware (adj)"],"col":["be aware of","raise awareness"]},{"w":"capacity","pos":"n","sub":5,"tr":"kapasite; yeterlik, yeti","def":"the maximum amount something can contain or produce; the ability to do something","ex":"The state lacked the [capacity] to collect taxes effectively.","syn":["ability","capability","volume"],"fam":["capable (adj)"],"col":["capacity to","in one's capacity as"]},{"w":"challenge","pos":"v","sub":5,"tr":"meydan okumak; sorgulamak, itiraz etmek","def":"to question the truth or legitimacy of; to test someone's abilities","ex":"Feminist scholars [challenged] traditional views of the family.","syn":["question","dispute","contest"],"fam":["challenge (n)","challenging (adj)"],"col":["challenge the view that"]},{"w":"clause","pos":"n","sub":5,"tr":"madde, fıkra; yan cümle","def":"a particular article in a legal document; a unit of grammar","ex":"The treaty contained a [clause] on minority rights.","syn":["article","provision","section"],"fam":[],"col":["a clause in the contract"]},{"w":"compound","pos":"v","sub":5,"tr":"kötüleştirmek, ağırlaştırmak","def":"to make a problem worse; to combine","ex":"Poor transport links [compounded] the region's isolation.","syn":["worsen","aggravate","intensify"],"fam":["compound (n: bileşik; site)"],"col":["compound the problem"]},{"w":"conflict","pos":"n","sub":5,"tr":"çatışma, anlaşmazlık","def":"a serious disagreement or armed struggle","ex":"The [conflict] displaced more than a million people.","syn":["dispute","clash","war"],"fam":["conflict (v: çelişmek)","conflicting (adj)"],"col":["in conflict with","armed conflict"]},{"w":"consult","pos":"v","sub":5,"tr":"danışmak, başvurmak","def":"to seek information or advice from","ex":"Local communities were not [consulted] about the project.","syn":["ask","refer to","confer"],"fam":["consultation (n)","consultant (n)","consultancy (n)"],"col":["consult with","consult a source"]},{"w":"contact","pos":"n","sub":5,"tr":"temas, ilişki, iletişim","def":"communication or meeting with someone","ex":"Regular [contact] between groups can reduce prejudice.","syn":["interaction","communication","connection"],"fam":["contact (v)"],"col":["in contact with","contact hypothesis"]},{"w":"decline","pos":"n","sub":5,"tr":"düşüş, gerileme","def":"a gradual decrease or deterioration","ex":"The [decline] of heavy industry hit northern towns hardest.","syn":["decrease","fall","deterioration"],"fam":["decline (v: azalmak; reddetmek)"],"col":["a decline in","in decline"]},{"w":"discrete","pos":"adj","sub":5,"tr":"ayrı, bağımsız, ayrık","def":"separate and distinct","ex":"The population can be divided into [discrete] groups.","syn":["separate","distinct","individual"],"fam":["discretely (adv)"],"col":["discrete categories"]},{"w":"draft","pos":"n","sub":5,"tr":"taslak","def":"a preliminary version of a text","ex":"The first [draft] of the report was criticised by experts.","syn":["outline","version","sketch"],"fam":["draft (v: taslak hazırlamak)"],"col":["draft law","first draft"]},{"w":"enable","pos":"v","sub":5,"tr":"olanak sağlamak, mümkün kılmak","def":"to give someone the means or opportunity to do something","ex":"Microcredit [enables] poor women to start small businesses.","syn":["allow","permit","empower"],"fam":[],"col":["enable someone to"]},{"w":"enforce","pos":"v","sub":5,"tr":"uygulamak, yürürlüğe koymak","def":"to make sure a law or rule is obeyed","ex":"The ban on child labour was rarely [enforced].","syn":["impose","apply","implement"],"fam":["enforcement (n)","enforceable (adj)"],"col":["enforce the law","law enforcement"]},{"w":"entity","pos":"n","sub":5,"tr":"varlık, birim, kuruluş","def":"a thing with distinct and independent existence","ex":"The EU is a political [entity] unlike any other.","syn":["body","unit","organisation"],"fam":[],"col":["legal entity","separate entity"]},{"w":"equivalent","pos":"adj","sub":5,"tr":"eşdeğer, denk","def":"equal in value, amount or meaning","ex":"There is no [equivalent] word in English.","syn":["equal","comparable","corresponding"],"fam":["equivalent (n)","equivalence (n)"],"col":["equivalent to"]},{"w":"evolve","pos":"v","sub":5,"tr":"evrimleşmek, gelişmek","def":"to develop gradually","ex":"Democratic institutions [evolved] over several centuries.","syn":["develop","progress","grow"],"fam":["evolution (n)","evolutionary (adj)"],"col":["evolve into"]},{"w":"expand","pos":"v","sub":5,"tr":"genişlemek, büyümek","def":"to become or make larger","ex":"Higher education [expanded] rapidly in the 1990s.","syn":["grow","enlarge","extend"],"fam":["expansion (n)","expansive (adj)"],"col":["expand into","rapidly expanding"]},{"w":"expose","pos":"v","sub":5,"tr":"maruz bırakmak; açığa çıkarmak","def":"to leave someone unprotected; to reveal something hidden","ex":"Children in poor areas are [exposed] to higher levels of pollution.","syn":["subject to","reveal","uncover"],"fam":["exposure (n)","exposed (adj)"],"col":["be exposed to","expose corruption"]},{"w":"external","pos":"adj","sub":5,"tr":"dış, harici","def":"belonging to or coming from outside","ex":"The economy is vulnerable to [external] shocks.","syn":["outside","foreign","outer"],"fam":["externally (adv)","externality (n)"],"col":["external debt","external factors"]},{"w":"facilitate","pos":"v","sub":5,"tr":"kolaylaştırmak","def":"to make an action or process easier","ex":"Digital technology [facilitates] communication across borders.","syn":["ease","enable","assist"],"fam":["facilitator (n)","facilitation (n)"],"col":["facilitate access to"]},{"w":"fundamental","pos":"adj","sub":5,"tr":"temel, esaslı","def":"forming a necessary base or core; of central importance","ex":"Freedom of speech is a [fundamental] right.","syn":["basic","essential","core"],"fam":["fundamentally (adv)","fundamentalism (n)"],"col":["fundamental change","fundamental rights"]},{"w":"generate","pos":"v","sub":5,"tr":"üretmek, yaratmak","def":"to produce or create","ex":"Tourism [generates] a large share of national income.","syn":["produce","create","yield"],"fam":["generation (n)","generator (n)"],"col":["generate income","generate interest"]},{"w":"generation","pos":"n","sub":5,"tr":"kuşak, nesil; üretim","def":"all people born at about the same time; the production of something","ex":"The second [generation] of migrants is better educated.","syn":["age group","cohort","production"],"fam":["generational (adj)","intergenerational (adj)"],"col":["younger generation","future generations"]},{"w":"image","pos":"n","sub":5,"tr":"imaj, görüntü; imge","def":"the general impression that a person or organisation presents; a picture","ex":"The media shapes the public [image] of refugees.","syn":["reputation","impression","picture"],"fam":["imagery (n)"],"col":["public image","self-image"]},{"w":"liberal","pos":"adj","sub":5,"tr":"liberal, özgürlükçü; hoşgörülü","def":"open to new ideas; favouring individual freedom","ex":"Attitudes to sexuality became more [liberal] over time.","syn":["tolerant","open-minded","progressive"],"fam":["liberalism (n)","liberalise (v)","liberalisation (n)"],"col":["liberal democracy"]},{"w":"licence","pos":"n","sub":5,"tr":"ruhsat, lisans, izin belgesi","def":"an official permit to do or own something","ex":"Street vendors need a [licence] to trade.","syn":["permit","authorisation","certificate"],"fam":["license (v)","US: license (n)"],"col":["driving licence","licence to"]},{"w":"logic","pos":"n","sub":5,"tr":"mantık","def":"reasoning conducted according to strict principles","ex":"The [logic] of the market does not always serve the public good.","syn":["reasoning","rationale","sense"],"fam":["logical (adj)","logically (adv)","illogical (adj)"],"col":["the logic of"]},{"w":"margin","pos":"n","sub":5,"tr":"kenar, marj; fark","def":"the edge of something; an amount by which a thing is won or falls short","ex":"The party won by a narrow [margin].","syn":["edge","periphery","gap"],"fam":["marginal (adj)","marginalise (v: ötekileştirmek)"],"col":["by a narrow margin","on the margins of"]},{"w":"mental","pos":"adj","sub":5,"tr":"zihinsel, akli, ruhsal","def":"relating to the mind","ex":"Unemployment has serious effects on [mental] health.","syn":["psychological","cognitive","intellectual"],"fam":["mentally (adv)","mentality (n: zihniyet)"],"col":["mental health"]},{"w":"modify","pos":"v","sub":5,"tr":"değiştirmek, uyarlamak","def":"to make partial changes to something","ex":"The questionnaire was [modified] after the pilot study.","syn":["alter","adjust","adapt"],"fam":["modification (n)"],"col":["modify behaviour"]},{"w":"monitor","pos":"v","sub":5,"tr":"izlemek, gözlemlemek","def":"to observe and check the progress of something over time","ex":"Independent observers [monitored] the elections.","syn":["observe","track","supervise"],"fam":["monitor (n)","monitoring (n)"],"col":["closely monitor"]},{"w":"notion","pos":"n","sub":5,"tr":"kavram, fikir, düşünce","def":"a concept or belief about something","ex":"The [notion] of childhood is historically specific.","syn":["idea","concept","belief"],"fam":["notional (adj)"],"col":["the notion that"]},{"w":"objective","pos":"n","sub":5,"tr":"amaç, hedef","def":"a goal or aim","ex":"The main [objective] of the reform was to reduce inequality.","syn":["aim","goal","purpose"],"fam":["objective (adj: nesnel)","objectivity (n)","objectively (adv)"],"col":["achieve an objective"]},{"w":"orient","pos":"v","sub":5,"tr":"yöneltmek, yönlendirmek","def":"to direct towards a particular aim","ex":"The economy was [oriented] towards exports.","syn":["direct","aim","focus"],"fam":["orientation (n)","oriented (adj)"],"col":["market-oriented","orient towards"]},{"w":"perspective","pos":"n","sub":5,"tr":"bakış açısı, perspektif","def":"a particular way of considering something","ex":"From a historical [perspective], the reforms were modest.","syn":["viewpoint","standpoint","outlook"],"fam":[],"col":["from a ... perspective","put into perspective"]},{"w":"precise","pos":"adj","sub":5,"tr":"kesin, tam, doğru","def":"exact and accurate","ex":"The [precise] number of victims is unknown.","syn":["exact","accurate","specific"],"fam":["precisely (adv)","precision (n)"],"col":["precise definition"]},{"w":"prime","pos":"adj","sub":5,"tr":"başlıca, en önemli; birinci sınıf","def":"of first importance; main","ex":"Unemployment was the [prime] concern of voters.","syn":["main","chief","primary"],"fam":["prime (n: en verimli dönem)"],"col":["prime minister","prime example"]},{"w":"psychology","pos":"n","sub":5,"tr":"psikoloji","def":"the scientific study of the human mind and behaviour","ex":"Social [psychology] examines how groups influence individuals.","syn":[],"fam":["psychological (adj)","psychologist (n)","psychologically (adv)"],"col":["social psychology"]},{"w":"pursue","pos":"v","sub":5,"tr":"peşinden koşmak, sürdürmek","def":"to follow or continue with a course of action","ex":"Many graduates [pursue] careers abroad.","syn":["follow","seek","strive for"],"fam":["pursuit (n)"],"col":["pursue a policy","pursue a career"]},{"w":"ratio","pos":"n","sub":5,"tr":"oran","def":"the quantitative relation between two amounts","ex":"The teacher-student [ratio] is 1 to 30.","syn":["proportion","rate","relation"],"fam":[],"col":["the ratio of A to B"]},{"w":"reject","pos":"v","sub":5,"tr":"reddetmek","def":"to refuse to accept or agree to","ex":"Voters [rejected] the proposed constitution.","syn":["refuse","turn down","dismiss"],"fam":["rejection (n)"],"col":["reject a proposal"]},{"w":"revenue","pos":"n","sub":5,"tr":"gelir (özellikle devlet/kurum)","def":"income, especially of a government or company","ex":"Oil exports provide most of the state's [revenue].","syn":["income","earnings","proceeds"],"fam":[],"col":["tax revenue","revenue from"]},{"w":"stable","pos":"adj","sub":5,"tr":"istikrarlı, dengeli, sağlam","def":"firmly established; not likely to change","ex":"A [stable] democracy requires strong institutions.","syn":["steady","secure","balanced"],"fam":["stability (n)","stabilise (v)","unstable (adj)"],"col":["politically stable"]},{"w":"substitute","pos":"n","sub":5,"tr":"ikame, yerine geçen şey","def":"a person or thing that takes the place of another","ex":"There is no [substitute] for face-to-face teaching.","syn":["replacement","alternative","surrogate"],"fam":["substitute (v)","substitution (n)"],"col":["substitute for","a substitute for"]},{"w":"sustain","pos":"v","sub":5,"tr":"sürdürmek, devam ettirmek; (zarar) görmek","def":"to maintain over a period of time; to suffer damage","ex":"High growth rates cannot be [sustained] indefinitely.","syn":["maintain","continue","support"],"fam":["sustainable (adj)","sustainability (n)"],"col":["sustain growth","sustainable development"]},{"w":"symbol","pos":"n","sub":5,"tr":"sembol, simge","def":"a thing that represents something else","ex":"The wall became a [symbol] of the Cold War.","syn":["emblem","sign","icon"],"fam":["symbolic (adj)","symbolise (v)","symbolism (n)"],"col":["a symbol of"]},{"w":"target","pos":"n","sub":5,"tr":"hedef","def":"an objective or result aimed at; a person or thing attacked","ex":"The government missed its inflation [target].","syn":["goal","aim","objective"],"fam":["target (v: hedef almak)"],"col":["meet a target","target group"]},{"w":"transit","pos":"n","sub":5,"tr":"geçiş, transit; toplu taşıma","def":"the carrying of people or goods from one place to another","ex":"Turkey is a major [transit] country for migrants.","syn":["passage","transport","movement"],"fam":["transition (n: geçiş dönemi)","transitional (adj)"],"col":["in transit","transit country"]},{"w":"trend","pos":"n","sub":5,"tr":"eğilim, yönelim","def":"a general direction of change","ex":"There is a growing [trend] towards later marriage.","syn":["tendency","pattern","movement"],"fam":["trendy (adj)"],"col":["a trend towards","current trends"]},{"w":"welfare","pos":"n","sub":5,"tr":"refah; sosyal yardım","def":"health, happiness and fortunes; financial support from the state","ex":"The [welfare] state expanded after the Second World War.","syn":["well-being","social security","benefit"],"fam":[],"col":["welfare state","child welfare"]},{"w":"whereas","pos":"conj","sub":5,"tr":"oysa, -iken","def":"in contrast or comparison with the fact that","ex":"Men dominate politics, [whereas] women dominate unpaid care work.","syn":["while","although","on the other hand"],"fam":[],"col":["whereas"]},{"w":"abstract","pos":"adj","sub":6,"tr":"soyut","def":"existing in thought or as an idea but not having a physical existence","ex":"Justice is an [abstract] concept that is difficult to measure.","syn":["theoretical","conceptual","intangible"],"fam":["abstraction (n)","abstract (n: özet)"],"col":["abstract idea","in the abstract"]},{"w":"accurate","pos":"adj","sub":6,"tr":"doğru, kesin, isabetli","def":"correct in all details; exact","ex":"Census data provide an [accurate] picture of the population.","syn":["precise","exact","correct"],"fam":["accuracy (n)","accurately (adv)","inaccurate (adj)"],"col":["accurate information"]},{"w":"acknowledge","pos":"v","sub":6,"tr":"kabul etmek, tanımak; teşekkür etmek","def":"to accept or admit the existence or truth of","ex":"The government [acknowledged] that the policy had failed.","syn":["admit","accept","recognise"],"fam":["acknowledgement (n)"],"col":["acknowledge that","widely acknowledged"]},{"w":"aggregate","pos":"adj","sub":6,"tr":"toplam, bütün","def":"formed by combining several elements","ex":"[Aggregate] demand fell during the recession.","syn":["total","combined","overall"],"fam":["aggregate (n, v)","aggregation (n)"],"col":["aggregate data","in aggregate"]},{"w":"allocate","pos":"v","sub":6,"tr":"tahsis etmek, ayırmak","def":"to distribute resources for a particular purpose","ex":"Only 3% of the budget is [allocated] to education.","syn":["assign","allot","distribute"],"fam":["allocation (n)"],"col":["allocate funds to"]},{"w":"assign","pos":"v","sub":6,"tr":"görevlendirmek, atamak; vermek","def":"to give a task or role to someone; to allocate","ex":"Participants were randomly [assigned] to two groups.","syn":["allocate","appoint","designate"],"fam":["assignment (n: ödev, görev)"],"col":["assign to","randomly assigned"]},{"w":"attach","pos":"v","sub":6,"tr":"iliştirmek, bağlamak; (önem) vermek","def":"to fasten or join; to regard as having importance","ex":"Voters [attach] great importance to economic stability.","syn":["fasten","connect","ascribe"],"fam":["attachment (n: bağlılık)","attached (adj)"],"col":["attach importance to","strings attached"]},{"w":"author","pos":"n","sub":6,"tr":"yazar","def":"a writer of a book or article; the originator of something","ex":"The [authors] argue that inequality undermines democracy.","syn":["writer","creator","originator"],"fam":["authorship (n)","author (v)"],"col":["co-author"]},{"w":"bond","pos":"n","sub":6,"tr":"bağ; tahvil","def":"a relationship or connection; a certificate of debt issued by a government or company","ex":"Shared rituals strengthen social [bonds].","syn":["tie","link","connection"],"fam":["bond (v: bağ kurmak)","bonding (n)"],"col":["social bonds","government bonds"]},{"w":"brief","pos":"adj","sub":6,"tr":"kısa, özlü","def":"of short duration; concise","ex":"The chapter ends with a [brief] summary of the main arguments.","syn":["short","concise","succinct"],"fam":["briefly (adv)","brief (n, v: bilgilendirmek)"],"col":["a brief overview"]},{"w":"capable","pos":"adj","sub":6,"tr":"yetenekli, muktedir (of)","def":"having the ability or capacity to do something","ex":"Few states were [capable] of controlling their borders.","syn":["able","competent","qualified"],"fam":["capability (n)","incapable (adj)"],"col":["capable of"]},{"w":"cite","pos":"v","sub":6,"tr":"alıntı yapmak, atıfta bulunmak; örnek göstermek","def":"to quote as evidence or as an example","ex":"The study is widely [cited] in the literature.","syn":["quote","refer to","mention"],"fam":["citation (n)"],"col":["cite as","frequently cited"]},{"w":"cooperate","pos":"v","sub":6,"tr":"işbirliği yapmak","def":"to work together towards the same goal","ex":"Neighbouring countries [cooperated] to manage water resources.","syn":["collaborate","work together","unite"],"fam":["cooperation (n)","cooperative (adj, n)"],"col":["cooperate with"]},{"w":"discriminate","pos":"v","sub":6,"tr":"ayrımcılık yapmak; ayırt etmek","def":"to treat a group unfairly; to recognise a difference","ex":"Employers often [discriminate] against older applicants.","syn":["differentiate","distinguish","be biased"],"fam":["discrimination (n)","discriminatory (adj)"],"col":["discriminate against","discriminate between"]},{"w":"display","pos":"v","sub":6,"tr":"sergilemek, göstermek","def":"to show or exhibit","ex":"Participants [displayed] high levels of anxiety.","syn":["show","exhibit","reveal"],"fam":["display (n)"],"col":["display signs of"]},{"w":"diverse","pos":"adj","sub":6,"tr":"çeşitli, farklı, çok kültürlü","def":"showing a great deal of variety","ex":"London is one of the most culturally [diverse] cities in the world.","syn":["varied","different","heterogeneous"],"fam":["diversity (n)","diversify (v)","diversification (n)"],"col":["ethnically diverse"]},{"w":"domain","pos":"n","sub":6,"tr":"alan; etki alanı","def":"an area of knowledge or activity; a territory","ex":"Politics was long seen as a male [domain].","syn":["field","area","sphere"],"fam":[],"col":["public domain","in the domain of"]},{"w":"edit","pos":"v","sub":6,"tr":"düzenlemek, yayına hazırlamak","def":"to prepare text for publication by correcting or revising it","ex":"The volume was [edited] by two historians.","syn":["revise","correct","prepare"],"fam":["edition (n: baskı)","editor (n)","editorial (adj, n)"],"col":["edited volume"]},{"w":"enhance","pos":"v","sub":6,"tr":"artırmak, güçlendirmek, geliştirmek","def":"to improve the quality, value or extent of something","ex":"Education [enhances] employment opportunities.","syn":["improve","boost","strengthen"],"fam":["enhancement (n)"],"col":["enhance the quality of"]},{"w":"estate","pos":"n","sub":6,"tr":"mülk, arazi; miras","def":"an area of land or property owned by a person or organisation","ex":"Large [estates] were redistributed during the land reform.","syn":["property","land","holdings"],"fam":[],"col":["real estate","housing estate"]},{"w":"exceed","pos":"v","sub":6,"tr":"aşmak, geçmek","def":"to be greater than a number or amount","ex":"Public debt [exceeded] 100% of GDP.","syn":["surpass","go beyond","outstrip"],"fam":["excess (n)","excessive (adj)","exceedingly (adv)"],"col":["exceed expectations"]},{"w":"expert","pos":"n","sub":6,"tr":"uzman","def":"a person with specialised knowledge or skill","ex":"[Experts] disagree about the long-term effects of the policy.","syn":["specialist","authority","professional"],"fam":["expertise (n: uzmanlık)"],"col":["an expert on","expert opinion"]},{"w":"explicit","pos":"adj","sub":6,"tr":"açık, net, belirgin","def":"stated clearly and in detail","ex":"The law makes [explicit] reference to gender equality.","syn":["clear","direct","specific"],"fam":["explicitly (adv)","implicit (adj: örtük)"],"col":["make explicit"]},{"w":"fee","pos":"n","sub":6,"tr":"ücret, harç","def":"a payment for professional services or for the right to do something","ex":"In England, university tuition [fees] were introduced in 1998.","syn":["charge","payment","cost"],"fam":[],"col":["tuition fees"]},{"w":"flexible","pos":"adj","sub":6,"tr":"esnek","def":"able to change or be changed easily","ex":"[Flexible] working hours help parents balance work and family.","syn":["adaptable","adjustable","versatile"],"fam":["flexibility (n)","inflexible (adj)"],"col":["flexible working"]},{"w":"furthermore","pos":"adv","sub":6,"tr":"ayrıca, üstelik","def":"in addition; moreover","ex":"The policy was costly. [Furthermore], it failed to reduce poverty.","syn":["moreover","in addition","besides"],"fam":[],"col":["furthermore"]},{"w":"gender","pos":"n","sub":6,"tr":"toplumsal cinsiyet","def":"the social and cultural roles associated with being male or female","ex":"[Gender] differences in pay remain significant.","syn":[],"fam":["gendered (adj)"],"col":["gender equality","gender roles"]},{"w":"ignorance","pos":"n","sub":6,"tr":"cehalet, bilgisizlik","def":"lack of knowledge or information","ex":"Prejudice is often rooted in [ignorance].","syn":["unawareness","lack of knowledge"],"fam":["ignorant (adj)","ignore (v)"],"col":["ignorance of"]},{"w":"incentive","pos":"n","sub":6,"tr":"teşvik, özendirici","def":"something that motivates or encourages someone to do something","ex":"Tax [incentives] attracted foreign investors.","syn":["motivation","stimulus","inducement"],"fam":[],"col":["an incentive to","financial incentives"]},{"w":"incidence","pos":"n","sub":6,"tr":"görülme sıklığı, oran","def":"the frequency with which something occurs","ex":"The [incidence] of poverty is higher in rural areas.","syn":["rate","frequency","occurrence"],"fam":["incident (n: olay)","incidental (adj)"],"col":["high incidence of"]},{"w":"incorporate","pos":"v","sub":6,"tr":"dahil etmek, bünyesine katmak","def":"to include something as part of a whole","ex":"The new curriculum [incorporates] environmental education.","syn":["include","integrate","absorb"],"fam":["incorporation (n)"],"col":["incorporate into"]},{"w":"index","pos":"n","sub":6,"tr":"endeks, dizin; gösterge","def":"a list of items; a number showing the level of something","ex":"The Human Development [Index] ranks countries by health, education and income.","syn":["indicator","measure","list"],"fam":["index (v)","indices (çoğul)"],"col":["price index"]},{"w":"inhibit","pos":"v","sub":6,"tr":"engellemek, ketlemek","def":"to hinder or restrain an action or process","ex":"High interest rates [inhibit] investment.","syn":["hinder","restrain","impede"],"fam":["inhibition (n)","inhibitor (n)"],"col":["inhibit growth"]},{"w":"initiate","pos":"v","sub":6,"tr":"başlatmak","def":"to cause a process or action to begin","ex":"The government [initiated] a series of economic reforms.","syn":["begin","start","launch"],"fam":["initiative (n: girişim)","initiation (n)","initial (adj)"],"col":["initiate reforms"]},{"w":"input","pos":"n","sub":6,"tr":"girdi, katkı","def":"what is put into a system; a contribution of information or ideas","ex":"Local residents had little [input] into the planning process.","syn":["contribution","involvement","data"],"fam":["input (v)"],"col":["input into"]},{"w":"instruct","pos":"v","sub":6,"tr":"talimat vermek; öğretmek","def":"to direct or command; to teach","ex":"Participants were [instructed] to read the text carefully.","syn":["direct","order","teach"],"fam":["instruction (n)","instructor (n)","instructive (adj: öğretici)"],"col":["instruct someone to"]},{"w":"intelligence","pos":"n","sub":6,"tr":"zekâ; istihbarat","def":"the ability to acquire and apply knowledge; secret information about enemies","ex":"Emotional [intelligence] predicts job performance.","syn":["intellect","cleverness","information"],"fam":["intelligent (adj)","intelligible (adj: anlaşılır)"],"col":["artificial intelligence","intelligence service"]},{"w":"interval","pos":"n","sub":6,"tr":"aralık, ara","def":"a period of time between two events","ex":"Data were collected at six-month [intervals].","syn":["gap","period","break"],"fam":[],"col":["at regular intervals","confidence interval"]},{"w":"lecture","pos":"n","sub":6,"tr":"ders (konferans şeklinde), konferans","def":"an educational talk to an audience, especially students","ex":"Attendance at [lectures] was not compulsory.","syn":["talk","speech","lesson"],"fam":["lecture (v)","lecturer (n: öğretim görevlisi)"],"col":["give a lecture on"]},{"w":"migrate","pos":"v","sub":6,"tr":"göç etmek","def":"to move from one region or country to another","ex":"Millions [migrated] from rural areas to the cities.","syn":["move","relocate","emigrate"],"fam":["migration (n)","migrant (n)","migratory (adj)"],"col":["migrate to","migrate from"]},{"w":"minimum","pos":"n","sub":6,"tr":"asgari, en az","def":"the smallest amount possible or allowed","ex":"The [minimum] wage was raised by 15%.","syn":["lowest","least"],"fam":["minimal (adj)","minimise (v)"],"col":["minimum wage","at a minimum"]},{"w":"ministry","pos":"n","sub":6,"tr":"bakanlık","def":"a government department headed by a minister","ex":"The [Ministry] of Education announced a new curriculum.","syn":["department","office"],"fam":["minister (n)","ministerial (adj)"],"col":["Ministry of Health"]},{"w":"motive","pos":"n","sub":6,"tr":"güdü, sebep","def":"a reason for doing something","ex":"Economic [motives] explain most labour migration.","syn":["reason","motivation","incentive"],"fam":["motivate (v)","motivation (n)"],"col":["motive for","ulterior motive"]},{"w":"neutral","pos":"adj","sub":6,"tr":"tarafsız, yansız","def":"not supporting either side in a conflict","ex":"Switzerland remained [neutral] during both world wars.","syn":["impartial","unbiased","non-aligned"],"fam":["neutrality (n)","neutralise (v)"],"col":["remain neutral"]},{"w":"nevertheless","pos":"adv","sub":6,"tr":"yine de, buna rağmen","def":"in spite of that","ex":"The sample was small. [Nevertheless], the results are important.","syn":["nonetheless","however","even so"],"fam":[],"col":["nevertheless"]},{"w":"overseas","pos":"adj","sub":6,"tr":"yurt dışı, denizaşırı","def":"relating to foreign countries, especially across the sea","ex":"[Overseas] students make up 20% of enrolments.","syn":["foreign","abroad","international"],"fam":["overseas (adv)"],"col":["overseas students","overseas aid"]},{"w":"precede","pos":"v","sub":6,"tr":"önce gelmek, öncesinde olmak","def":"to come before something in time or order","ex":"A long economic crisis [preceded] the revolution.","syn":["come before","antedate","lead up to"],"fam":["precedent (n: emsal)","preceding (adj)","unprecedented (adj: eşi görülmemiş)"],"col":["preceded by"]},{"w":"presume","pos":"v","sub":6,"tr":"varsaymak, farz etmek","def":"to suppose that something is true without proof","ex":"Defendants are [presumed] innocent until proven guilty.","syn":["assume","suppose","take for granted"],"fam":["presumption (n)","presumably (adv)"],"col":["presume that"]},{"w":"rational","pos":"adj","sub":6,"tr":"akılcı, rasyonel, mantıklı","def":"based on reason or logic","ex":"[Rational] choice theory assumes that people maximise benefits.","syn":["logical","reasonable","sensible"],"fam":["rationality (n)","rationalise (v)","irrational (adj)"],"col":["rational choice"]},{"w":"recover","pos":"v","sub":6,"tr":"toparlanmak, iyileşmek; geri almak","def":"to return to a normal state; to regain possession","ex":"The economy [recovered] slowly after the crisis.","syn":["recuperate","bounce back","regain"],"fam":["recovery (n)"],"col":["recover from"]},{"w":"reveal","pos":"v","sub":6,"tr":"ortaya koymak, açığa çıkarmak","def":"to make known something previously unknown","ex":"The interviews [revealed] deep distrust of politicians.","syn":["disclose","show","uncover"],"fam":["revelation (n)"],"col":["reveal that"]},{"w":"scope","pos":"n","sub":6,"tr":"kapsam, alan","def":"the extent of the area or subject matter something deals with","ex":"The [scope] of the study is limited to urban areas.","syn":["range","extent","reach"],"fam":[],"col":["beyond the scope of","scope for"]},{"w":"subsidy","pos":"n","sub":6,"tr":"sübvansiyon, devlet desteği","def":"money granted by the state to help keep prices low or support an industry","ex":"Agricultural [subsidies] distort world trade.","syn":["grant","aid","support"],"fam":["subsidise (v)"],"col":["farm subsidies"]},{"w":"tape","pos":"n","sub":6,"tr":"bant, kaset","def":"a strip of material for recording sound or for fastening","ex":"The interviews were recorded on [tape] and transcribed.","syn":["recording","cassette"],"fam":["tape (v: kaydetmek)"],"col":["red tape (bürokratik engel)"]},{"w":"trace","pos":"v","sub":6,"tr":"izini sürmek, kökenini bulmak","def":"to find the origin or development of something","ex":"The roots of the conflict can be [traced] back to the colonial era.","syn":["track","follow","find"],"fam":["trace (n: iz)"],"col":["trace back to"]},{"w":"transform","pos":"v","sub":6,"tr":"dönüştürmek","def":"to make a marked change in form or character","ex":"Industrialisation [transformed] rural societies.","syn":["change","convert","alter"],"fam":["transformation (n)","transformative (adj)"],"col":["transform into"]},{"w":"transport","pos":"n","sub":6,"tr":"ulaşım, taşımacılık","def":"a system for carrying people or goods","ex":"Public [transport] is poor in many peripheral districts.","syn":["transportation","conveyance","transit"],"fam":["transport (v)"],"col":["public transport"]},{"w":"underlie","pos":"v","sub":6,"tr":"temelini oluşturmak, altında yatmak","def":"to be the cause or basis of something","ex":"Economic inequality [underlies] many social problems.","syn":["be the basis of","cause","support"],"fam":["underlying (adj: altta yatan)"],"col":["underlying causes"]},{"w":"utilise","pos":"v","sub":6,"tr":"kullanmak, yararlanmak","def":"to make practical and effective use of","ex":"The study [utilised] both qualitative and quantitative data.","syn":["use","employ","exploit"],"fam":["utilisation (n)","utility (n: fayda)","US: utilize"],"col":["utilise resources"]}];
 
-  { w: "ubiquitous", pos: "adj", lv: "C2", def: "seeming to be everywhere at the same time", tr: "her yerde bulunan", ex: "Smartphones have become [ubiquitous] in modern life.", syn: "omnipresent, pervasive" },
-  { w: "ephemeral", pos: "adj", lv: "C2", def: "lasting for only a very short time", tr: "geçici, kısa ömürlü", ex: "Fame on social media is often [ephemeral].", syn: "fleeting, transient" },
-  { w: "pragmatic", pos: "adj", lv: "C2", def: "dealing with problems in a practical, realistic way", tr: "pragmatik, gerçekçi", ex: "We need a [pragmatic] approach rather than an ideal one.", syn: "practical, realistic" },
-  { w: "exacerbate", pos: "verb", lv: "C2", def: "to make a problem or bad situation worse", tr: "kötüleştirmek, şiddetlendirmek", ex: "Cutting staff would only [exacerbate] the delays.", syn: "aggravate, worsen" },
-  { w: "conundrum", pos: "noun", lv: "C2", def: "a confusing and difficult problem", tr: "içinden çıkılmaz sorun, bilmece", ex: "How to fund the project remains a [conundrum].", syn: "puzzle, dilemma" },
-  { w: "juxtapose", pos: "verb", lv: "C2", def: "to place things side by side to show a contrast", tr: "yan yana koymak (karşılaştırmak için)", ex: "The exhibition [juxtaposes] ancient and modern art.", syn: "contrast, set side by side" },
-  { w: "candid", pos: "adj", lv: "C2", def: "honest and direct, even when the truth is uncomfortable", tr: "açık sözlü, samimi", ex: "She gave a [candid] account of her struggles.", syn: "frank, forthright" },
-  { w: "tenacious", pos: "adj", lv: "C2", def: "holding firmly to something; very determined", tr: "azimli, inatçı", ex: "The [tenacious] journalist refused to drop the story.", syn: "persistent, determined" },
-  { w: "succinct", pos: "adj", lv: "C2", def: "expressed clearly in a few words", tr: "özlü, kısa ve net", ex: "Please keep your summary [succinct].", syn: "concise, brief" },
-  { w: "dichotomy", pos: "noun", lv: "C2", def: "a division or contrast between two opposite things", tr: "ikilik, karşıtlık", ex: "The film explores the [dichotomy] between duty and desire.", syn: "division, split" },
-  { w: "idiosyncratic", pos: "adj", lv: "C2", def: "peculiar to one person; unusual or individual", tr: "kendine özgü, alışılmadık", ex: "His [idiosyncratic] style of teaching amused the students.", syn: "eccentric, distinctive" },
-  { w: "precarious", pos: "adj", lv: "C2", def: "not safe or secure; likely to fall or fail", tr: "tehlikeli, güvencesiz", ex: "Many freelancers live in a [precarious] financial situation.", syn: "unstable, insecure" },
-  { w: "ostensibly", pos: "adv", lv: "C2", def: "apparently or seemingly, but perhaps not actually", tr: "görünüşte, sözde", ex: "He left, [ostensibly] to visit his mother.", syn: "seemingly, supposedly" },
-  { w: "cogent", pos: "adj", lv: "C2", def: "clear, logical and convincing", tr: "sağlam, ikna edici (gerekçe)", ex: "She made a [cogent] case for reform.", syn: "convincing, compelling" },
-  { w: "reticent", pos: "adj", lv: "C2", def: "unwilling to share thoughts or feelings", tr: "suskun, ağzı sıkı", ex: "He is [reticent] about his private life.", syn: "reserved, taciturn" },
-  { w: "galvanize", pos: "verb", lv: "C2", def: "to shock or excite someone into taking action", tr: "harekete geçirmek, canlandırmak", ex: "The disaster [galvanized] the community into action.", syn: "spur, energize" },
-  { w: "scrupulous", pos: "adj", lv: "C2", def: "very careful to be honest and do things correctly", tr: "titiz, vicdanlı", ex: "She was [scrupulous] in keeping accurate records.", syn: "meticulous, conscientious" },
-  { w: "enigmatic", pos: "adj", lv: "C2", def: "mysterious and difficult to understand", tr: "gizemli, esrarengiz", ex: "The Mona Lisa is famous for her [enigmatic] smile.", syn: "mysterious, puzzling" },
-  { w: "obsolete", pos: "adj", lv: "C2", def: "no longer used because something newer exists", tr: "modası geçmiş, kullanılmayan", ex: "Fax machines are now largely [obsolete].", syn: "outdated, outmoded" },
-  { w: "benevolent", pos: "adj", lv: "C2", def: "kind and wishing to help others", tr: "iyiliksever, hayırsever", ex: "A [benevolent] donor paid for the new library.", syn: "kind, charitable" },
-  { w: "mundane", pos: "adj", lv: "C2", def: "ordinary and not interesting or exciting", tr: "sıradan, tekdüze", ex: "Most of the job involves [mundane] paperwork.", syn: "dull, routine" },
-  { w: "eloquent", pos: "adj", lv: "C2", def: "able to express ideas clearly and persuasively", tr: "belagatli, etkili konuşan", ex: "She gave an [eloquent] speech at the ceremony.", syn: "articulate, expressive" }
-];
+/* ================= Yardımcılar ================= */
+const $ = s => document.querySelector(s);
+const alan = $("#alan");
+const POS = { n: "isim", v: "fiil", adj: "sıfat", adv: "zarf", conj: "bağlaç" };
+const ARALIK = [0, 1, 3, 7, 16, 35];          // Leitner kutusuna göre gün
+const KALICI_KUTU = 4;                        // 16+ gün aralığına ulaşan kelime "kalıcı"
+const DEPO = "yokdil-kelime-v1";
+const HARF = ["A", "B", "C", "D", "E"];
 
-const POS_TR = { adj: "sıfat", verb: "fiil", noun: "isim", adv: "zarf" };
-const DEPO = "c1-kelime-atolyesi-v1";
-
-// Kişisel ilerleme yalnızca bu tarayıcıda tutulur
-let durum = { bilinen: {}, uretilen: [], seviye: "hepsi" };
-try { Object.assign(durum, JSON.parse(localStorage.getItem(DEPO)) || {}); } catch (e) {}
-function kaydet() { try { localStorage.setItem(DEPO, JSON.stringify(durum)); } catch (e) {} }
-
-const alan = document.getElementById("alan");
-let sekme = "ogren";
-let ogrenSira = [], ogrenIndex = 0, anlamAcik = false;
-let test = null;
-
-function tumKelimeler() { return HAVUZ.concat(durum.uretilen); }
-function secili() {
-  const t = tumKelimeler();
-  return durum.seviye === "hepsi" ? t : t.filter(k => k.lv === durum.seviye);
-}
-function karistir(a) {
-  a = a.slice();
-  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
-  return a;
-}
 function kacis(s) { return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
 function ornekHtml(ex) { return kacis(ex).replace(/\[(.+?)\]/g, "<b>$1</b>"); }
+function karistir(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function gun(d = new Date()) { return Math.floor((d.getTime() - d.getTimezoneOffset() * 60000) / 86400000); }
+function gunEtiketi(g) { return new Date(g * 86400000).toLocaleDateString("tr-TR", { weekday: "short", timeZone: "UTC" }); }
+const BUGUN = () => gun();
+const sozluk = Object.fromEntries(KELIMELER.map(k => [k.w, k]));
 
-function ilerlemeGuncelle() {
-  const t = tumKelimeler();
-  const n = t.filter(k => durum.bilinen[k.w]).length;
-  document.getElementById("ogrenilen").textContent = n + " / " + t.length;
+/* ================= Durum ================= */
+const VARSAYILAN = { srs: {}, fav: [], log: {}, ayar: { yeniGunluk: 15, hedef: 30, alt: [1, 2, 3, 4, 5, 6] } };
+let durum = JSON.parse(JSON.stringify(VARSAYILAN));
+try {
+  const k = JSON.parse(localStorage.getItem(DEPO));
+  if (k) durum = { ...durum, ...k, ayar: { ...durum.ayar, ...(k.ayar || {}) } };
+} catch (e) {}
+function kaydet() { try { localStorage.setItem(DEPO, JSON.stringify(durum)); } catch (e) {} }
+
+function kayit(w) { return durum.srs[w]; }
+function kutu(w) { return durum.srs[w] ? durum.srs[w].b : -1; }
+function durumu(w) { const b = kutu(w); return b < 0 ? "yeni" : b >= KALICI_KUTU ? "kalici" : "ogren"; }
+function gunLog() { const g = BUGUN(); return durum.log[g] || (durum.log[g] = { rev: 0, yeni: 0, d: 0, y: 0 }); }
+
+function aktifKelimeler() { return KELIMELER.filter(k => durum.ayar.alt.includes(k.sub)); }
+function vadesiGelen() { const g = BUGUN(); return aktifKelimeler().filter(k => durum.srs[k.w] && durum.srs[k.w].due <= g); }
+function yeniKelimeler() { return aktifKelimeler().filter(k => !durum.srs[k.w]); }
+function bugunYeniHakki() { return Math.max(0, durum.ayar.yeniGunluk - gunLog().yeni); }
+
+function puanla(w, sonuc) {
+  // sonuc: 0 = tekrar, 1 = zor, 2 = bildim
+  const g = BUGUN();
+  const r = durum.srs[w] || { b: 0, due: g, dogru: 0, yanlis: 0, ilk: g };
+  const yeniMi = !durum.srs[w];
+  if (sonuc === 0) { r.b = 0; r.yanlis++; }
+  else if (sonuc === 1) { r.b = Math.max(1, r.b); r.dogru++; }
+  else { r.b = Math.min(ARALIK.length - 1, r.b + 1); r.dogru++; }
+  r.due = g + ARALIK[r.b];
+  r.son = g;
+  durum.srs[w] = r;
+  const l = gunLog();
+  l.rev++; if (yeniMi) l.yeni++;
+  if (sonuc === 0) l.y++; else l.d++;
+  kaydet();
+}
+function testSonucu(w, dogruMu) {
+  const g = BUGUN(), l = gunLog();
+  if (dogruMu) l.d++; else l.y++;
+  const r = durum.srs[w];
+  if (!dogruMu) {
+    const yeni = r || { b: 0, due: g, dogru: 0, yanlis: 0, ilk: g };
+    yeni.b = 0; yeni.due = g; yeni.yanlis++;
+    durum.srs[w] = yeni;
+  } else if (r) { r.dogru++; }
+  kaydet();
+}
+function seri() {
+  let g = BUGUN(), n = 0;
+  if (!(durum.log[g] && durum.log[g].rev + durum.log[g].d + durum.log[g].y > 0)) g--;
+  while (durum.log[g] && (durum.log[g].rev + durum.log[g].d + durum.log[g].y) > 0) { n++; g--; }
+  return n;
 }
 
-// Seslendirme: Android uygulamasında yerel TTS köprüsü, tarayıcıda Web Speech
+/* ================= Ses ================= */
 const androidSes = window.AndroidTTS;
 const sesVar = !!androidSes || "speechSynthesis" in window;
 function seslendir(metin) {
@@ -306,253 +322,475 @@ function seslendir(metin) {
     speechSynthesis.speak(u);
   } catch (e) {}
 }
+const IKON = {
+  ses: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>',
+  yildiz: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>'
+};
 
-/* ---------- ÖĞREN ---------- */
-function ogrenHazirla() {
-  const s = secili();
-  const yeni = karistir(s.filter(k => !durum.bilinen[k.w]));
-  const eski = karistir(s.filter(k => durum.bilinen[k.w]));
-  ogrenSira = yeni.concat(eski);
-  ogrenIndex = 0;
-  anlamAcik = false;
+function toast(m) {
+  const t = document.createElement("div"); t.className = "toast"; t.textContent = m;
+  document.body.appendChild(t); setTimeout(() => t.remove(), 1800);
 }
 
-function ogrenCiz() {
-  if (!ogrenSira.length) { alan.innerHTML = `<div class="kart">Bu seviyede kelime yok.</div>`; return; }
-  const k = ogrenSira[ogrenIndex % ogrenSira.length];
-  const bilindi = !!durum.bilinen[k.w];
-  alan.innerHTML = `
-    <article class="kart">
-      <div class="madde-bas">
-        <span class="kelime">${kacis(k.w)}</span>
-        <span class="etiket">${POS_TR[k.pos] || kacis(k.pos)}</span>
-        <span class="rozet">${kacis(k.lv)}</span>
-        ${bilindi ? '<span class="durum ok">öğrenildi</span>' : ""}
-        ${sesVar ? '<button class="seslendir" id="sesBtn" type="button" aria-label="Telaffuzu dinle">🔊</button>' : ""}
-      </div>
-      <div class="anlam ${anlamAcik ? "" : "gizli-anlam"}" id="anlam">
-        <div><div class="etiket">Tanım</div><p class="tanim">${kacis(k.def)}</p></div>
-        <div><div class="etiket">Türkçe</div><p class="tr">${kacis(k.tr)}</p></div>
-        <div><div class="etiket">Örnek</div><p class="ornek">${ornekHtml(k.ex)}</p></div>
-        ${k.syn ? `<div><div class="etiket">Eş anlamlılar</div><p class="es">${kacis(k.syn)}</p></div>` : ""}
-      </div>
-      <div class="dugmeler">
-        ${anlamAcik
-          ? `<button class="btn ana" id="bildim" type="button">Öğrendim</button>
-             <button class="btn" id="tekrar" type="button">Tekrar göster</button>`
-          : `<button class="btn ana" id="goster" type="button">Anlamını göster</button>`}
-        <span class="sayac">${(ogrenIndex % ogrenSira.length) + 1} / ${ogrenSira.length}</span>
-      </div>
-    </article>`;
-  if (sesVar) document.getElementById("sesBtn").onclick = () => seslendir(k.w + ". " + k.ex.replace(/[\[\]]/g, ""));
-  if (!anlamAcik) {
-    document.getElementById("goster").onclick = () => { anlamAcik = true; ogrenCiz(); };
-    document.getElementById("anlam").onclick = () => { anlamAcik = true; ogrenCiz(); };
-  } else {
-    document.getElementById("bildim").onclick = () => {
-      durum.bilinen[k.w] = true; kaydet(); ilerlemeGuncelle(); sonraki();
-    };
-    document.getElementById("tekrar").onclick = () => {
-      // Kelimeyi birkaç kart sonra yeniden göster
-      ogrenSira.splice(Math.min(ogrenIndex + 4, ogrenSira.length), 0, k);
-      sonraki();
-    };
-  }
+/* ================= Gezinme ================= */
+let ekran = "bugun";
+function git(ad) {
+  ekran = ad;
+  document.querySelectorAll("[data-git]").forEach(b => b.dataset.git === ad ? b.setAttribute("aria-current", "page") : b.removeAttribute("aria-current"));
+  ({ bugun: bugunCiz, calis: calisBasla, test: testMenu, sozluk: sozlukCiz })[ad]();
+  window.scrollTo(0, 0);
+  seriGuncelle();
 }
-function sonraki() { ogrenIndex = (ogrenIndex + 1) % ogrenSira.length; anlamAcik = false; ogrenCiz(); }
+document.querySelectorAll("[data-git]").forEach(b => b.onclick = () => git(b.dataset.git));
+function seriGuncelle() { $("#seriSayi").textContent = seri(); }
 
-/* ---------- TEST ---------- */
-const SORU_SAYISI = 10;
+/* ================= Bugün ================= */
+function bugunCiz() {
+  const aktif = aktifKelimeler();
+  const vade = vadesiGelen().length;
+  const yeniHak = Math.min(bugunYeniHakki(), yeniKelimeler().length);
+  const l = durum.log[BUGUN()] || { rev: 0 };
+  const hedef = durum.ayar.hedef;
+  const oran = Math.min(1, l.rev / hedef);
+  const say = { yeni: 0, ogren: 0, kalici: 0 };
+  aktif.forEach(k => say[durumu(k.w)]++);
+  const toplam = aktif.length || 1;
+  const C = 2 * Math.PI * 48;
 
-function celdiriciler(k, havuz, alanAdi) {
-  const ayni = havuz.filter(x => x.w !== k.w && x.pos === k.pos);
-  const diger = havuz.filter(x => x.w !== k.w && x.pos !== k.pos);
-  const secim = karistir(ayni).concat(karistir(diger));
-  const cikti = [];
-  for (const x of secim) {
-    if (cikti.length === 3) break;
-    if (!cikti.includes(x[alanAdi]) && x[alanAdi] !== k[alanAdi]) cikti.push(x[alanAdi]);
-  }
-  return cikti;
-}
+  const gunler = []; for (let i = 6; i >= 0; i--) gunler.push(BUGUN() - i);
+  const maks = Math.max(1, ...gunler.map(g => (durum.log[g] || {}).rev || 0));
 
-function testHazirla() {
-  const s = secili();
-  const havuz = tumKelimeler();
-  const hedef = karistir(s).slice(0, Math.min(SORU_SAYISI, s.length));
-  const sorular = hedef.map((k, i) => {
-    const tur = i % 3;
-    if (tur === 0) {
-      return { k, tip: "Türkçe anlamı hangisi?", soru: `<span class="kelime" style="font-size:40px">${kacis(k.w)}</span>`, dogru: k.tr, secenekler: karistir([k.tr, ...celdiriciler(k, havuz, "tr")]) };
-    }
-    if (tur === 1) {
-      return { k, tip: "Bu tanıma uyan kelime hangisi?", soru: `“${kacis(k.def)}”`, dogru: k.w, secenekler: karistir([k.w, ...celdiriciler(k, havuz, "w")]) };
-    }
-    const bicim = (k.ex.match(/\[(.+?)\]/) || [, k.w])[1];
-    const cumle = kacis(k.ex).replace(/\[(.+?)\]/, '<span class="bosluk">&nbsp;</span>');
-    // Seçenekleri hedefin kullanılan biçimiyle değil, sözlük biçimiyle göster
-    return { k, tip: "Boşluğa hangi kelime gelir?", soru: cumle, dogru: k.w, ipucu: bicim, secenekler: karistir([k.w, ...celdiriciler(k, havuz, "w")]) };
-  });
-  test = { sorular, i: 0, dogru: 0, yanlislar: [], cevaplandi: false };
-}
+  const zayif = Object.entries(durum.srs).filter(([w, r]) => r.yanlis > 0 && sozluk[w])
+    .sort((a, b) => (b[1].yanlis - b[1].dogru * .5) - (a[1].yanlis - a[1].dogru * .5)).slice(0, 8).map(([w]) => w);
 
-function testCiz() {
-  if (!test || !test.sorular.length) { alan.innerHTML = `<div class="kart">Test için yeterli kelime yok.</div>`; return; }
-  if (test.i >= test.sorular.length) return sonucCiz();
-  const q = test.sorular[test.i];
+  const kartSayisi = vade + yeniHak;
   alan.innerHTML = `
     <section class="kart">
-      <div class="soru-ust">
-        <span class="etiket">Soru ${test.i + 1} / ${test.sorular.length} · ${q.tip}</span>
-        <span class="etiket">Doğru: ${test.dogru}</span>
+      <div class="hero">
+        <div class="halka" role="img" aria-label="Günlük hedef: ${l.rev} / ${hedef} kart">
+          <svg viewBox="0 0 112 112"><circle cx="56" cy="56" r="48" fill="none" stroke="var(--yuzey2)" stroke-width="10"/>
+            <circle cx="56" cy="56" r="48" fill="none" stroke="var(--vurgu)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - oran)}"/></svg>
+          <div class="ortasi"><div><b>${l.rev}</b><br><span>/ ${hedef} kart</span></div></div>
+        </div>
+        <div>
+          <div class="etiket">Bugünkü plan</div>
+          <h2>${kartSayisi ? `${kartSayisi} kart seni bekliyor` : oran >= 1 ? "Günlük hedef tamam" : "Bugünlük kart kalmadı"}</h2>
+          <p class="ikincil">${vade} tekrar · ${yeniHak} yeni kelime</p>
+        </div>
       </div>
-      <div class="cubuk"><span style="width:${(test.i / test.sorular.length) * 100}%"></span></div>
+      <div style="margin-top:18px">
+        <button class="btn ana genis" id="basla" type="button" ${kartSayisi ? "" : "disabled"}>${kartSayisi ? "Çalışmaya başla" : "Yarın yeni kartlar gelecek"}</button>
+        ${!kartSayisi ? '<button class="btn genis" id="ekstra" type="button" style="margin-top:8px">Ekstra 10 yeni kelime aç</button>' : ""}
+      </div>
+    </section>
+
+    <section class="kart">
+      <div class="satir" style="justify-content:space-between"><div class="etiket">İlerleme · ${aktif.length} kelime</div><span class="ikincil">%${Math.round(say.kalici / toplam * 100)} kalıcı</span></div>
+      <div class="ilerleme-cubuk" style="margin-top:10px" role="img" aria-label="${say.kalici} kalıcı, ${say.ogren} öğreniliyor, ${say.yeni} yeni">
+        <i style="width:${say.kalici / toplam * 100}%;background:var(--dogru)"></i>
+        <i style="width:${say.ogren / toplam * 100}%;background:var(--amber)"></i>
+      </div>
+      <div class="aciklama"><span style="--r:var(--dogru)">Kalıcı ${say.kalici}</span><span style="--r:var(--amber)">Öğreniliyor ${say.ogren}</span><span style="--r:var(--cizgi)">Yeni ${say.yeni}</span></div>
+      <div class="etiket" style="margin-top:20px">Son 7 gün · çalışılan kart</div>
+      <div class="hafta">
+        ${gunler.map(g => { const v = (durum.log[g] || {}).rev || 0; return `<div><span>${v || ""}</span><i class="${v ? "" : "bos"}" style="height:${v ? Math.max(8, v / maks * 64) : 3}px"></i><span>${gunEtiketi(g)}</span></div>`; }).join("")}
+      </div>
+    </section>
+
+    ${zayif.length ? `<section class="kart">
+      <div class="etiket">Zorlandığın kelimeler</div>
+      <div class="cipler" style="margin-top:10px">${zayif.map(w => `<button class="cip" type="button" data-kelime="${kacis(w)}">${kacis(w)}</button>`).join("")}</div>
+    </section>` : ""}
+
+    <section class="kart">
+      <div class="etiket">Neden bu kelimeler?</div>
+      <p class="ikincil" style="margin-top:6px">Liste, akademik metinlerde en sık geçen kelime ailelerini derleyen Akademik Kelime Listesi'nin (Coxhead, 2000) ilk altı alt listesinden oluşur. Günlük dilde çok yaygın olanlar çıkarıldı. Ayrıntı için sağ üstteki ⚙ düğmesine dokun.</p>
+    </section>`;
+  $("#basla").onclick = () => git("calis");
+  const ek = $("#ekstra");
+  if (ek) ek.onclick = () => { durum.ayar.yeniGunluk += 10; kaydet(); toast("10 yeni kelime açıldı"); git("calis"); };
+  alan.querySelectorAll("[data-kelime]").forEach(b => b.onclick = () => detayAc(b.dataset.kelime));
+}
+
+/* ================= Çalış (aralıklı tekrar) ================= */
+let oturum = null;
+function calisBasla() {
+  const vade = karistir(vadesiGelen()).map(k => k.w);
+  const yeni = yeniKelimeler().sort((a, b) => ((b.yk || 0) - (a.yk || 0)) || (a.sub - b.sub)).slice(0, bugunYeniHakki()).map(k => k.w);
+  oturum = { sira: vade.concat(yeni), i: 0, acik: false, sonuc: [0, 0, 0], toplam: vade.length + yeni.length };
+  calisCiz();
+}
+function kelimeKarti(k, acik, opts = {}) {
+  const st = durumu(k.w);
+  const fav = durum.fav.includes(k.w);
+  return `
+    <div class="madde-bas">
+      <div>
+        <div class="kelime">${kacis(k.w)}</div>
+        <div class="madde-meta">
+          <span class="etiket">${POS[k.pos] || k.pos}</span>
+          <span class="rozet">AWL ${k.sub}</span>
+          ${k.yk ? `<span class="rozet">YÖKDİL'de ${k.yk} kez</span>` : ""}
+          ${st === "yeni" ? '<span class="rozet amber">yeni</span>' : st === "kalici" ? '<span class="rozet yesil">kalıcı</span>' : ""}
+        </div>
+      </div>
+      <div class="araclar">
+        ${sesVar ? `<button class="ikon-btn" type="button" data-ses aria-label="Telaffuz">${IKON.ses}</button>` : ""}
+        <button class="ikon-btn yildiz" type="button" data-fav aria-pressed="${fav}" aria-label="Favorilere ekle">${IKON.yildiz}</button>
+      </div>
+    </div>
+    <div class="gizli">
+      <div class="bolumler">
+        <div><div class="etiket">Türkçe</div><p class="tr">${kacis(k.tr)}</p></div>
+        <div><div class="etiket">Tanım</div><p class="tanim">${kacis(k.def)}</p></div>
+        <div><div class="etiket">Örnek</div><p class="ornek">${ornekHtml(k.ex)}</p>
+          ${opts.ai ? `<div class="ai-ornekler" data-ai-alan></div><div class="satir" style="margin-top:8px"><button class="btn" type="button" data-ai hidden>Yeni örnek cümleler üret</button></div>` : ""}</div>
+        ${k.syn.length ? `<div><div class="etiket">Eş anlamlılar</div><p>${k.syn.map(kacis).join(" · ")}</p></div>` : ""}
+        ${k.fam.length ? `<div><div class="etiket">Kelime ailesi</div><div class="aile">${k.fam.map(f => { const m = f.match(/^(.+?)\s*\((.+)\)$/); return m ? `<span>${kacis(m[1])}<em>${kacis(m[2])}</em></span>` : `<span>${kacis(f)}</span>`; }).join("")}</div></div>` : ""}
+        ${k.col.length ? `<div><div class="etiket">Kalıplar</div><p>${k.col.map(kacis).join(" · ")}</p></div>` : ""}
+      </div>
+      ${acik ? "" : '<button class="perde" type="button" data-goster>Anlamı görmek için dokun</button>'}
+    </div>`;
+}
+function kartBagla(kok, k) {
+  const s = kok.querySelector("[data-ses]");
+  if (s) s.onclick = () => seslendir(k.w + ". " + k.ex.replace(/[\[\]]/g, ""));
+  const f = kok.querySelector("[data-fav]");
+  f.onclick = () => {
+    const i = durum.fav.indexOf(k.w);
+    if (i >= 0) durum.fav.splice(i, 1); else durum.fav.push(k.w);
+    kaydet(); f.setAttribute("aria-pressed", i < 0);
+    toast(i < 0 ? "Favorilere eklendi" : "Favorilerden çıkarıldı");
+  };
+}
+function calisCiz() {
+  if (!oturum.sira.length || oturum.i >= oturum.sira.length) return calisBitti();
+  const k = sozluk[oturum.sira[oturum.i]];
+  const kalan = oturum.sira.length - oturum.i;
+  alan.innerHTML = `
+    <div class="oturum-ust"><span class="etiket">${kalan} kart kaldı</span><span class="etiket">${durumu(k.w) === "yeni" ? "Yeni kelime" : "Tekrar"}</span></div>
+    <div class="cubuk"><span style="width:${oturum.i / Math.max(1, oturum.sira.length) * 100}%"></span></div>
+    <article class="kart" id="kart">
+      ${kelimeKarti(k, oturum.acik)}
+      ${oturum.acik ? `
+        <div class="puanla">
+          <button class="btn tekrar" type="button" data-p="0">Tekrar<small>bugün yine</small></button>
+          <button class="btn zor" type="button" data-p="1">Zor<small>${ARALIK[Math.max(1, kutu(k.w))]} gün</small></button>
+          <button class="btn ana" type="button" data-p="2">Bildim<small>${ARALIK[Math.min(ARALIK.length - 1, Math.max(0, kutu(k.w)) + 1)]} gün</small></button>
+        </div>` : `<button class="btn ana genis" type="button" data-goster style="margin-top:22px">Anlamını göster</button>`}
+    </article>`;
+  const kart = $("#kart");
+  kartBagla(kart, k);
+  kart.querySelectorAll("[data-goster]").forEach(b => b.onclick = () => { oturum.acik = true; calisCiz(); });
+  kart.querySelectorAll("[data-p]").forEach(b => b.onclick = () => {
+    const p = +b.dataset.p;
+    puanla(k.w, p);
+    oturum.sonuc[p]++;
+    if (p === 0) oturum.sira.splice(Math.min(oturum.i + 4, oturum.sira.length), 0, k.w);
+    oturum.i++; oturum.acik = false;
+    seriGuncelle(); calisCiz();
+  });
+}
+function calisBitti() {
+  const [t, z, b] = oturum.sonuc;
+  const bos = !oturum.toplam;
+  alan.innerHTML = `
+    <section class="kart">
+      <div class="etiket">${bos ? "Çalış" : "Oturum bitti"}</div>
+      <h2 style="margin-top:6px">${bos ? "Şu an tekrar zamanı gelen kart yok" : "Güzel iş. Bugünkü kartlar tamam."}</h2>
+      ${bos ? `<p class="ikincil" style="margin-top:8px">Günlük yeni kelime hakkını doldurdun ya da seçili alt listelerde yeni kelime kalmadı. Test çözerek pekiştirebilir veya ekstra kelime açabilirsin.</p>` :
+      `<div class="sayilar" style="margin-top:16px"><div><b style="color:var(--dogru)">${b}</b><span>Bildim</span></div><div><b style="color:var(--amber)">${z}</b><span>Zor</span></div><div><b style="color:var(--yanlis)">${t}</b><span>Tekrar</span></div></div>`}
+      <div class="satir" style="margin-top:18px">
+        <button class="btn ana" type="button" id="teste">Test çöz</button>
+        <button class="btn" type="button" id="ekstra">Ekstra 10 yeni kelime</button>
+      </div>
+    </section>`;
+  $("#teste").onclick = () => git("test");
+  $("#ekstra").onclick = () => { durum.ayar.yeniGunluk += 10; kaydet(); calisBasla(); };
+}
+
+/* ================= Test ================= */
+const MODLAR = {
+  yokdil: { ad: "YÖKDİL tipi boşluk doldurma", aciklama: "Cümledeki boşluğa uygun kelimeyi seç (5 seçenek)", etiket: "A–E" },
+  esanlam: { ad: "Eş anlamlı", aciklama: "Anlamca en yakın kelimeyi bul", etiket: "A–E" },
+  tr: { ad: "İngilizce → Türkçe", aciklama: "Kelimenin Türkçe karşılığını seç", etiket: "4" },
+  en: { ad: "Türkçe → İngilizce", aciklama: "Türkçe anlamı verilen kelimeyi seç", etiket: "4" },
+  karisik: { ad: "Karışık deneme", aciklama: "Tüm soru tiplerinden karışık", etiket: "mix" }
+};
+let testAyar = { mod: "yokdil", n: 20, kapsam: "tum" };
+let test = null;
+
+function testMenu() {
+  const favSay = durum.fav.length, ogrSay = Object.keys(durum.srs).filter(w => sozluk[w]).length;
+  alan.innerHTML = `
+    <section class="kart">
+      <div class="etiket">Test</div>
+      <h2 style="margin-top:4px">Kendini sına</h2>
+      <p class="ikincil" style="margin-top:4px">Yanlış yaptığın kelimeler tekrar kutusuna düşer ve aynı gün yeniden sorulur.</p>
+      <div class="etiket" style="margin-top:18px">Soru tipi</div>
+      <div class="mod-liste" style="margin-top:8px">
+        ${Object.entries(MODLAR).map(([k, m]) => `<button class="mod" type="button" data-mod="${k}" aria-pressed="${testAyar.mod === k}"><b>${m.ad}</b><span>${m.aciklama}</span><i>${m.etiket}</i></button>`).join("")}
+      </div>
+      <div class="etiket" style="margin-top:18px">Kapsam</div>
+      <div class="cipler" style="margin-top:8px">
+        <button class="cip" type="button" data-kapsam="tum" aria-pressed="${testAyar.kapsam === "tum"}">Tüm liste</button>
+        <button class="cip" type="button" data-kapsam="calisilan" aria-pressed="${testAyar.kapsam === "calisilan"}" ${ogrSay < 5 ? "disabled" : ""}>Çalıştıklarım (${ogrSay})</button>
+        <button class="cip" type="button" data-kapsam="fav" aria-pressed="${testAyar.kapsam === "fav"}" ${favSay < 5 ? "disabled" : ""}>Favoriler (${favSay})</button>
+      </div>
+      <div class="etiket" style="margin-top:18px">Soru sayısı</div>
+      <div class="cipler" style="margin-top:8px">
+        ${[10, 20, 40].map(n => `<button class="cip" type="button" data-n="${n}" aria-pressed="${testAyar.n === n}">${n}</button>`).join("")}
+      </div>
+      <button class="btn ana genis" type="button" id="testBasla" style="margin-top:22px">Testi başlat</button>
+    </section>`;
+  alan.querySelectorAll("[data-mod]").forEach(b => b.onclick = () => { testAyar.mod = b.dataset.mod; testMenu(); });
+  alan.querySelectorAll("[data-kapsam]").forEach(b => b.onclick = () => { testAyar.kapsam = b.dataset.kapsam; testMenu(); });
+  alan.querySelectorAll("[data-n]").forEach(b => b.onclick = () => { testAyar.n = +b.dataset.n; testMenu(); });
+  $("#testBasla").onclick = testBaslat;
+}
+
+// Hedefle anlamca yakın kelimeleri çeldirici yapma: iki doğru cevaplı soru oluşmasın
+function yakinMi(x, k) {
+  const a = new Set([k.w, ...k.syn].map(s => s.toLowerCase()));
+  return a.has(x.w.toLowerCase()) || x.syn.some(s => a.has(s.toLowerCase()));
+}
+function celdirici(k, alanAdi, sayi, havuz = KELIMELER) {
+  const uygun = havuz.filter(x => x.w !== k.w && !yakinMi(x, k));
+  const ayni = karistir(uygun.filter(x => x.pos === k.pos));
+  const diger = karistir(uygun.filter(x => x.pos !== k.pos));
+  const out = [];
+  for (const x of ayni.concat(diger)) {
+    if (out.length === sayi) break;
+    const v = x[alanAdi];
+    if (v !== k[alanAdi] && !out.includes(v)) out.push(v);
+  }
+  return out;
+}
+function soruUret(k, tip) {
+  if (tip === "yokdil") {
+    const cumle = kacis(k.ex).replace(/\[(.+?)\]/, '<span class="bosluk">&nbsp;</span>');
+    const s = karistir([k.w, ...celdirici(k, "w", 4)]);
+    return { k, tip, baslik: "Boşluğa en uygun kelimeyi seçin.", soru: cumle, secenekler: s, dogru: k.w, not: "Seçenekler sözlük biçimindedir; cümlede çekimli hâli gerekebilir." };
+  }
+  if (tip === "esanlam" && k.syn.length) {
+    const hedef = k.syn[0];
+    const yasak = new Set([k.w, ...k.syn].map(s => s.toLowerCase()));
+    const aday = karistir(KELIMELER.filter(x => x.w !== k.w && x.pos === k.pos && x.syn.length && !yakinMi(x, k)))
+      .map(x => x.syn[0]).filter(s => !yasak.has(s.toLowerCase()));
+    const cel = [...new Set(aday)].slice(0, 4);
+    if (cel.length === 4) {
+      return { k, tip, baslik: "Anlamca en yakın olanı seçin.", soru: `<span class="anahtar">${kacis(k.w)}</span> <span class="etiket">${POS[k.pos]}</span>`, secenekler: karistir([hedef, ...cel]), dogru: hedef };
+    }
+  }
+  if (tip === "en") {
+    return { k, tip, baslik: "Türkçe karşılığı verilen kelimeyi seçin.", soru: `<span class="anahtar">${kacis(k.tr)}</span>`, secenekler: karistir([k.w, ...celdirici(k, "w", 3)]), dogru: k.w };
+  }
+  return { k, tip: "tr", baslik: "Türkçe karşılığını seçin.", soru: `<span class="anahtar">${kacis(k.w)}</span> <span class="etiket">${POS[k.pos]}</span>`, secenekler: karistir([k.tr, ...celdirici(k, "tr", 3)]), dogru: k.tr };
+}
+function testBaslat() {
+  let havuz = aktifKelimeler();
+  if (testAyar.kapsam === "calisilan") havuz = havuz.filter(k => durum.srs[k.w]);
+  if (testAyar.kapsam === "fav") havuz = KELIMELER.filter(k => durum.fav.includes(k.w));
+  if (havuz.length < 5) havuz = aktifKelimeler();
+  const secim = karistir(havuz).slice(0, Math.min(testAyar.n, havuz.length));
+  const tipler = ["yokdil", "esanlam", "tr", "en"];
+  const sorular = secim.map((k, i) => soruUret(k, testAyar.mod === "karisik" ? tipler[i % 4] : testAyar.mod));
+  test = { sorular, i: 0, cevaplar: [], basla: Date.now() };
+  soruCiz();
+}
+function soruCiz() {
+  if (test.i >= test.sorular.length) return testSonuc();
+  const q = test.sorular[test.i];
+  const dogruSay = test.cevaplar.filter(c => c.dogru).length;
+  alan.innerHTML = `
+    <div class="oturum-ust"><span class="etiket">Soru ${test.i + 1} / ${test.sorular.length}</span><span class="etiket">Doğru ${dogruSay}</span></div>
+    <div class="cubuk"><span style="width:${test.i / test.sorular.length * 100}%"></span></div>
+    <section class="kart">
+      <div class="etiket">${MODLAR[q.tip] ? MODLAR[q.tip].ad : ""}</div>
+      <p class="ikincil" style="margin-top:2px">${q.baslik}</p>
       <p class="soru">${q.soru}</p>
       <div class="secenekler">
-        ${q.secenekler.map((s, j) => `<button class="secenek" type="button" data-j="${j}">${kacis(s)}</button>`).join("")}
+        ${q.secenekler.map((s, j) => `<button class="secenek" type="button" data-j="${j}"><span class="harf">${HARF[j]})</span><span>${kacis(s)}</span></button>`).join("")}
       </div>
-      <div class="geri-bildirim" id="gb"></div>
+      ${q.not ? `<p class="ikincil" style="margin-top:10px;font-size:12px">${q.not}</p>` : ""}
+      <div class="geri" id="geri"></div>
     </section>`;
-  alan.querySelectorAll(".secenek").forEach(b => b.onclick = () => cevapla(b, q));
+  alan.querySelectorAll(".secenek").forEach(b => b.onclick = () => cevapla(+b.dataset.j));
 }
-
-function cevapla(btn, q) {
-  if (test.cevaplandi) return;
-  test.cevaplandi = true;
-  const secilen = q.secenekler[+btn.dataset.j];
-  const dogruMu = secilen === q.dogru;
+function cevapla(j) {
+  const q = test.sorular[test.i];
+  if (test.cevaplar[test.i]) return;
+  const dogru = q.secenekler[j] === q.dogru;
+  test.cevaplar[test.i] = { dogru, secilen: q.secenekler[j] };
+  testSonucu(q.k.w, dogru);
   alan.querySelectorAll(".secenek").forEach(b => {
     b.disabled = true;
-    if (q.secenekler[+b.dataset.j] === q.dogru) b.classList.add("dogru");
+    const s = q.secenekler[+b.dataset.j];
+    if (s === q.dogru) b.classList.add("dogru");
+    else if (+b.dataset.j === j) b.classList.add("yanlis");
   });
-  if (dogruMu) {
-    test.dogru++;
-    durum.bilinen[q.k.w] = true; kaydet(); ilerlemeGuncelle();
-  } else {
-    btn.classList.add("yanlis");
-    test.yanlislar.push(q.k);
-    delete durum.bilinen[q.k.w]; kaydet(); ilerlemeGuncelle();
-  }
-  const gb = document.getElementById("gb");
-  gb.innerHTML = `${dogruMu ? "✓ Doğru." : "✗ Yanlış."} <b>${kacis(q.k.w)}</b>: ${kacis(q.k.tr)} — <span style="color:var(--soluk)">${ornekHtml(q.k.ex)}</span>
-    <div class="dugmeler" style="margin-top:12px"><button class="btn ana" id="devam" type="button">${test.i + 1 < test.sorular.length ? "Sonraki soru" : "Sonucu gör"}</button></div>`;
-  document.getElementById("devam").onclick = () => { test.i++; test.cevaplandi = false; testCiz(); };
-  document.getElementById("devam").focus();
+  $("#geri").innerHTML = `
+    <p style="margin:0"><b style="color:${dogru ? "var(--dogru)" : "var(--yanlis)"}">${dogru ? "Doğru." : "Yanlış."}</b> <b>${kacis(q.k.w)}</b>: ${kacis(q.k.tr)}</p>
+    <p class="ornek" style="font-size:16px;margin:8px 0 0">${ornekHtml(q.k.ex)}</p>
+    <button class="btn ana genis" type="button" id="devam" style="margin-top:14px">${test.i + 1 < test.sorular.length ? "Sonraki soru" : "Sonucu gör"}</button>`;
+  $("#devam").onclick = () => { test.i++; soruCiz(); };
+  $("#devam").focus();
+  seriGuncelle();
 }
-
-function sonucCiz() {
-  const oran = Math.round((test.dogru / test.sorular.length) * 100);
-  const yorum = oran >= 90 ? "Çok iyi. Bu kelimeler artık senin." : oran >= 60 ? "İyi gidiyorsun. Yanlışları bir kez daha çalış." : "Önce Öğren sekmesinde kartlara bir göz at, sonra tekrar dene.";
+function testSonuc() {
+  const d = test.cevaplar.filter(c => c.dogru).length, n = test.sorular.length;
+  const dk = Math.max(1, Math.round((Date.now() - test.basla) / 60000));
+  const yanlis = test.sorular.filter((q, i) => !test.cevaplar[i].dogru);
+  const oran = Math.round(d / n * 100);
   alan.innerHTML = `
     <section class="kart">
-      <div class="etiket">Sonuç</div>
-      <div class="sonuc-skor">${test.dogru}<span style="font-size:28px;color:var(--soluk)"> / ${test.sorular.length}</span></div>
-      <p>${yorum}</p>
-      ${test.yanlislar.length ? `<div class="etiket" style="margin-top:20px">Tekrar çalışılacaklar</div>
-        <ul class="liste">${test.yanlislar.map(k => `<li><b>${kacis(k.w)}</b><span>${kacis(k.tr)}</span></li>`).join("")}</ul>` : ""}
-      <div class="dugmeler">
-        <button class="btn ana" id="yeniTest" type="button">Yeni test</button>
-        ${test.yanlislar.length ? '<button class="btn" id="yanlisCalis" type="button">Yanlışları çalış</button>' : ""}
+      <div class="etiket">Sonuç · ${dk} dk</div>
+      <div class="skor" style="margin-top:6px">${d}<span style="font-size:28px;color:var(--soluk)"> / ${n}</span></div>
+      <p class="ikincil" style="margin-top:6px">%${oran} başarı. ${oran >= 85 ? "Sınav düzeyinde iyi bir sonuç." : oran >= 60 ? "İyi gidiyorsun; yanlışlar tekrar kutusuna eklendi." : "Yanlışları Çalış bölümünde tekrar et, sonra testi yinele."}</p>
+      ${yanlis.length ? `<div class="etiket" style="margin-top:18px">Yanlış yaptıkların</div>
+        <ul class="liste" style="margin-top:8px">${yanlis.map(q => `<li><button type="button" data-kelime="${kacis(q.k.w)}"><b>${kacis(q.k.w)}</b><span class="alt">${kacis(q.k.tr)}</span><span class="sag"><span class="nokta ogren"></span></span></button></li>`).join("")}</ul>` : ""}
+      <div class="satir" style="margin-top:18px">
+        <button class="btn ana" type="button" id="yeniden">Yeni test</button>
+        ${yanlis.length ? '<button class="btn" type="button" id="calisa">Yanlışları çalış</button>' : ""}
+        <button class="btn" type="button" id="menu">Test türleri</button>
       </div>
     </section>`;
-  document.getElementById("yeniTest").onclick = () => { testHazirla(); testCiz(); };
-  const yc = document.getElementById("yanlisCalis");
-  if (yc) yc.onclick = () => {
-    ogrenSira = test.yanlislar.slice(); ogrenIndex = 0; anlamAcik = false;
-    sekmeSec("ogren", true);
-  };
+  $("#yeniden").onclick = testBaslat;
+  $("#menu").onclick = testMenu;
+  const c = $("#calisa");
+  if (c) c.onclick = () => { oturum = { sira: yanlis.map(q => q.k.w), i: 0, acik: false, sonuc: [0, 0, 0], toplam: yanlis.length }; ekran = "calis"; document.querySelectorAll("[data-git]").forEach(b => b.dataset.git === "calis" ? b.setAttribute("aria-current", "page") : b.removeAttribute("aria-current")); calisCiz(); };
+  alan.querySelectorAll("[data-kelime]").forEach(b => b.onclick = () => detayAc(b.dataset.kelime));
 }
 
-/* ---------- LİSTE ---------- */
-function listeCiz() {
-  const s = secili().slice().sort((a, b) => a.w.localeCompare(b.w));
+/* ================= Sözlük ================= */
+let sozlukAyar = { q: "", filtre: "hepsi" };
+function sozlukCiz() {
   alan.innerHTML = `
-    <section class="kart">
-      <div class="etiket">${s.length} kelime · ${durum.seviye === "hepsi" ? "tüm seviyeler" : durum.seviye}</div>
-      <ul class="liste">
-        ${s.map(k => `<li><div><b>${kacis(k.w)}</b> <span class="etiket">${POS_TR[k.pos] || kacis(k.pos)} · ${kacis(k.lv)}</span><br><span>${kacis(k.tr)}</span></div>
-          <span class="durum ${durum.bilinen[k.w] ? "ok" : "yeni"}">${durum.bilinen[k.w] ? "öğrenildi" : "yeni"}</span></li>`).join("")}
-      </ul>
-      <div class="dugmeler"><button class="btn" id="sifirla" type="button">İlerlemeyi sıfırla</button></div>
-    </section>`;
-  const sb = document.getElementById("sifirla");
-  sb.onclick = () => {
-    if (sb.dataset.onay) { durum.bilinen = {}; kaydet(); ilerlemeGuncelle(); listeCiz(); }
-    else { sb.dataset.onay = "1"; sb.textContent = "Emin misin? Tekrar tıkla"; }
-  };
+    <input class="ara" id="ara" type="search" placeholder="İngilizce ya da Türkçe ara…" value="${kacis(sozlukAyar.q)}" aria-label="Kelime ara" autocomplete="off">
+    <div class="cipler">
+      ${[["hepsi", "Hepsi"], ["yeni", "Yeni"], ["ogren", "Öğreniliyor"], ["kalici", "Kalıcı"], ["fav", "★ Favoriler"]].map(([k, a]) => `<button class="cip" type="button" data-f="${k}" aria-pressed="${sozlukAyar.filtre === k}">${a}</button>`).join("")}
+    </div>
+    <div id="sonuclar"></div>`;
+  const ara = $("#ara");
+  ara.oninput = () => { sozlukAyar.q = ara.value; listeCiz(); };
+  alan.querySelectorAll("[data-f]").forEach(b => b.onclick = () => { sozlukAyar.filtre = b.dataset.f; sozlukCiz(); });
+  listeCiz();
+}
+function normal(s) { return s.toLocaleLowerCase("tr-TR").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/ı/g, "i"); }
+function listeCiz() {
+  const q = normal(sozlukAyar.q.trim());
+  const f = sozlukAyar.filtre;
+  const s = KELIMELER.filter(k =>
+    (f === "hepsi" || (f === "fav" ? durum.fav.includes(k.w) : durumu(k.w) === f)) &&
+    (!q || normal(k.w).includes(q) || normal(k.tr).includes(q) || k.fam.some(x => normal(x).includes(q)))
+  ).sort((a, b) => a.w.localeCompare(b.w));
+  $("#sonuclar").innerHTML = s.length ? `
+    <p class="etiket" style="margin:0 0 8px">${s.length} kelime</p>
+    <ul class="liste">${s.map(k => { const d = durumu(k.w); return `<li><button type="button" data-kelime="${kacis(k.w)}"><b>${kacis(k.w)}</b><span class="alt">${kacis(k.tr)}</span><span class="sag">${durum.fav.includes(k.w) ? '<span style="color:var(--amber)">★</span>' : ""}<span class="etiket">${k.sub}</span><span class="nokta ${d === "yeni" ? "" : d}" title="${d}"></span></span></button></li>`; }).join("")}</ul>`
+    : `<div class="bos-durum">Aramana uyan kelime yok.</div>`;
+  $("#sonuclar").querySelectorAll("[data-kelime]").forEach(b => b.onclick = () => detayAc(b.dataset.kelime));
 }
 
-/* ---------- Gezinme ---------- */
-function sekmeSec(ad, siraKoru) {
-  sekme = ad;
-  document.querySelectorAll("[data-sekme]").forEach(b => b.setAttribute("aria-selected", b.dataset.sekme === ad));
-  if (ad === "ogren") { if (!siraKoru) ogrenHazirla(); ogrenCiz(); }
-  if (ad === "test") { testHazirla(); testCiz(); }
-  if (ad === "liste") listeCiz();
+/* ================= Alt sayfa: kelime ayrıntısı ================= */
+function sayfaAc(html) {
+  const arka = document.createElement("div");
+  arka.className = "perde-arka";
+  arka.innerHTML = `<div class="sayfa" role="dialog" aria-modal="true"><div class="tutamak"></div>${html}</div>`;
+  arka.onclick = e => { if (e.target === arka) kapat(); };
+  const kapat = () => { arka.remove(); document.removeEventListener("keydown", esc); if (ekran === "sozluk") listeCiz(); if (ekran === "bugun") bugunCiz(); };
+  const esc = e => { if (e.key === "Escape") kapat(); };
+  document.addEventListener("keydown", esc);
+  document.body.appendChild(arka);
+  return { kok: arka.querySelector(".sayfa"), kapat };
 }
-document.querySelectorAll("[data-sekme]").forEach(b => b.onclick = () => sekmeSec(b.dataset.sekme));
-function seviyeIsaretle() {
-  document.querySelectorAll("[data-seviye]").forEach(b => b.setAttribute("aria-pressed", b.dataset.seviye === durum.seviye));
+function detayAc(w) {
+  const k = sozluk[w]; if (!k) return;
+  const r = kayit(w);
+  const { kok, kapat } = sayfaAc(`
+    <article class="kart">${kelimeKarti(k, true, { ai: true })}</article>
+    <div class="kart" style="margin-top:12px">
+      <div class="sayilar">
+        <div><b>${r ? r.dogru : 0}</b><span>doğru</span></div>
+        <div><b>${r ? r.yanlis : 0}</b><span>yanlış</span></div>
+        <div><b>${r ? (r.due <= BUGUN() ? "bugün" : (r.due - BUGUN()) + " gün") : "—"}</b><span>sonraki tekrar</span></div>
+      </div>
+      <div class="satir" style="margin-top:14px">
+        <button class="btn" type="button" data-sifirla ${r ? "" : "disabled"}>Bu kelimeyi yeniden öğren</button>
+        <button class="btn" type="button" data-kapat style="margin-left:auto">Kapat</button>
+      </div>
+    </div>`);
+  kartBagla(kok, k);
+  kok.querySelector("[data-kapat]").onclick = kapat;
+  kok.querySelector("[data-sifirla]").onclick = () => { durum.srs[w] = { ...(r || {}), b: 0, due: BUGUN(), dogru: r ? r.dogru : 0, yanlis: r ? r.yanlis : 0 }; kaydet(); toast("Kelime tekrar kutusuna alındı"); kapat(); };
+  aiBagla(kok, k);
 }
-document.querySelectorAll("[data-seviye]").forEach(b => b.onclick = () => {
-  durum.seviye = b.dataset.seviye; kaydet(); seviyeIsaretle(); sekmeSec(sekme);
-});
 
-/* ---------- Claude ile yeni kelime üret ---------- */
+/* ================= Claude ile yeni örnek cümle (yalnız claude.ai içinde) ================= */
+let sampleFn = null;
 (async () => {
-  const sample = window.claude ? await window.claude.use("sample") : null;
-  if (!sample) return;
-  const kutu = document.getElementById("uretKutu");
-  const btn = document.getElementById("uretBtn");
-  const aciklama = kutu.querySelector("p");
-  const ilkAciklama = aciklama.innerHTML;
-  kutu.hidden = false;
-
-  btn.onclick = async () => {
-    btn.disabled = true;
-    btn.textContent = "Hazırlanıyor…";
-    aciklama.innerHTML = "Claude yeni kelimeleri seçiyor. Bu 10–40 saniye sürebilir.";
-    const mevcut = tumKelimeler().map(k => k.w).join(", ");
-    const seviye = durum.seviye === "hepsi" ? "a mix of C1 and C2" : durum.seviye;
-    const istem =
-`You are an expert EFL lexicographer. Choose 8 English words at CEFR level ${seviye} that are useful for advanced learners (academic and educated general English). Only use words whose CEFR level you are confident about.
-Do NOT include any of these words: ${mevcut}.
-For each word give an accurate learner-dictionary definition, a natural Turkish translation (1-3 short equivalents), one natural example sentence in which the target word (in the form used) is wrapped in square brackets exactly once, and 2 synonyms.
-Reply with only a JSON array like:
-[{"w":"meticulous","pos":"adj","lv":"C1","def":"showing great attention to detail","tr":"titiz, özenli","ex":"She kept [meticulous] records of every experiment.","syn":"thorough, painstaking"}]
-"pos" must be one of adj, verb, noun, adv. "lv" must be C1 or C2.`;
-    try {
-      const veri = await sample.json(istem, { cache: false });
-      const var_olan = new Set(tumKelimeler().map(k => k.w.toLowerCase()));
-      const temiz = (Array.isArray(veri) ? veri : []).filter(k =>
-        k && typeof k.w === "string" && k.w.trim() && typeof k.def === "string" && typeof k.tr === "string" &&
-        typeof k.ex === "string" && /\[.+?\]/.test(k.ex) && ["adj", "verb", "noun", "adv"].includes(k.pos) &&
-        ["C1", "C2"].includes(k.lv) && !var_olan.has(k.w.toLowerCase())
-      ).map(k => ({ w: k.w.trim(), pos: k.pos, lv: k.lv, def: k.def, tr: k.tr, ex: k.ex, syn: typeof k.syn === "string" ? k.syn : "", yeni: true }));
-      if (!temiz.length) throw { code: "invalid_json" };
-      durum.uretilen = durum.uretilen.concat(temiz);
-      kaydet(); ilerlemeGuncelle();
-      aciklama.innerHTML = `<strong>${temiz.length} yeni kelime eklendi:</strong> ${temiz.map(k => kacis(k.w)).join(", ")}. Öğren sekmesinde seni bekliyorlar.`;
-      ogrenSira = temiz.filter(k => durum.seviye === "hepsi" || k.lv === durum.seviye).concat(ogrenSira);
-      ogrenIndex = 0; anlamAcik = false;
-      sekmeSec("ogren", true);
-    } catch (e) {
-      const kod = e && e.code;
-      if (["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed"].includes(kod)) {
-        kutu.hidden = true; return;
-      }
-      aciklama.innerHTML = kod === "rate_limited"
-        ? "Çok sık istek gönderildi. Biraz bekleyip yeniden dene."
-        : kod === "cancelled" ? ilkAciklama
-        : "Kelimeler bu sefer hazırlanamadı. Yeniden dene.";
-    } finally {
-      btn.disabled = false;
-      btn.textContent = "Yeni kelimeler üret";
-    }
-  };
+  try { sampleFn = window.claude ? await window.claude.use("sample") : null; } catch (e) { sampleFn = null; }
 })();
+function aiBagla(kok, k) {
+  const btn = kok.querySelector("[data-ai]"), yer = kok.querySelector("[data-ai-alan]");
+  if (!btn || !sampleFn) return;
+  btn.hidden = false;
+  btn.onclick = async () => {
+    btn.disabled = true; btn.textContent = "Hazırlanıyor…";
+    try {
+      const veri = await sampleFn.json(
+`Write 3 new, natural example sentences at CEFR C1 level that use the English word "${k.w}" (${POS[k.pos]}; meaning: ${k.def}).
+Each sentence should read like a sentence from an academic social-science text (sociology, economics, history, politics, education or psychology), similar to reading passages in the Turkish YÖKDİL exam.
+Avoid invented statistics and specific factual claims that could be false; keep sentences general and plausible.
+Wrap the target word (in the form used) in square brackets exactly once per sentence.
+Reply with only a JSON array of 3 strings.`, { modelTier: "quick" });
+      const cumleler = (Array.isArray(veri) ? veri : []).filter(s => typeof s === "string" && /\[.+?\]/.test(s)).slice(0, 3);
+      if (!cumleler.length) throw { code: "invalid_json" };
+      yer.innerHTML = `<div class="etiket" style="margin-top:6px">Claude'un önerdiği örnekler</div>` + cumleler.map(s => `<p>${ornekHtml(s)}</p>`).join("");
+      btn.textContent = "Başka örnekler üret";
+    } catch (e) {
+      const c = e && e.code;
+      if (["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed"].includes(c)) { btn.hidden = true; return; }
+      toast(c === "rate_limited" ? "Çok sık istek gönderildi, biraz bekle." : "Örnekler hazırlanamadı, yeniden dene.");
+      btn.textContent = "Yeni örnek cümleler üret";
+    } finally { btn.disabled = false; }
+  };
+}
 
-seviyeIsaretle();
-ilerlemeGuncelle();
-sekmeSec("ogren");
+/* ================= Ayarlar ve kaynak ================= */
+$("#ayarBtn").onclick = () => {
+  const a = durum.ayar;
+  const { kok, kapat } = sayfaAc(`
+    <section class="kart">
+      <h2>Ayarlar</h2>
+      <div class="ayar"><label for="yeniGunluk">Günlük yeni kelime</label>
+        <select id="yeniGunluk">${[5, 10, 15, 20, 30, 40].map(n => `<option ${a.yeniGunluk === n ? "selected" : ""}>${n}</option>`).join("")}${[5, 10, 15, 20, 30, 40].includes(a.yeniGunluk) ? "" : `<option selected>${a.yeniGunluk}</option>`}</select></div>
+      <div class="ayar"><label for="hedef">Günlük kart hedefi</label>
+        <select id="hedef">${[20, 30, 50, 80, 100].map(n => `<option ${a.hedef === n ? "selected" : ""}>${n}</option>`).join("")}</select></div>
+      <div class="ayar" style="display:block"><div>Çalışılacak AWL alt listeleri</div>
+        <div class="cipler" style="margin-top:8px">${[1, 2, 3, 4, 5, 6].map(n => `<button class="cip" type="button" data-alt="${n}" aria-pressed="${a.alt.includes(n)}">Alt liste ${n} · ${KELIMELER.filter(k => k.sub === n).length}</button>`).join("")}</div></div>
+      <div class="ayar"><span>Tüm ilerlemeyi sil</span><button class="btn" type="button" id="sifirla">Sıfırla</button></div>
+    </section>
+    <section class="kart kaynak" style="margin-top:12px">
+      <div class="etiket" style="margin-bottom:8px">Kaynak ve yöntem</div>
+      <p><b>Kelime havuzu.</b> Akademik Kelime Listesi (AWL), 28 konu alanından derlenen 3,5 milyon sözcüklük akademik bir derlemde sık geçen 570 kelime ailesini içerir. Alt listeler sıklığa göre sıralanır; 1. alt liste en sık olanlardır.</p>
+      <p>Coxhead, A. (2000). A new academic word list. <i>TESOL Quarterly, 34</i>(2), 213–238. https://doi.org/10.2307/3587951</p>
+      <p><b>Seçim.</b> İlk altı alt liste (360 aile) alındı. Günlük İngilizcede çok yaygın olan 47 kelime (ör. <i>area, data, research</i>) çıkarıldı. Ölçüt, wordfreq kütüphanesinde Zipf sıklığı ≥ 5,0 olmasıdır. Kalan 313 kelime uygulamadadır.</p>
+      <p><b>Sınırlılık.</b> Liste, ÖSYM'nin YÖKDİL Sosyal sorularından yapılmış bir sıklık sayımı değildir. AWL akademik metinlerin genelini temsil eder. Çıkmış YÖKDİL kitapçıklarıyla sıklık sayımı yapıldığında sıralama güncellenecektir. AWL listesi resmî kaynaktan indirilemediği için elle derlendi. Tutarlılık denetimlerinden geçti, ama resmî listeyle karşılaştırılması önerilir.</p>
+      <p><b>Türkçe karşılıklar, tanımlar ve örnek cümleler</b> bu uygulama için yazılmıştır; sınav sorularından alınmamıştır.</p>
+    </section>`);
+  kok.querySelector("#yeniGunluk").onchange = e => { durum.ayar.yeniGunluk = +e.target.value; kaydet(); };
+  kok.querySelector("#hedef").onchange = e => { durum.ayar.hedef = +e.target.value; kaydet(); };
+  kok.querySelectorAll("[data-alt]").forEach(b => b.onclick = () => {
+    const n = +b.dataset.alt, i = durum.ayar.alt.indexOf(n);
+    if (i >= 0 && durum.ayar.alt.length > 1) durum.ayar.alt.splice(i, 1); else if (i < 0) durum.ayar.alt.push(n);
+    kaydet(); b.setAttribute("aria-pressed", durum.ayar.alt.includes(n));
+  });
+  const s = kok.querySelector("#sifirla");
+  s.onclick = () => {
+    if (!s.dataset.onay) { s.dataset.onay = "1"; s.textContent = "Emin misin? Tekrar dokun"; return; }
+    durum = JSON.parse(JSON.stringify(VARSAYILAN)); kaydet(); toast("İlerleme silindi"); kapat(); git("bugun");
+  };
+};
+
+git("bugun");
 </script>
