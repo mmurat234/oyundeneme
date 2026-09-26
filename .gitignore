@@ -3,3 +3,5 @@ android/.build/
 yokdil/veri/siklik.csv
 yokdil/veri/kelimeler_siklik.json
 __pycache__/
+android/upload.keystore
+android/upload.parola
