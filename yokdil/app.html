@@ -76,7 +76,7 @@
     background: var(--yuzey); border-top: 1px solid var(--cizgi);
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
-  .alt-bar nav { max-width: 760px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .alt-bar nav { max-width: 760px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); }
   .alt-bar button {
     border: 0; background: transparent; cursor: pointer; padding: 9px 4px 10px;
     display: flex; flex-direction: column; align-items: center; gap: 3px;
@@ -187,6 +187,42 @@
   .geri { margin-top: 14px; font-size: 14px; }
   .skor { font-family: var(--serif); font-size: 64px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
 
+  /* Derinleş */
+  .merdiven { display: grid; gap: 10px; margin-top: 12px; }
+  .basamak { display: grid; grid-template-columns: 28px 1fr 44px; gap: 4px 12px; align-items: center; }
+  .basamak .no { grid-row: 1 / span 2; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-family: var(--mono); font-size: 12px; background: var(--yuzey2); border: 1px solid var(--cizgi); color: var(--soluk); }
+  .basamak.dolu .no { background: var(--vurgu); border-color: var(--vurgu); color: var(--vurgu-yazi); }
+  .basamak .ad { font-size: 14px; font-weight: 700; line-height: 1.2; }
+  .basamak .ad span { font-weight: 500; color: var(--soluk); font-size: 12px; margin-left: 6px; }
+  .basamak .say { grid-row: 1 / span 2; grid-column: 3; text-align: right; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .basamak .bar { height: 6px; border-radius: 6px; background: var(--yuzey2); overflow: hidden; }
+  .basamak .bar i { display: block; height: 100%; background: var(--vurgu); border-radius: 6px; }
+  .parcalar { display: flex; flex-wrap: wrap; gap: 6px; align-items: stretch; margin-top: 8px; }
+  .parca { border: 1px solid var(--cizgi); background: var(--yuzey2); border-radius: 10px; padding: 8px 12px; display: flex; flex-direction: column; gap: 2px; }
+  .parca b { font-family: var(--serif); font-size: 21px; font-weight: 600; color: var(--vurgu); line-height: 1.1; }
+  .parca span { font-size: 12px; color: var(--soluk); max-width: 160px; }
+  .parca-arti { align-self: center; color: var(--soluk); font-weight: 700; }
+  .imge { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 5.4vw, 25px); line-height: 1.35; text-wrap: balance; margin: 0; }
+  .hikaye { font-family: var(--serif); font-size: 18px; line-height: 1.62; margin: 0; }
+  .kutu-not { font-size: 14px; border-radius: 10px; padding: 10px 12px; background: var(--yuzey2); border: 1px solid var(--cizgi); }
+  .kutu-not.uyari { background: var(--amber-acik); border-color: transparent; color: var(--murekkep); }
+  .kutu-not > b:first-child { display: block; font-size: 11px; font-family: var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--soluk); margin-bottom: 2px; font-weight: 500; }
+  .adimlar { display: flex; gap: 6px; margin-top: 8px; }
+  .adimlar i { flex: 1; height: 4px; border-radius: 4px; background: var(--cizgi); }
+  .adimlar i.tam { background: var(--vurgu); }
+  textarea { width: 100%; min-height: 110px; font: inherit; font-size: 16px; line-height: 1.5; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--cizgi); background: var(--yuzey); color: var(--murekkep); resize: vertical; }
+  .kontrol { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; padding: 6px 0; cursor: pointer; }
+  .kontrol input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--vurgu); }
+  .senin { font-family: var(--serif); font-size: 18px; line-height: 1.5; margin: 4px 0 0; padding: 10px 12px; border-radius: 10px; background: var(--vurgu-acik); }
+  .senin b { color: var(--vurgu); }
+  .kok-izgara { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin-top: 10px; }
+  .kok-btn { text-align: left; border: 1px solid var(--cizgi); background: var(--yuzey2); border-radius: 12px; padding: 10px 12px; cursor: pointer; display: grid; gap: 2px; }
+  .kok-btn b { font-family: var(--serif); font-size: 18px; font-weight: 600; }
+  .kok-btn span { font-size: 12px; color: var(--soluk); }
+  .gunun { display: grid; gap: 10px; }
+  .gunun .kelime { font-size: clamp(32px, 9vw, 44px); }
+  .seviye-rozet { font-family: var(--mono); font-size: 11px; padding: 3px 8px; border-radius: 99px; background: var(--vurgu-acik); color: var(--vurgu); white-space: nowrap; }
+
   /* Sözlük */
   .ara { width: 100%; font-size: 16px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--cizgi); background: var(--yuzey); color: var(--murekkep); }
   .liste { list-style: none; margin: 0; padding: 0; border: 1px solid var(--cizgi); border-radius: 14px; overflow: hidden; background: var(--cizgi); display: grid; gap: 1px; }
@@ -230,6 +266,8 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Bugün</button>
     <button type="button" data-git="calis">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/></svg>Çalış</button>
+    <button type="button" data-git="derin">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 7 8 4 4 4c0 5 3 8 8 8z"/><path d="M12 14c0-4 3-7 8-7 0 4-3 7-8 7z"/></svg>Derinleş</button>
     <button type="button" data-git="test">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>Test</button>
     <button type="button" data-git="sozluk">
@@ -258,7 +296,7 @@ const BUGUN = () => gun();
 const sozluk = Object.fromEntries(KELIMELER.map(k => [k.w, k]));
 
 /* ================= Durum ================= */
-const VARSAYILAN = { srs: {}, fav: [], log: {}, ayar: { yeniGunluk: 15, hedef: 30, alt: [1, 2, 3, 4, 5, 6] } };
+const VARSAYILAN = { srs: {}, fav: [], log: {}, yol: {}, cumle: {}, ayar: { yeniGunluk: 15, hedef: 30, alt: [1, 2, 3, 4, 5, 6] } };
 let durum = JSON.parse(JSON.stringify(VARSAYILAN));
 try {
   const k = JSON.parse(localStorage.getItem(DEPO));
@@ -337,7 +375,7 @@ let ekran = "bugun";
 function git(ad) {
   ekran = ad;
   document.querySelectorAll("[data-git]").forEach(b => b.dataset.git === ad ? b.setAttribute("aria-current", "page") : b.removeAttribute("aria-current"));
-  ({ bugun: bugunCiz, calis: calisBasla, test: testMenu, sozluk: sozlukCiz })[ad]();
+  ({ bugun: bugunCiz, calis: calisBasla, derin: derinCiz, test: testMenu, sozluk: sozlukCiz })[ad]();
   window.scrollTo(0, 0);
   seriGuncelle();
 }
@@ -384,6 +422,13 @@ function bugunCiz() {
       </div>
     </section>
 
+    ${(() => { const g = gununKelimesi(); const ic = aktif.filter(k => seviye(k.w) >= 5).length, an = aktif.filter(k => seviye(k.w) >= 3).length; return g ? `<section class="kart gunun">
+      <div class="satir" style="justify-content:space-between"><div class="etiket">Günün kelimesi · Derinleş</div><span class="ikincil">${an} anlamlandırıldı · ${ic} cümle</span></div>
+      <div class="kelime">${kacis(g.w)}</div>
+      <p class="imge">${kacis(g.ko.imge)}</p>
+      <button class="btn genis" type="button" data-yol="${kacis(g.w)}">Kökünü ve hikâyesini keşfet</button>
+    </section>` : ""; })()}
+
     <section class="kart">
       <div class="satir" style="justify-content:space-between"><div class="etiket">İlerleme · ${aktif.length} kelime</div><span class="ikincil">%${Math.round(say.kalici / toplam * 100)} kalıcı</span></div>
       <div class="ilerleme-cubuk" style="margin-top:10px" role="img" aria-label="${say.kalici} kalıcı, ${say.ogren} öğreniliyor, ${say.yeni} yeni">
@@ -410,6 +455,7 @@ function bugunCiz() {
   const ek = $("#ekstra");
   if (ek) ek.onclick = () => { durum.ayar.yeniGunluk += 10; kaydet(); toast("10 yeni kelime açıldı"); git("calis"); };
   alan.querySelectorAll("[data-kelime]").forEach(b => b.onclick = () => detayAc(b.dataset.kelime));
+  alan.querySelectorAll("[data-yol]").forEach(b => b.onclick = () => yolculukBasla(b.dataset.yol));
 }
 
 /* ================= Çalış (aralıklı tekrar) ================= */
@@ -441,10 +487,13 @@ function kelimeKarti(k, acik, opts = {}) {
     </div>
     <div class="gizli">
       <div class="bolumler">
+        ${durum.cumle[k.w] ? `<div><div class="etiket">Senin cümlen</div><p class="senin">${kacis(durum.cumle[k.w].t)}</p></div>` : ""}
         <div><div class="etiket">Türkçe</div><p class="tr">${kacis(k.tr)}</p></div>
         <div><div class="etiket">Tanım</div><p class="tanim">${kacis(k.def)}</p></div>
         <div><div class="etiket">Örnek</div><p class="ornek">${ornekHtml(k.ex)}</p>
           ${opts.ai ? `<div class="ai-ornekler" data-ai-alan></div><div class="satir" style="margin-top:8px"><button class="btn" type="button" data-ai hidden>Yeni örnek cümleler üret</button></div>` : ""}</div>
+        ${k.ko ? `<div><div class="etiket">Köken · ${kacis(k.ko.dil)} ${kacis(k.ko.kok)} “${kacis(k.ko.kok_anlam)}”</div>${parcaHtml(k.ko)}<p class="imge" style="font-size:18px;margin-top:10px">${kacis(k.ko.imge)}</p>
+          ${opts.ai ? `<p class="hikaye" style="font-size:17px;margin-top:10px">${kacis(k.ko.hikaye)}</p>${k.ko.tr_bag ? `<div class="kutu-not" style="margin-top:10px"><b>Türkçeyle bağı</b>${kacis(k.ko.tr_bag)}</div>` : ""}${k.ko.tuzak ? `<div class="kutu-not uyari" style="margin-top:8px"><b>Dikkat</b>${kacis(k.ko.tuzak)}</div>` : ""}` : ""}</div>` : ""}
         ${k.syn.length ? `<div><div class="etiket">Eş anlamlılar</div><p>${k.syn.map(kacis).join(" · ")}</p></div>` : ""}
         ${k.fam.length ? `<div><div class="etiket">Kelime ailesi</div><div class="aile">${k.fam.map(f => { const m = f.match(/^(.+?)\s*\((.+)\)$/); return m ? `<span>${kacis(m[1])}<em>${kacis(m[2])}</em></span>` : `<span>${kacis(f)}</span>`; }).join("")}</div></div>` : ""}
         ${k.col.length ? `<div><div class="etiket">Kalıplar</div><p>${k.col.map(kacis).join(" · ")}</p></div>` : ""}
@@ -709,6 +758,7 @@ function detayAc(w) {
   const { kok, kapat } = sayfaAc(`
     <article class="kart">${kelimeKarti(k, true, { ai: true })}</article>
     <div class="kart" style="margin-top:12px">
+      <div class="satir" style="justify-content:space-between;margin-bottom:12px"><span class="seviye-rozet">${seviye(w) ? seviye(w) + ". basamak · " + BASAMAK[seviye(w) - 1].ad : "Henüz başlamadın"}</span>${k.ko ? `<button class="btn ana" type="button" data-yolculuk>${durum.cumle[w] ? "Yolculuğu yinele" : "Yolculuğa başla"}</button>` : ""}</div>
       <div class="sayilar">
         <div><b>${r ? r.dogru : 0}</b><span>doğru</span></div>
         <div><b>${r ? r.yanlis : 0}</b><span>yanlış</span></div>
@@ -721,8 +771,267 @@ function detayAc(w) {
     </div>`);
   kartBagla(kok, k);
   kok.querySelector("[data-kapat]").onclick = kapat;
+  const yb = kok.querySelector("[data-yolculuk]");
+  if (yb) yb.onclick = () => { kapat(); yolculukBasla(w); };
   kok.querySelector("[data-sifirla]").onclick = () => { durum.srs[w] = { ...(r || {}), b: 0, due: BUGUN(), dogru: r ? r.dogru : 0, yanlis: r ? r.yanlis : 0 }; kaydet(); toast("Kelime tekrar kutusuna alındı"); kapat(); };
   aiBagla(kok, k);
+}
+
+/* ================= İçselleştirme: basamaklar ================= */
+const BASAMAK = [
+  { ad: "Tanıma", acik: "ilk karşılaşma" },
+  { ad: "Hatırlama", acik: "tekrarla geri çağırma" },
+  { ad: "Anlamlandırma", acik: "kök, imge, hikâye" },
+  { ad: "Bağlamda kullanma", acik: "doğru bağlamı seçme" },
+  { ad: "Üretme", acik: "kendi cümlen" },
+  { ad: "İçselleştirme", acik: "üretim + kalıcı bellek" }
+];
+function yolu(w) { return durum.yol[w] || (durum.yol[w] = {}); }
+function seviye(w) {
+  const r = durum.srs[w], y = durum.yol[w] || {}, c = durum.cumle[w];
+  if (c && r && r.b >= KALICI_KUTU) return 6;
+  if (c) return 5;
+  if (y.baglam) return 4;
+  if (y.anlam) return 3;
+  if (r && r.b >= 2) return 2;
+  if (r || y.gordu) return 1;
+  return 0;
+}
+const KOKLER = {};
+KELIMELER.forEach(k => { if (k.ko && k.ko.kok) (KOKLER[k.ko.kok] = KOKLER[k.ko.kok] || []).push(k.w); });
+function akrabalar(k) { return k.ko ? (KOKLER[k.ko.kok] || []).filter(w => w !== k.w) : []; }
+function parcaHtml(ko) {
+  return `<div class="parcalar">${ko.parca.map((p, i) => `${i ? '<span class="parca-arti">+</span>' : ""}<div class="parca"><b>${kacis(p[0])}</b><span>${kacis(p[1])}</span></div>`).join("")}</div>`;
+}
+function kelimeGec(metin, w) {
+  const kok = w.toLowerCase().slice(0, Math.max(4, w.length - 2));
+  return new RegExp("\\b" + kok.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i").test(metin);
+}
+function merdivenHtml(liste) {
+  const n = liste.length || 1;
+  return `<div class="merdiven">${BASAMAK.map((b, i) => i).reverse().map(i => {
+    const say = liste.filter(k => seviye(k.w) >= i + 1).length;
+    return `<div class="basamak ${say ? "dolu" : ""}"><span class="no">${i + 1}</span><span class="ad">${BASAMAK[i].ad}<span>${BASAMAK[i].acik}</span></span><span class="say">${say}</span><span class="bar"><i style="width:${say / n * 100}%"></i></span></div>`;
+  }).join("")}</div>`;
+}
+function gununKelimesi() {
+  const aday = KELIMELER.filter(k => k.ko && durum.srs[k.w] && seviye(k.w) < 3);
+  const havuz = aday.length ? aday : KELIMELER.filter(k => k.ko);
+  return havuz[BUGUN() % havuz.length];
+}
+
+/* ================= Derinleş ekranı ================= */
+function derinCiz() {
+  yolculuk = null;
+  const aktif = aktifKelimeler();
+  const g = gununKelimesi();
+  const sirada = aktif.filter(k => k.ko && seviye(k.w) >= 1 && seviye(k.w) < 5)
+    .sort((a, b) => seviye(b.w) - seviye(a.w) || kutu(b.w) - kutu(a.w)).slice(0, 6);
+  const kokler = Object.entries(KOKLER).filter(([, ws]) => ws.length >= 2).sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
+  const defter = Object.entries(durum.cumle).filter(([w]) => sozluk[w]).sort((a, b) => (b[1].g || 0) - (a[1].g || 0));
+  alan.innerHTML = `
+    <section class="kart">
+      <div class="etiket">Hatırlamaktan içselleştirmeye</div>
+      <h2 style="margin-top:4px">Kelimeyle ilişki kur</h2>
+      <p class="ikincil" style="margin-top:6px">Bir kelimeyi hatırlamak ilk basamak. Kökünü görmek, bağlamda sınamak ve kendi hayatından bir cümle kurmak onu senin kelimen yapar.</p>
+      ${merdivenHtml(aktif)}
+    </section>
+    ${g ? `<section class="kart gunun">
+      <div class="etiket">Günün kelimesi</div>
+      <div class="kelime">${kacis(g.w)}</div>
+      <p class="imge">${kacis(g.ko.imge)}</p>
+      <button class="btn ana genis" type="button" data-yol="${kacis(g.w)}">Yolculuğa başla</button>
+    </section>` : ""}
+    ${sirada.length ? `<section class="kart">
+      <div class="etiket">Derinleşmeye hazır</div>
+      <p class="ikincil" style="margin-top:4px">Tanıdığın ama henüz içselleştirmediğin kelimeler.</p>
+      <ul class="liste" style="margin-top:10px">${sirada.map(k => `<li><button type="button" data-yol="${kacis(k.w)}"><b>${kacis(k.w)}</b><span class="alt">${kacis(k.tr)}</span><span class="sag"><span class="seviye-rozet">${seviye(k.w)}. ${BASAMAK[seviye(k.w) - 1].ad}</span></span></button></li>`).join("")}</ul>
+    </section>` : `<section class="kart"><p class="ikincil" style="margin:0">Çalış bölümünde kelime tanıdıkça burada derinleşmeye hazır kelimeler belirecek. İstersen günün kelimesiyle hemen başla.</p></section>`}
+    <section class="kart">
+      <div class="etiket">Kök ağı</div>
+      <p class="ikincil" style="margin-top:4px">Aynı kökten gelen kelimeler birlikte öğrenilince birbirini hatırlatır.</p>
+      <div class="kok-izgara">${kokler.map(([kok, ws]) => `<button class="kok-btn" type="button" data-kok="${kacis(kok)}"><b>${kacis(kok)}</b><span>${kacis(sozluk[ws[0]].ko.kok_anlam)} · ${ws.length} kelime</span></button>`).join("")}</div>
+    </section>
+    <section class="kart">
+      <div class="etiket">Cümle defterin · ${defter.length}</div>
+      ${defter.length ? `<ul class="liste" style="margin-top:10px">${defter.map(([w, c]) => `<li><button type="button" data-kelime="${kacis(w)}"><b>${kacis(w)}</b><span class="alt" style="white-space:normal">${kacis(c.t)}</span></button></li>`).join("")}</ul>`
+        : `<p class="ikincil" style="margin-top:6px">Yolculuğun son adımında yazdığın cümleler burada birikir. Tekrarda kartın arkasında da görünür.</p>`}
+    </section>`;
+  alan.querySelectorAll("[data-yol]").forEach(b => b.onclick = () => yolculukBasla(b.dataset.yol));
+  alan.querySelectorAll("[data-kok]").forEach(b => b.onclick = () => kokAc(b.dataset.kok));
+  alan.querySelectorAll("[data-kelime]").forEach(b => b.onclick = () => detayAc(b.dataset.kelime));
+}
+function kokAc(kok) {
+  const ws = KOKLER[kok] || [];
+  const ilk = sozluk[ws[0]].ko;
+  const { kok: sayfa, kapat } = sayfaAc(`
+    <section class="kart">
+      <div class="etiket">${kacis(ilk.dil)} kök</div>
+      <h2 style="margin-top:4px">${kacis(kok)}</h2>
+      <p class="tr" style="margin:4px 0 0">${kacis(ilk.kok_anlam)}</p>
+      <div class="bolumler">${ws.map(w => { const k = sozluk[w]; return `<div><button class="btn" type="button" data-yol="${kacis(w)}" style="padding:6px 12px">${kacis(w)} · ${kacis(k.tr.split(/[,;]/)[0])}</button>${parcaHtml(k.ko)}</div>`; }).join("")}</div>
+    </section>`);
+  sayfa.querySelectorAll("[data-yol]").forEach(b => b.onclick = () => { kapat(); yolculukBasla(b.dataset.yol); });
+}
+
+/* ================= Kelime yolculuğu (4 adım) ================= */
+let yolculuk = null;
+const ADIMLAR = ["Tahmin", "Kök ve hikâye", "Bağlam", "Senin cümlen"];
+function yolculukBasla(w) {
+  const k = sozluk[w]; if (!k) return;
+  yolculuk = { w, adim: k.ko ? 0 : 2, cevap: null, cerceve: "hayat" };
+  yolu(w).gordu = true; kaydet();
+  ekran = "derin";
+  document.querySelectorAll("[data-git]").forEach(b => b.dataset.git === "derin" ? b.setAttribute("aria-current", "page") : b.removeAttribute("aria-current"));
+  yolculukCiz();
+}
+function adimUst() {
+  return `<div class="oturum-ust"><button class="btn" type="button" id="yolKapat" style="padding:6px 12px">← Derinleş</button><span class="etiket">${yolculuk.adim < 4 ? `${yolculuk.adim + 1}/4 · ${ADIMLAR[yolculuk.adim]}` : "Tamamlandı"}</span></div>
+    <div class="adimlar">${ADIMLAR.map((a, i) => `<i class="${i <= yolculuk.adim ? "tam" : ""}"></i>`).join("")}</div>`;
+}
+function yolculukCiz() {
+  const k = sozluk[yolculuk.w], ko = k.ko, a = yolculuk.adim;
+  let govde = "";
+  if (a === 0) {
+    if (!yolculuk.secenek) yolculuk.secenek = karistir([k.tr, ...celdirici(k, "tr", 2)]);
+    const c = yolculuk.cevap;
+    govde = `
+      <div class="kelime">${kacis(k.w)}</div>
+      <div class="madde-meta"><span class="etiket">${POS[k.pos]}</span><span class="rozet">${kacis(ko.dil)} · ${kacis(ko.kok)}</span></div>
+      <p class="ikincil" style="margin-top:16px">Kelimeyi parçalarına ayırdık. Parçalara bakarak anlamını tahmin et.</p>
+      ${parcaHtml(ko)}
+      <div class="secenekler" style="margin-top:16px">${yolculuk.secenek.map((s, j) => `<button class="secenek ${c !== null ? (s === k.tr ? "dogru" : j === c ? "yanlis" : "") : ""}" type="button" data-t="${j}" ${c !== null ? "disabled" : ""}><span class="harf">${HARF[j]})</span><span>${kacis(s)}</span></button>`).join("")}</div>
+      ${c !== null ? `<div class="kutu-not" style="margin-top:14px"><b>${yolculuk.secenek[c] === k.tr ? "İyi tahmin" : "Tahmin etmek de öğrenmektir"}</b>${kacis(k.def)}</div>
+        <button class="btn ana genis" type="button" id="ileri" style="margin-top:14px">Kökün hikâyesine geç</button>` : ""}`;
+  } else if (a === 1) {
+    const akr = akrabalar(k);
+    govde = `
+      <div class="madde-meta" style="margin-top:0"><span class="rozet">${kacis(ko.dil)} · ${kacis(ko.kok)}</span><span class="ikincil">${kacis(ko.kok_anlam)}</span></div>
+      <div class="kelime" style="margin-top:10px">${kacis(k.w)}</div>
+      ${parcaHtml(ko)}
+      <div class="bolumler">
+        <div><div class="etiket">Kökteki imge</div><p class="imge" style="margin-top:6px">${kacis(ko.imge)}</p></div>
+        <div><div class="etiket">Anlamın yolculuğu</div><p class="hikaye" style="margin-top:6px">${kacis(ko.hikaye)}</p>
+          <p class="etiket" style="margin-top:8px;text-transform:none;letter-spacing:0">${kacis(ko.yol)}</p></div>
+        ${ko.tr_bag ? `<div class="kutu-not"><b>Türkçeyle bağı</b>${kacis(ko.tr_bag)}</div>` : ""}
+        ${akr.length ? `<div><div class="etiket">Aynı kökten, bu listede</div><div class="cipler" style="margin-top:8px">${akr.map(w => `<button class="cip" type="button" data-kelime="${kacis(w)}">${kacis(w)}</button>`).join("")}</div></div>` : ""}
+        ${ko.emin === "orta" ? `<div class="kutu-not uyari"><b>Not</b>Bu kelimenin kökeniyle ilgili bazı ayrıntılar kaynaklar arasında tartışmalıdır. Yukarıdaki anlatım yerleşik olan kısmı özetler.</div>` : ""}
+      </div>
+      <button class="btn ana genis" type="button" id="ileri" style="margin-top:18px">Anladım, bağlama geç</button>`;
+  } else if (a === 2) {
+    if (!yolculuk.baglam) {
+      const uygun = karistir(KELIMELER.filter(x => x.w !== k.w && x.pos !== k.pos && !yakinMi(x, k))).slice(0, 2);
+      yolculuk.baglam = karistir([k, ...uygun]);
+    }
+    const c = yolculuk.cevap;
+    govde = `
+      <p class="ikincil" style="margin:0">Aşağıdaki cümlelerin hangisinde boşluğa <b>${kacis(k.w)}</b> (ya da çekimli hâli) gelmeli? Cümlenin geri kalanını tart.</p>
+      <div class="secenekler" style="margin-top:14px">${yolculuk.baglam.map((x, j) => `<button class="secenek ${c !== null ? (x.w === k.w ? "dogru" : j === c ? "yanlis" : "") : ""}" type="button" data-b="${j}" ${c !== null ? "disabled" : ""} style="font-family:var(--serif);font-size:17px"><span class="harf">${HARF[j]})</span><span>${kacis(x.ex).replace(/\[(.+?)\]/, c !== null && x.w === k.w ? "<b>$1</b>" : "_____")}</span></button>`).join("")}</div>
+      ${c !== null ? `
+        <div class="bolumler" style="margin-top:14px">
+          <div class="kutu-not"><b>${yolculuk.baglam[c].w === k.w ? "Doğru bağlam" : "Bu cümle başka bir kelimenin"}</b>${yolculuk.baglam[c].w === k.w ? "Cümlenin anlamı ve dil bilgisi kelimeyle örtüşüyor." : `Bu boşluğa <b>${kacis(yolculuk.baglam[c].w)}</b> (${kacis(POS[yolculuk.baglam[c].pos])}) gelir. ${kacis(k.w)} ise bir ${kacis(POS[k.pos])}.`}</div>
+          ${k.col.length ? `<div><div class="etiket">Doğal kalıplar</div><p style="margin:4px 0 0">${k.col.map(kacis).join(" · ")}</p></div>` : ""}
+          ${k.ko && k.ko.tuzak ? `<div class="kutu-not uyari"><b>Dikkat</b>${kacis(k.ko.tuzak)}</div>` : ""}
+        </div>
+        <button class="btn ana genis" type="button" id="ileri" style="margin-top:14px">Kendi cümleme geç</button>` : ""}`;
+  } else if (a === 3) {
+    const cer = {
+      hayat: `Kendi hayatından bir durumu "${k.w}" ile anlat: bir karar, bir değişim ya da bir gözlem.`,
+      alan: `Çalıştığın ya da ilgilendiğin alanda "${k.w}" nerede karşına çıkar? Bir cümleyle yaz.`,
+      turkiye: `Türkiye'de gözlediğin bir toplumsal durumu "${k.w}" ile anlat.`
+    };
+    const eski = durum.cumle[k.w];
+    govde = `
+      <h2>Şimdi senin cümlen</h2>
+      <p class="ikincil" style="margin-top:6px">Kendinle ilişkilendirdiğin bilgi daha iyi akılda kalır. İngilizce, kısa ve doğru bir cümle yeter.</p>
+      <div class="cipler" style="margin-top:12px">${[["hayat", "Kendi hayatımdan"], ["alan", "Alanımdan"], ["turkiye", "Türkiye'den"]].map(([v, t]) => `<button class="cip" type="button" data-cer="${v}" aria-pressed="${yolculuk.cerceve === v}">${t}</button>`).join("")}</div>
+      <p style="margin:12px 0 8px;font-weight:600">${kacis(cer[yolculuk.cerceve])}</p>
+      <textarea id="cumle" placeholder="${kacis(k.ex.replace(/[\[\]]/g, ""))}">${eski ? kacis(eski.t) : ""}</textarea>
+      <div style="margin-top:10px">
+        <label class="kontrol"><input type="checkbox" id="k1"> <span>Kelimeyi doğru anlamda kullandım (${kacis(k.tr.split(";")[0])}).</span></label>
+        <label class="kontrol"><input type="checkbox" id="k2"> <span>Cümle benimle, alanımla ya da çevremle ilgili.</span></label>
+        ${k.col.length ? `<label class="kontrol"><input type="checkbox" id="k3"> <span>Doğal bir kalıp kullandım (ör. ${kacis(k.col[0])}).</span></label>` : ""}
+      </div>
+      <div id="aiGeri"></div>
+      <div class="satir" style="margin-top:12px">
+        <button class="btn ana" type="button" id="kaydetCumle">Cümlemi kaydet</button>
+        <button class="btn" type="button" id="aiDegerlendir" hidden>Claude'a değerlendirt</button>
+      </div>
+      <p class="ikincil" id="cumleUyari" style="margin-top:8px"></p>`;
+  } else {
+    const sv = seviye(k.w), c = durum.cumle[k.w];
+    govde = `
+      <div class="etiket">Yolculuk tamam</div>
+      <div class="kelime" style="margin-top:6px">${kacis(k.w)}</div>
+      <p class="senin" style="margin-top:14px">${kacis(c ? c.t : "")}</p>
+      <div class="kutu-not" style="margin-top:14px"><b>Şu anki basamak</b>${sv}. ${BASAMAK[sv - 1].ad}. ${sv < 6 ? "Kelime tekrarla kalıcı kutuya ulaştığında 6. basamağa, içselleştirmeye çıkar. Tekrarda kartın arkasında kendi cümlen görünecek." : "Bu kelime artık senin."}</div>
+      <div class="satir" style="margin-top:16px">
+        <button class="btn ana" type="button" id="sonraki">Sıradaki kelime</button>
+        <button class="btn" type="button" id="donus">Derinleş'e dön</button>
+      </div>`;
+  }
+  alan.innerHTML = `${adimUst()}<section class="kart">${govde}</section>`;
+  $("#yolKapat").onclick = derinCiz;
+  const ileri = $("#ileri");
+  if (ileri) ileri.onclick = () => {
+    if (a === 1) { yolu(k.w).anlam = true; kaydet(); }
+    yolculuk.adim++; yolculuk.cevap = null; yolculukCiz(); window.scrollTo(0, 0);
+  };
+  alan.querySelectorAll("[data-t]").forEach(b => b.onclick = () => { yolculuk.cevap = +b.dataset.t; yolculukCiz(); });
+  alan.querySelectorAll("[data-b]").forEach(b => b.onclick = () => {
+    yolculuk.cevap = +b.dataset.b;
+    const dogru = yolculuk.baglam[yolculuk.cevap].w === k.w;
+    if (dogru) { yolu(k.w).baglam = true; kaydet(); }
+    yolculukCiz();
+    if (!dogru) { const i = $("#ileri"); if (i) { i.textContent = "Bir daha dene"; i.onclick = () => { yolculuk.cevap = null; yolculuk.baglam = null; yolculukCiz(); }; } }
+  });
+  alan.querySelectorAll("[data-kelime]").forEach(b => b.onclick = () => detayAc(b.dataset.kelime));
+  alan.querySelectorAll("[data-cer]").forEach(b => b.onclick = () => { const t = $("#cumle").value; yolculuk.cerceve = b.dataset.cer; yolculukCiz(); $("#cumle").value = t; });
+  const kay = $("#kaydetCumle");
+  if (kay) {
+    kay.onclick = () => {
+      const t = $("#cumle").value.trim(), uy = $("#cumleUyari");
+      if (t.split(/\s+/).length < 4) { uy.textContent = "Biraz daha uzun bir cümle yaz (en az 4 sözcük)."; return; }
+      if (!kelimeGec(t, k.w)) { uy.textContent = `Cümlende "${k.w}" ya da çekimli bir biçimi geçmiyor.`; return; }
+      if (!$("#k1").checked) { uy.textContent = "Kaydetmeden önce kelimeyi doğru anlamda kullandığından emin ol ve ilk kutuyu işaretle."; return; }
+      durum.cumle[k.w] = { t, tur: yolculuk.cerceve, g: BUGUN() };
+      if (!durum.srs[k.w]) durum.srs[k.w] = { b: 0, due: BUGUN() + 1, dogru: 0, yanlis: 0, ilk: BUGUN() };
+      kaydet(); yolculuk.adim = 4; yolculukCiz(); window.scrollTo(0, 0);
+    };
+    aiDegerlendirmeBagla(k);
+  }
+  const s = $("#sonraki");
+  if (s) s.onclick = () => {
+    const sir = aktifKelimeler().filter(x => x.ko && x.w !== k.w && seviye(x.w) >= 1 && seviye(x.w) < 5).sort((p, q) => seviye(q.w) - seviye(p.w));
+    const n = sir[0] || aktifKelimeler().find(x => x.ko && seviye(x.w) < 3 && x.w !== k.w);
+    n ? yolculukBasla(n.w) : derinCiz();
+  };
+  const d = $("#donus"); if (d) d.onclick = derinCiz;
+}
+
+/* Claude ile cümle değerlendirme (yalnız claude.ai içinde) */
+function aiDegerlendirmeBagla(k) {
+  const btn = $("#aiDegerlendir"), yer = $("#aiGeri");
+  if (!btn || !sampleFn) return;
+  btn.hidden = false;
+  btn.onclick = async () => {
+    const t = $("#cumle").value.trim();
+    if (!t) { $("#cumleUyari").textContent = "Önce bir cümle yaz."; return; }
+    btn.disabled = true; btn.textContent = "Değerlendiriliyor…";
+    try {
+      const r = await sampleFn.json(
+`You are a supportive but precise EFL teacher. A Turkish learner preparing for the YÖKDİL social sciences exam wrote this sentence to practise the word "${k.w}" (${POS[k.pos]}; meaning: ${k.def}).
+Sentence: """${t.slice(0, 500)}"""
+Judge only: (1) is the target word used with the correct meaning and part of speech, (2) is the sentence grammatical and natural.
+Reply with only JSON: {"uygun": true|false, "yorum": "1-2 short sentences in Turkish, concrete", "oneri": "one corrected or more natural English version of the learner's own sentence, keeping their idea"}`, { modelTier: "quick", cache: false });
+      if (!r || typeof r.yorum !== "string") throw { code: "invalid_json" };
+      yer.innerHTML = `<div class="kutu-not ${r.uygun ? "" : "uyari"}" style="margin-top:12px"><b>Claude'un geri bildirimi</b>${kacis(r.yorum)}${r.oneri ? `<p class="senin" style="margin-top:8px">${kacis(r.oneri)}</p>` : ""}</div>`;
+    } catch (e) {
+      const c = e && e.code;
+      if (["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed"].includes(c)) { btn.hidden = true; return; }
+      toast(c === "rate_limited" ? "Çok sık istek gönderildi, biraz bekle." : "Değerlendirme yapılamadı, yeniden dene.");
+    } finally { btn.disabled = false; btn.textContent = "Claude'a değerlendirt"; }
+  };
 }
 
 /* ================= Claude ile yeni örnek cümle (yalnız claude.ai içinde) ================= */
@@ -776,7 +1085,13 @@ $("#ayarBtn").onclick = () => {
       <p>Coxhead, A. (2000). A new academic word list. <i>TESOL Quarterly, 34</i>(2), 213–238. https://doi.org/10.2307/3587951</p>
       <p><b>Seçim.</b> İlk altı alt liste (360 aile) alındı. Günlük İngilizcede çok yaygın olan 47 kelime (ör. <i>area, data, research</i>) çıkarıldı. Ölçüt, wordfreq kütüphanesinde Zipf sıklığı ≥ 5,0 olmasıdır. Kalan 313 kelime uygulamadadır.</p>
       <p><b>Sınırlılık.</b> Liste, ÖSYM'nin YÖKDİL Sosyal sorularından yapılmış bir sıklık sayımı değildir. AWL akademik metinlerin genelini temsil eder. Çıkmış YÖKDİL kitapçıklarıyla sıklık sayımı yapıldığında sıralama güncellenecektir. AWL listesi resmî kaynaktan indirilemediği için elle derlendi. Tutarlılık denetimlerinden geçti, ama resmî listeyle karşılaştırılması önerilir.</p>
-      <p><b>Türkçe karşılıklar, tanımlar ve örnek cümleler</b> bu uygulama için yazılmıştır; sınav sorularından alınmamıştır.</p>
+      <p><b>Türkçe karşılıklar, tanımlar, örnek cümleler, köken notları ve hikâyeler</b> bu uygulama için yazılmıştır; sınav sorularından alınmamıştır. Köken notları yerleşik etimolojik bilgiyle sınırlı tutuldu; tarih ve anekdot verilmedi. Tartışmalı kökenler kartta belirtilir.</p>
+      <p><b>İçselleştirme basamakları.</b> Derinleş bölümü, kelimeyi hatırlamanın ötesine taşımak için dört adım kullanır: parçalardan anlam tahmini, kökteki imge ve hikâye, doğru bağlamı değerlendirme, kendi hayatından cümle kurma. Tasarım şu bulgulara dayanır: Anlam üzerinde daha derin işlenen bilgi daha kalıcıdır (Craik ve Lockhart, 1972). Görevin gerektirdiği değerlendirme ve üretim yükü kelime öğrenimini artırır (Laufer ve Hulstijn, 2001). 42 çalışmayı kapsayan bir meta-analizde en güçlü katkıyı değerlendirme bileşeni yapmıştır (Yanagisawa ve Webb, 2021). Kendiyle ilişkilendirilen bilgi daha iyi hatırlanır (Rogers vd., 1977). Tahmin ve köken notu, deyimlerde anlamın hatırlanmasını desteklemiştir (Wang vd., 2026). Bu son bulgu deyimlere dayanır; tek kelimelere genellenmesi bir varsayımdır. Altı basamak araştırmalardan esinlenen bir tasarım modelidir, geçerliği sınanmış bir ölçek değildir.</p>
+      <p>Craik, F. I. M., &amp; Lockhart, R. S. (1972). Levels of processing: A framework for memory research. <i>Journal of Verbal Learning and Verbal Behavior, 11</i>(6), 671–684. https://doi.org/10.1016/S0022-5371(72)80001-X</p>
+      <p>Laufer, B., &amp; Hulstijn, J. (2001). Incidental vocabulary acquisition in a second language: The construct of task-induced involvement. <i>Applied Linguistics, 22</i>(1), 1–26. https://doi.org/10.1093/applin/22.1.1</p>
+      <p>Rogers, T. B., Kuiper, N. A., &amp; Kirker, W. S. (1977). Self-reference and the encoding of personal information. <i>Journal of Personality and Social Psychology, 35</i>(9), 677–688. https://doi.org/10.1037/0022-3514.35.9.677</p>
+      <p>Wang, X., Boers, F., Wang, X., &amp; Eyckmans, J. (2026). Does information about the origins of figurative idioms help learners to remember them? A multi-site study. <i>The Modern Language Journal, 110</i>(3), 738–752. https://doi.org/10.1111/modl.70074</p>
+      <p>Yanagisawa, A., &amp; Webb, S. (2021). To what extent does the involvement load hypothesis predict incidental L2 vocabulary learning? A meta-analysis. <i>Language Learning, 71</i>(2), 487–536. https://doi.org/10.1111/lang.12444</p>
     </section>`);
   kok.querySelector("#yeniGunluk").onchange = e => { durum.ayar.yeniGunluk = +e.target.value; kaydet(); };
   kok.querySelector("#hedef").onchange = e => { durum.ayar.hedef = +e.target.value; kaydet(); };
